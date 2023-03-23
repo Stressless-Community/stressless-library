@@ -1,0 +1,332 @@
+
+@media only screen and (min-width: 992px){
+  .book{
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 110px;
+    justify-content: center;
+    .thumbnail{
+      img{
+        width: 350px;
+        height: 500px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      }
+    }
+    .section{
+      width: 70%;
+      display: flex;
+      flex-direction: row;
+      .firstdetails{
+        margin-left: 5%;
+        width: 100%;
+        h1{
+          font-size: 22px;
+        }
+        .authors{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            .author{
+                margin-right: 10px;
+            }
+        }
+
+      }
+    }
+
+    .more{
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      margin-top: 40px;
+      h1{
+        font-size: 18px;
+      }
+      .details{
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        background-color: rgba(128, 128, 128, 0.582);
+        padding-top: 15px;
+        i{
+          font-size: 28px;
+        }
+        div{
+          h1{
+            text-align: center;
+          }
+          p{
+            color: rgb(0, 0, 0);
+            font-weight: 600;
+            text-align: center;
+          }
+          width: 15%;
+          margin-left: 4%;
+        }
+      }
+
+      .description{
+        border-top: 2px black;
+        width: 100%;
+    }
+  }
+  }
+
+  /* CSS */
+  .readnow {
+
+  align-items: center;
+  background-color: #24579b;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  margin-top: 60px;
+  :hover{
+    background-color: #000000;
+    color: #ffffff
+  }
+  }
+  }
+
+
+
+
+
+  /*For Tablet and other middle screen devices*/
+  @media only screen and (max-width: 991px) {
+    .book{
+      width: 100%;
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-top: 110px;
+      justify-content: center;
+      .thumbnail{
+        img{
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        }
+      }
+      .section{
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        .firstdetails{
+          margin-left: 5%;
+          width: 100%;
+          h1{
+            font-size: 22px;
+          }
+        }
+      }
+
+      .more{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin-top: 40px;
+        i{
+          width: 100%;
+         font-size: 30px;
+         text-align: center;
+        }
+
+        h1{
+          font-size: 18px;
+        }
+        .details{
+          width: 100%;
+          text-align: center;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          background-color: rgba(128, 128, 128, 0.582);
+          padding-top: 15px;
+          div{
+            h1{
+              text-align: center;
+            }
+            p{
+              color: rgb(0, 0, 0);
+              font-weight: 600;
+              text-align: center;
+            }
+            width: 15%;
+            margin-left: 4%;
+          }
+        }
+
+        .description{
+          border-top: 2px black;
+          width: 100%;
+      }
+    }
+    }
+
+    /* CSS */
+    .readnow {
+
+    align-items: center;
+    background-color: #24579b;
+    border: 0;
+    border-radius: 100px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 480px;
+    min-height: 40px;
+    min-width: 0px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    margin-top: 60px;
+    :hover{
+      background-color: #000000;
+      color: #ffffff
+    }
+    }
+  }
+
+
+
+  @media only screen and (max-width: 600px) {
+    .book{
+      width: 100%;
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-top: 110px;
+      justify-content: center;
+      .thumbnail{
+        img{
+          width: 280px;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        }
+      }
+      .section{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        .firstdetails{
+          width: 80%;
+          h1{
+            margin-top: 20px;
+            font-size: 22px;
+          }
+        }
+      }
+
+      .more{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin-top: 40px;
+        i{
+          width: 100%;
+         font-size: 30px;
+         text-align: center;
+        }
+
+        h1{
+          font-size: 18px;
+        }
+        .details{
+          text-align: center;
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: left;
+          padding-top: 15px;
+          div{
+            h1{
+              text-align: center;
+            }
+            p{
+              color: rgb(0, 0, 0);
+              font-weight: 600;
+              text-align: center;
+            }
+            width: 25%;
+            margin-top: 5px;
+            margin-left: 10%;
+            margin-right: 10%;
+          }
+        }
+
+        .description{
+          border-top: 2px black;
+          width: 100%;
+      }
+    }
+    }
+
+    /* CSS */
+    .readnow {
+
+    align-items: center;
+    background-color: #24579b;
+    border: 0;
+    border-radius: 100px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 480px;
+    min-height: 40px;
+    min-width: 0px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    margin-top: 10px;
+    :hover{
+      background-color: #000000;
+      color: #ffffff
+    }
+    }
+  }

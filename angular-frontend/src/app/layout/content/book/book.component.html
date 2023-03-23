@@ -1,0 +1,69 @@
+<app-header ></app-header>
+<div class="book">
+  <div class="section">
+    <div class="thumbnail" data-aos="zoom-in" data-aos-delay="20">
+      <img src="{{book.largeCoverUrl}}" alt="thumbnail">
+
+    </div>
+    <div class="firstdetails">
+      <h1>
+        {{book.title}} - {{book.subtitle}}
+      </h1>
+      <div class="authors">
+        <ng-container *ngFor="let author of book.authors">
+          <div class="author">
+            <p>{{author.name}}</p>
+          </div>
+
+        </ng-container>
+      </div>
+
+
+      <div *ngIf="book.pdfurl">
+        <button  class="readnow" role="button" [routerLink]="['ebook/:{{book.pdfurl}}']"
+        routerLinkActive="router-link-active" >Read now</button>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="more">
+    <div class="descprition">
+      <h1>Description</h1>
+      <p>{{book.description}}</p>
+    </div>
+    <div class="details">
+      <div class="language">
+        <h1>Language</h1>
+        <i class="fa fa-globe" aria-hidden="true"></i>
+        <p>{{book.language}}</p>
+
+      </div>
+      <div class="isbn">
+        <h1>ISBN</h1>
+        <i class="fa fa-book" aria-hidden="true" ></i>
+        <p>{{book.isbn}}</p>
+      </div>
+      <div class="publisher">
+        <h1>Publisher</h1>
+        <i class="fa fa-print" aria-hidden="true"></i>
+        <p>{{book.publisher}}</p>
+
+      </div>
+      <div class="publishedDate">
+        <h1>Published date</h1>
+        <i class="fa fa-calendar"></i>
+        <p>{{book.publishedDate}}</p>
+      </div>
+
+      <div class="publishedDate">
+        <h1>Pages</h1>
+        <i class="fa fa-paperclip" aria-hidden="true"></i>
+        <p>{{book.pageCount}}</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-footer ></app-footer>

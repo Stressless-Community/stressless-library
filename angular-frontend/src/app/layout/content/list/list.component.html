@@ -1,0 +1,28 @@
+<div  class="books"  >
+    <ng-container *ngFor="let book of books | paginate: { itemsPerPage: 12, currentPage: p }"  >
+
+        <div class="book" routerLink="/details/{{book.isbn}}" data-aos="fade-up" data-aos-delay="100">
+          <div class="thumbnail">
+            <img src={{book.largeCoverUrl}} alt="thumbnail">
+          </div>
+
+          <div class="description" >
+            <h1>{{book.title}}</h1>
+            <h2>{{book.subtitle}}</h2>
+          </div>
+
+
+
+      </div>
+    </ng-container>
+
+    <div class="pagination">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+
+
+
+
+
+</div>
+
