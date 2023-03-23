@@ -1,4 +1,4 @@
-package com.stressless.gatewayservice;
+package com.stresslesslibrary.gatewayservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

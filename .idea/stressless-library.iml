@@ -6,6 +6,10 @@
       <sourceFolder url="file://$MODULE_DIR$/angular-frontend" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/bookservice" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/configuration-service" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/microservices-backend/bookservice" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/microservices-backend/configuration-service" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/microservices-backend/gateway-service" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/microservices-backend/registration-service" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
