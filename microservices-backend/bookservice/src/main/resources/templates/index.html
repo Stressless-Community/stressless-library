@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UCBC Library Catalog</title>
+    <link th:href="@{/assets/css/styles.css}" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+</head>
+<body>
+<header>
+
+</header>
+<section >
+    <div class="books">
+        <div id="book" th:each="book : ${catalogs}">
+            <a th:href="@{'/book/' + ${book.isbn}}" class="book" >
+                <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
+<!--                <img class="bookimage" th:src="@{assets/img/book.jpg}">-->
+            </a>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

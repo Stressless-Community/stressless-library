@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library | Add book</title>
+    <link th:href="@{/assets/css/styles.css}" rel="stylesheet" />
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css} "/>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+</head>
+
+<body>
+  <section id="newbook">
+    <form action="#" th:action="@{/addbook}" th:object="${bookDto}" method="post" enctype="multipart/form-data" >
+      <h1>New Book</h1>
+      <input type="file" accept="image/*" th:field="*{cover}" class="form-control-data" required>
+      <label for="isbn">Isbn</label>
+      <input id="isbn" type="text" th:field="*{isbn}" placeholder="isbn" required />
+      <span><p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">Isbn Error</p></span>
+
+
+      <label for="title">Title</label>
+      <input id="title" type="text" th:field="*{title}" placeholder="title" required />
+
+
+
+
+      <label for="subtitle">Subtitle</label>
+      <input id="subtitle" type="text" th:field="*{subtitle}" placeholder="subtitle" />
+
+
+      <label for="description">Description</label>
+      <textarea id="description" type="text" th:field="*{description}" placeholder="description"  required  style="height=300px"/>
+
+      <label for="language">Language</label>
+      <select id="language" required th:field="*{language}" >
+        <option value="FRANÇAIS">Français</option>
+        <option value="ENGLISH">English</option>
+        <option value="SWAHILI">Swahili</option>
+      </select>
+
+      <label for="pageCount">Page Count</label>
+      <input id="pageCount" type="number" th:field="*{pageCount}" placeholder="pageCount" required />
+
+      <label for="publishedDate">Published Date</label>
+      <input id="publishedDate" type="text" th:field="*{publishedDate}" placeholder="publishedDate" required />
+
+      <label for="kind">Print Kind</label>
+      <select id="kind" th:field="*{kind}" required >
+        <option value="HARDCOVER">HardCover</option>
+        <option value="BOOK">Book</option>
+      </select>
+
+
+
+
+
+      <label for="publisher">Publisher</label>
+      <input id="publisher" type="text" th:field="*{publisher}" placeholder="epubAvailable" />
+
+      <label for="branch">Branch</label>
+      <input id="branch" type="text" th:field="*{branchId}" placeholder="Branch" />
+
+
+      <input id="isReference" type="checkbox" th:field="*{isReference}" />
+      <label for="isReference">Reference</label>
+
+        <input id="pdfAvailable" type="checkbox" th:field="*{pdfAvailble}"/>
+        <label for="pdfAvailable">Pdf</label>
+
+
+        <input id="epubAvailable" type="checkbox"  th:field="*{epubAvailble}" />
+        <label for="epubAvailable">Epub</label>
+
+      <input type="submit" value="Save">
+
+    </form>
+  </section>
+</body>
+<script>
+  document.getElementById("isbn").value="978274609833"
+  document.getElementById("title").value="Windows Communication Foundation"
+  document.getElementById("subtitle").value="Maitrisez la platforme pas a pas"
+  document.getElementById("description").value="Windows Communication Foundation"
+  document.getElementById("pageCount").value="210"
+  document.getElementById("publishedDate").value="2020"
+  document.getElementById("kind").value="BOOK"
+
+  document.getElementById("publisher").value="ENI"
+  document.getElementById("branch").value="000"
+
+</script>
+</html>

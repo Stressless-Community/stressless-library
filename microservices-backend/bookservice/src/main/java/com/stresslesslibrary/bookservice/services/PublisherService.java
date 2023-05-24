@@ -11,7 +11,9 @@ public interface PublisherService {
 	
 	Publisher getOne(int id);
 	
-	Publisher findByName(String name) throws Exception;
+	Publisher findByName(String name);
 	
 	Publisher save(Publisher publisher);
+
+	boolean existsByName(String name);
 }

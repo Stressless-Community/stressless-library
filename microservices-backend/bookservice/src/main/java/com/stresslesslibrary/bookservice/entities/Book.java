@@ -1,10 +1,11 @@
 package com.stresslesslibrary.bookservice.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 
-
+import lombok.ToString;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
 @Table(name = "books")
+@ToString
 @JsonInclude(Include.NON_NULL)
 @JsonIdentityInfo(
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
@@ -70,6 +72,10 @@ public class Book implements Serializable {
 
 	public String getIsbn() {
 		return isbn;
+	}
+
+	public void setBookImage(BookImage bookImage) {
+		this.bookImage = bookImage;
 	}
 
 	public void setIsbn(String isbn) {
@@ -202,15 +208,26 @@ public class Book implements Serializable {
 	}
 	
 	public String getLargeCoverUrl() {
-		
-		UriComponents uri =ServletUriComponentsBuilder.fromCurrentContextPath()
-				//.port(${server.port})
-				.path("/image/"+isbn)
-				.build();
-              
+		if (bookImage == null){
+			UriComponents uri =ServletUriComponentsBuilder.fromCurrentContextPath()
+					//.port(${server.port})
+					.path("image/0000000000000")
+					.build();
+			String urlString = uri.toString();
+			return urlString;
+		}else{
+			UriComponents uri =ServletUriComponentsBuilder.fromCurrentContextPath()
+					//.port(${server.port})
+					.path("image/"+isbn)
+					.build();
+			String urlString = uri.toString();
+			return urlString;
+		}
 
-		String urlString = uri.toString();
-		return urlString;
+
+
+
+
 	}
 	
 	public Long getAvailableItems() {

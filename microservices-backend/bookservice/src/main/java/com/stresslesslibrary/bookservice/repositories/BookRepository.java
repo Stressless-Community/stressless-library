@@ -15,5 +15,5 @@ public interface BookRepository extends JpaRepository<Book, String> {
 			+ " OR b.isbn LIKE %:search%"
 			+ " OR b.subtitle LIKE %:search%"
 			+ " OR b.description LIKE %:search%")
-	public List<Book> search(@Param("search") String search);
+	List<Book> search(@Param("search") String search);
 }

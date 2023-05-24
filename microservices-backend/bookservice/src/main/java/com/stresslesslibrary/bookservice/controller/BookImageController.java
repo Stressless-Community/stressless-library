@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.http.HttpHeaders;
 import java.util.Optional;
 
+import com.stresslesslibrary.bookservice.entities.Book;
+import com.stresslesslibrary.bookservice.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +28,22 @@ public class BookImageController {
 	
 	@Autowired
 	private BookImageRepository bookImage;
+
+	@Autowired
+	private BookService bookService;
 	
 	@PostMapping
-	public ResponseEntity<String> uploadAttachment(@RequestParam("file") MultipartFile file,String name){
+	public ResponseEntity<String> uploadAttachment(@RequestParam("file") MultipartFile file,String isbn){
 		
 		try {
-			BookImage image= new BookImage(name, file.getContentType(), file.getBytes());
+			Book book=bookService.getOne(isbn);
+			BookImage image= new BookImage(isbn, file.getContentType(), file.getBytes());
+			image.setBook(book);
 			bookImage.save(image);
+			book.setBookImage(image);
+			bookService.update(book);
+
+
 			return ResponseEntity.ok().body("Success upload");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -43,17 +54,19 @@ public class BookImageController {
 
 	    @GetMapping(path = {"/{name}"})
 	    public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) throws Exception {
-
 	        	BookImage dbImage=new BookImage();
 				try {
 					dbImage = bookImage.findByName(name);
+					return ResponseEntity
+							.ok()
+							.contentType(MediaType.valueOf(dbImage.getType()))
+							.body((dbImage.getImage()));
 				} catch (Exception e) {
-					dbImage = bookImage.findByName("noImage");
+					return ResponseEntity
+							.notFound()
+							.build();
 				}
 
-	        return ResponseEntity
-	                .ok()
-	                .contentType(MediaType.valueOf(dbImage.getType()))
-	                .body((dbImage.getImage()));
+
 	    }
 }

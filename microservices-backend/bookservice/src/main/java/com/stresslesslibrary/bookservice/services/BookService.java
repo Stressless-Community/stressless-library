@@ -19,4 +19,6 @@ public interface BookService {
 	Boolean setAuthor(int authorId, String isbn);
 	
 	Book updateBook(BookDTO book);
+
+	Book update (Book book);
 }
