@@ -5,14 +5,47 @@
     <meta charset="UTF-8">
     <title>Library | Book</title>
     <link th:href="@{/assets/css/styles.css}" rel="stylesheet" />
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/assets/jquery-steps/jquery.steps.css} "/>
     <link rel="icon" type="image/x-icon"  th:href="@{/assets/img/favicon.ico}">
 </head>
 
 <body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">UCBC Library</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <div class="row book">
+        <div class="card">
+            <div class="card-body ">
 
-    <div class="book">
-        <div>
-            <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
+            </div>
+            <img  alt="Cover" th:src="@{${book.largeCoverUrl}}">
 <!--            <img class="bookimage" th:src="@{/assets/img/book.jpg}" >-->
         </div>
         <div class="bookinfo">

@@ -67,10 +67,12 @@ public class ThymeleafController {
            MultipartFile file = bookDTO.getCover();
            BookImage image= new BookImage(bookDTO.getIsbn(), file.getContentType(), file.getBytes());
            System.out.print(file.getOriginalFilename());
-           image.setBook(bookService.saveBook(bookDTO));
-           bookImageRepository.save(image);
-           bookService.saveBook(bookDTO).setBookImage(image);
+           BookImage imagedb = bookImageRepository.save(image);
            bookService.saveBook(bookDTO);
+           imagedb.setBook(bookService.saveBook(bookDTO));
+           bookImageRepository.save(imagedb);
+
+
             return "redirect:/";
         }
 

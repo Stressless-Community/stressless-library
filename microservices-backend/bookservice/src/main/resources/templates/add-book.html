@@ -5,64 +5,104 @@
     <title>Library | Add book</title>
     <link th:href="@{/assets/css/styles.css}" rel="stylesheet" />
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css} "/>
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="@{/assets/img/favicon.ico}">
 </head>
 
 <body>
   <section id="newbook">
-    <form action="#" th:action="@{/addbook}" th:object="${bookDto}" method="post" enctype="multipart/form-data" >
+    <form action="#" th:action="@{/addbook}" th:object="${bookDto}" method="post" enctype="multipart/form-data" autocomplete="off" >
       <h1>New Book</h1>
-      <input type="file" accept="image/*" th:field="*{cover}" class="form-control-data" required>
-      <label for="isbn">Isbn</label>
-      <input id="isbn" type="text" th:field="*{isbn}" placeholder="isbn" required />
-      <span><p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">Isbn Error</p></span>
+
+        <div class="form-group row">
+          <label for="cover" class="col-sm-2 col-form-label">Cover Image</label>
+          <div class="col-sm-10">
+            <input id="cover" type="file" accept="image/*" th:field="*{cover}" class="form-control-data" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="isbn" class="col-sm-2 col-form-label" >Isbn</label>
+          <div class="col-sm-10">
+            <input id="isbn" type="text" th:field="*{isbn}" placeholder="isbn" class="form-control"  required />
+          </div>
+        </div>
 
 
-      <label for="title">Title</label>
-      <input id="title" type="text" th:field="*{title}" placeholder="title" required />
+        <div class="form-group row">
+         <label for="title" class="col-sm-2 col-form-label">Title</label>
+          <div class="col-sm-10">
+            <input id="title" type="text" th:field="*{title}" placeholder="title" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="subtitle" class="col-sm-2 col-form-label">Subtitle</label>
+          <div class="col-sm-10">
+            <input id="subtitle" type="text" th:field="*{subtitle}" placeholder="subtitle" class="form-control" />
+          </div>
+        </div>
+
+      <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+          <textarea id="description" type="text" th:field="*{description}" placeholder="description"  class="form-control" required  style="height=300px"/>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="language" class="col-sm-2 col-form-label">Language</label>
+        <div class="col-sm-10">
+          <select id="language" required th:field="*{language}" >
+            <option value="FRANÇAIS">Français</option>
+            <option value="ENGLISH">English</option>
+            <option value="SWAHILI">Swahili</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="pageCount" class="col-sm-2 col-form-label">Page Count</label>
+        <div class="col-sm-10">
+          <input id="pageCount" type="number" th:field="*{pageCount}" placeholder="pageCount"  class="form-control"required />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="publishedDate">Published Date</label>
+        <div class="col-sm-10">
+          <input id="publishedDate" type="text" th:field="*{publishedDate}" placeholder="publishedDate"  class="form-control"required />
+        </div>
+      </div>
 
 
 
+      <div class="form-group row">
+        <label for="kind">Print Kind</label>
+        <div class="col-sm-10">
+          <select id="kind" th:field="*{kind}" required class="form-control" >
+            <option value="HARDCOVER">HardCover</option>
+            <option value="BOOK">Book</option>
+          </select>
 
-      <label for="subtitle">Subtitle</label>
-      <input id="subtitle" type="text" th:field="*{subtitle}" placeholder="subtitle" />
+        </div>
+      </div>
 
+      <div class="form-group row">
+        <label for="publisher">Publisher</label>
+        <div class="col-sm-10">
+          <input id="publisher" type="text" th:field="*{publisher}" placeholder="epubAvailable" />
+        </div>
+      </div>
 
-      <label for="description">Description</label>
-      <textarea id="description" type="text" th:field="*{description}" placeholder="description"  required  style="height=300px"/>
+      <div class="form-group row">
+        <label for="branch">Branch</label>
+        <div class="col-sm-10">
+          <input id="branch" type="text" th:field="*{branchId}" placeholder="Branch" />
+        </div>
+      </div>
 
-      <label for="language">Language</label>
-      <select id="language" required th:field="*{language}" >
-        <option value="FRANÇAIS">Français</option>
-        <option value="ENGLISH">English</option>
-        <option value="SWAHILI">Swahili</option>
-      </select>
-
-      <label for="pageCount">Page Count</label>
-      <input id="pageCount" type="number" th:field="*{pageCount}" placeholder="pageCount" required />
-
-      <label for="publishedDate">Published Date</label>
-      <input id="publishedDate" type="text" th:field="*{publishedDate}" placeholder="publishedDate" required />
-
-      <label for="kind">Print Kind</label>
-      <select id="kind" th:field="*{kind}" required >
-        <option value="HARDCOVER">HardCover</option>
-        <option value="BOOK">Book</option>
-      </select>
-
-
-
-
-
-      <label for="publisher">Publisher</label>
-      <input id="publisher" type="text" th:field="*{publisher}" placeholder="epubAvailable" />
-
-      <label for="branch">Branch</label>
-      <input id="branch" type="text" th:field="*{branchId}" placeholder="Branch" />
-
-
-      <input id="isReference" type="checkbox" th:field="*{isReference}" />
-      <label for="isReference">Reference</label>
+        <input id="isReference" type="checkbox" th:field="*{isReference}" />
+        <label for="isReference">Reference</label>
 
         <input id="pdfAvailable" type="checkbox" th:field="*{pdfAvailble}"/>
         <label for="pdfAvailable">Pdf</label>
@@ -71,22 +111,16 @@
         <input id="epubAvailable" type="checkbox"  th:field="*{epubAvailble}" />
         <label for="epubAvailable">Epub</label>
 
-      <input type="submit" value="Save">
+        <input type="submit" value="Save">
+
+
 
     </form>
   </section>
+  <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+<!--  <script th:src="@{/assets/jquery/jquery.min.js}"></script>-->
+<!--  <script th:src="@{/assets/popper.js/popper.min.js}"></script>-->
+<!--  <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>-->
 </body>
-<script>
-  document.getElementById("isbn").value="978274609833"
-  document.getElementById("title").value="Windows Communication Foundation"
-  document.getElementById("subtitle").value="Maitrisez la platforme pas a pas"
-  document.getElementById("description").value="Windows Communication Foundation"
-  document.getElementById("pageCount").value="210"
-  document.getElementById("publishedDate").value="2020"
-  document.getElementById("kind").value="BOOK"
 
-  document.getElementById("publisher").value="ENI"
-  document.getElementById("branch").value="000"
-
-</script>
 </html>
