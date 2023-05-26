@@ -8,9 +8,9 @@
     <link rel="icon" type="image/x-icon" href="@{/assets/img/favicon.ico}">
 </head>
 
-<body>
+<body class="">
   <section id="newbook">
-    <form action="#" th:action="@{/addbook}" th:object="${bookDto}" method="post" enctype="multipart/form-data" autocomplete="off" >
+    <form action="#" th:action="@{/addbook}" th:object="${bookDto}" method="post" enctype="multipart/form-data" autocomplete="off" id="form">
       <h1>New Book</h1>
 
         <div class="form-group row">
