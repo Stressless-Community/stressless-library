@@ -4,6 +4,23 @@ body{
     padding: 0;
     font-family: Verdana, Arial, Tahoma, Serif;
 }
+
+
+.swiper-container {
+    width: 100%;
+}
+
+.swiper-slide {
+    background-size: cover;
+    background-position: 50%;
+    min-height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
 .books {
     width:80%;
     display: flex;

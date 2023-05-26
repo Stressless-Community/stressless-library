@@ -5,6 +5,8 @@
     <title>Library | Add book</title>
     <link th:href="@{/assets/css/styles.css}" rel="stylesheet" />
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css} "/>
+    <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet" />
+    <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="@{/assets/img/favicon.ico}">
 </head>
 
@@ -45,7 +47,21 @@
       <div class="form-group row">
         <label for="description" class="col-sm-2 col-form-label">Description</label>
         <div class="col-sm-10">
-          <textarea id="description" type="text" th:field="*{description}" placeholder="description"  class="form-control" required  style="height=300px"/>
+          <textarea id="description" type="text" th:field="*{description}" placeholder="description"  class="form-control" required></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="branch">Branch</label>
+        <div class="col-sm-10">
+          <input id="branch" type="text" th:field="*{branchId}" placeholder="Branch" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="authors" class="col-sm-2 col-form-label">Author(s)</label>
+        <div class="col-sm-10">
+          <input id="authors" type="text" placeholder="Enter author(s) full name(s) separated by a comma"  class="form-control" />
         </div>
       </div>
 
@@ -94,12 +110,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
-        <label for="branch">Branch</label>
-        <div class="col-sm-10">
-          <input id="branch" type="text" th:field="*{branchId}" placeholder="Branch" />
-        </div>
-      </div>
+
 
         <input id="isReference" type="checkbox" th:field="*{isReference}" />
         <label for="isReference">Reference</label>
@@ -117,7 +128,34 @@
 
     </form>
   </section>
+  <script>
+    document.getElementById("isbn").addEventListener("change",getBookInfo)
+
+function getBookInfo(){
+   
+    fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:"+document.getElementById("isbn").value)
+        .then(response => response.json())
+        .then(json => {
+            console.log(json.items[0].volumeInfo)
+//            document.getElementById("isbn").value=json.items[0].volumeInfo
+            document.getElementById("title").value=json.items[0].volumeInfo.title
+            document.getElementById("subtitle").value=json.items[0].volumeInfo.subtitle
+            document.getElementById("description").value=json.items[0].volumeInfo.description
+            document.getElementById("pageCount").value=json.items[0].volumeInfo.pageCount
+            document.getElementById("publishedDate").value=json.items[0].volumeInfo.publishedDate
+            document.getElementById("kind").value=json.items[0].volumeInfo.printType
+            // document.getElementById("publisher").value=json.items[0].volumeInfo.printType
+//            document.getElementById("branch").value="000"
+    });
+
+}
+  </script>
+  <script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script> 
+  
+  
   <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+
+
 <!--  <script th:src="@{/assets/jquery/jquery.min.js}"></script>-->
 <!--  <script th:src="@{/assets/popper.js/popper.min.js}"></script>-->
 <!--  <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>-->

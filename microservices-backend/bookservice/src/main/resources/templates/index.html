@@ -4,22 +4,134 @@
     <meta charset="UTF-8">
     <title>UCBC Library Catalog</title>
     <link th:href="@{/assets/css/styles.css}" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet" />
+    <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}">
 </head>
 <body>
-<header>
-
-</header>
-<section >
-    <div class="books">
-        <div id="book" th:each="book : ${catalogs}">
-            <a th:href="@{'/book/' + ${book.isbn}}" class="book" >
-                <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
-<!--                <img class="bookimage" th:src="@{assets/img/book.jpg}">-->
-            </a>
+    <header>
+        <div>
+            <div>
+                <img class="logo" alt="logo" th:src="@{/assets/img/logo-1.png}">
+                <p>UCBC LIBRARY</p>
+            </div>
+            <div class="user">
+                <p class="">Username</p>
+            </div>
         </div>
-    </div>
+        <!-- Bookcases -->
+        <div class="bookcases">
+            <a href="#">Computer science, information & general works</a>
+            <a href="#">Philosophy & psychology</a>
+            <a href="#">Religion</a>
+            <a href="#">Social sciences</a>
+            <a href="#">Language</a>
+            <a href="#">Science</a>
+            <a href="#">Technology</a>
+            <a href="#">Arts & recreation</a>
+            <a href="#">Literature</a>
+            <a href="#">History & geography</a>
+        </div>
+    </header>
+    <section >
+        <!-- Search bar -->
+        <div class="search-bar">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </div>
 
-</section>
+        <div class="swiper-container">
+    
+            <!-- swiper slides -->
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background: rgb(187, 153, 0);">
+                    <h2>SIMPLE SWIPER</h2>
+                </div>
+                
+                <div class="swiper-slide" style="background: black;"> 
+                    <h2>HELLO WORLD</h2>
+                </div>
+                
+                <div class="swiper-slide" style="background: rgb(196, 77, 77);">
+                    <h2>Random Text 1</h2>
+                </div>
+                
+                <div class="swiper-slide" style="background: rgb(60, 156, 73);">
+                </div>
+                
+                <div class="swiper-slide" style="background: rgb(139, 102, 102);">
+                </div>
+            </div>
+            <!-- !swiper slides -->
+            
+            <!-- next / prev arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <!-- !next / prev arrows -->
+            
+            <!-- pagination dots -->
+            <div class="swiper-pagination"></div>
+            <!-- !pagination dots -->
+        </div>
+        <h2>Popular books</h2>
+        <div class="popular">
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+        </div>
+        <h2>Recently added</h2>
+        <div class="recently">
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+        </div>
+        
+        <div class="books">
+            <div id="book" th:each="book : ${catalogs}">
+                <a th:href="@{'/book/' + ${book.isbn}}" class="book" >
+                    <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
+    <!--                <img class="bookimage" th:src="@{assets/img/book.jpg}">-->
+                </a>
+            </div>
+        </div>
+    </section> 
+    <footer>
+
+        <div>
+            <p>&copy; ucbc library <span id="date">2023</span></p>
+        </div>
+    </footer>
+    <script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+    <script>
+        document.getElementById("date").innerHTML = new Date().getFullYear()
+    </script>
+   
 </body>
 </html>

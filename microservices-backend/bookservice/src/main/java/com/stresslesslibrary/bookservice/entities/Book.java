@@ -34,7 +34,8 @@ public class Book implements Serializable {
 	private String isbn;
 	private String title;
 	private String subtitle;
-	@Lob
+	
+	@Column(columnDefinition="TEXT")
 	private String description;
 	private Language language;
 	private int pageCount;
