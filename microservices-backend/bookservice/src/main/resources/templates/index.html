@@ -33,7 +33,9 @@
             <a href="#">History & geography</a>
         </div>
     </header>
-    <section >
+
+    <!-- HOME SECTION  -->
+    <section id="home">
         <!-- Search bar -->
         <div class="search-bar">
             <input type="text" name="query" placeholder="Search" title="Enter search keyword">
@@ -111,23 +113,88 @@
                 </a>
             </div>
         </div>
-        
+    </section>
+<!-- END HOME -->
+
+    <!-- FINDBOOK SECION  -->
+    <section id="findbook">
         <div class="books">
-            <div id="book" th:each="book : ${catalogs}">
+            <!-- <div id="book" th:each="book : ${catalogs}">
                 <a th:href="@{'/book/' + ${book.isbn}}" class="book" >
                     <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
-    <!--                <img class="bookimage" th:src="@{assets/img/book.jpg}">-->
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div> -->
+
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
                 </a>
             </div>
+
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+        
         </div>
-    </section> 
+    </section>
+
+    <!-- END FINDBOOK -->
+    
+    <!-- FOOTER -->
+       <div id="book" th:each="book : ${catalogs}">
+                <a th:href="@{'/book/' + ${book.isbn}}" class="book" >
+                    <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
+        </div>
     <footer>
 
         <div>
             <p>&copy; ucbc library <span id="date">2023</span></p>
         </div>
     </footer>
+    
     <script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+   
+   
     <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
     <script>
         document.getElementById("date").innerHTML = new Date().getFullYear()

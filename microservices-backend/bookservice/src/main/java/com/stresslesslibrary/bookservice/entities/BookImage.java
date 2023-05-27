@@ -36,4 +36,11 @@ public class BookImage {
 		this.image=bytes;
 	}
 
+	public BookImage(String name, String contentType, byte[] bytes, Book book) {
+		this.name=name;
+		this.type=contentType;
+		this.image=bytes;
+		this.book=book;
+	}
+
 }
