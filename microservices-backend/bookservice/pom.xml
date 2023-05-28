@@ -19,6 +19,12 @@
 		<spring-cloud.version>2022.0.0-RC2</spring-cloud.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -155,47 +161,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-			<groupId>com.maciejwalkowiak.paseq</groupId>
-			<artifactId>paseq-maven-plugin</artifactId>
-			<version>0.1.1</version>
-			<!-- configuration for building the package -->
-			<executions>
-				<execution>
-					<phase>compile</phase>
-					<goals>
-						<goal>exec</goal>
-					</goals>
-					<configuration>
-						<tasks>
-							<task>
-								<exec>
-									<directory>src/main/frontend</directory>
-									<command>npm install</command>
-								</exec>
-							</task>
-							<task>
-								<async>true</async>
-								<exec>
-									<directory>src/main/frontend</directory>
-									<command>npm run watch -- -o ../resources/static/main.css</command>
-								</exec>
-							</task>
-							<task>
-								<async>true</async>
-								<exec>
-									<directory>src/main/frontend</directory>
-									<command>npm run watch -- -o ${project.build.directory}/classes/static/assets/css/styles.css</command>
-								</exec>
-							</task>
-							<task>
-								<goals>spring-boot:run</goals>
-							</task>
-						</tasks>
-					</configuration>
-				</execution>
-			</executions>
-		</plugin>
 		</plugins>
 	</build>
 	<repositories>

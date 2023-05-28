@@ -4,22 +4,184 @@
     <meta charset="UTF-8">
     <title>UCBC Library Catalog</title>
     <link th:href="@{/assets/css/styles.css}" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}">
 </head>
-<body>
-<header>
+<body class="flex flex-col w-full">
 
-</header>
-<section >
-    <div class="books">
-        <div id="book" th:each="book : ${catalogs}">
-            <a th:href="@{'/book/' + ${book.isbn}}" class="book" >
-                <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
-<!--                <img class="bookimage" th:src="@{assets/img/book.jpg}">-->
-            </a>
+    <!-- Header -->
+    <header class="flex flex-col sticky top-0 z-30 bg-white shadow-md">
+        <div class="flex flex-row justify-between mx-10 py-5 ">
+            <div class="flex flex-row gap-3">
+                <img class="logo h-20 w-16" alt="logo" th:src="@{/assets/img/logo-1.png}">
+                <div class="flex flex-col justify-center">
+                    <p class="text-3xl text-yellow-600 font-serif text-center font-bold text-justify">UCBC LIBRARY</p>
+                    <span class="text-gray-800">Read to be transformed</span>
+                </div>
+            </div>
+            <div class="user flex flex-col justify-center">
+                <p class="text-md text-gray-600">Username</p>
+            </div>
         </div>
-    </div>
 
-</section>
+        <!-- Bookcases -->
+        <div class="bookcases flex flex-row justify-between px-5 border-b border-t border-ray-300 gap-2 bg-gray-900 text-yellow-600 py-2">
+            <a href="#" class="p-4 w-40 truncate" id="bookcase1">Computer science, information & general works</a>
+            <a href="#" class="p-4 w-40 truncate" id="bookcase2">Philosophy & psychology</a>
+            <a href="#" class="p-4 w-40 truncate" id="bookcase3">Religion</a>
+            <a href="#" class="p-4 w-40 truncate" id="bookcase4">Social sciences</a>
+            <a href="#" class="p-4 w-40 truncate" id="bookcase5">Language</a>
+            <a href="#" class="p-4 w-40 truncate" id="bookcase6">Science</a>
+            <a href="#" class="p-4 w-40 truncate" id="bookcase7">Technology</a>
+            <a href="#" class="p-4 w-40 truncate" id="bookcase8">Arts & recreation</a>
+            <a href="#" class="p-4 w-40 truncate" id="bookcase9">Literature</a>
+            <a href="#" class="p-4 w-40 truncate" id="bookcase10">History & geography</a>
+        </div>
+
+        <!-- Search bar -->
+        <div class="search-bar flex flex-row justify-center p-4 h-full w-full">
+            <div class="relative flex items-center h-12 w-72 rounded-lg focus-within:shadow-md bg-white overflow-hidden border border-yellow-600">
+                <div class="grid place-items-center h-full w-12 text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+        
+                <input
+                class="peer h-full w-full outline-none text-sm text-gray-700 pr-2" type="text" id="search" placeholder="Search..." /> 
+            </div>
+        </div>
+    </header>
+
+    <!-- End header -->
+
+    <!-- Main section -->
+    <section class="">
+        
+           <!-- Swiper -->
+        <div class=" overflow-x-hidden w-full h-64 flex justify-center items-center">
+            <div class="swiper-container w-full h-full relative z-0">
+
+                <!-- swiper slides -->
+            <div class="swiper-wrapper h-max relative">
+                <div class="swiper-slide bg-gray-200">
+                    <h2>SIMPLE SWIPER 1</h2>
+                </div>
+                
+                <div class="swiper-slide bg-gray-100"> 
+                    <h2>SIMPLE SWIPER 2</h2>
+                </div>
+                
+                <div class="swiper-slide bg-gray-300">
+                    <h2>SIMPLE SWIPER 3</h2>
+                </div>
+                
+                <div class="swiper-slide bg-100">
+                    <h2>SIMPLE SWIPER 4</h2>
+                </div>
+                
+                <div class="swiper-slide bg-300 text-center">
+                    <h2>SIMPLE SWIPER 5</h2>
+                </div>
+            </div>
+            <!-- End swiper slides -->
+
+            <!-- pagination dots -->
+            <div class="swiper-pagination" style="z-index: 20; color: rgba(130, 130, 4, 0.919);"></div>
+            <!-- End pagination dots -->
+
+              <div class="absolute inset-0 flex justify-center items-center z-10">
+                <div class="flex flex-row justify-between w-full">
+                    <div class="swiper-button-prev relative" style="color:rgba(130, 130, 4, 0.919)"></div>
+                    <div class="swiper-button-next relative" style="color: rgba(130, 130, 4, 0.919);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- End Swiper -->
+
+
+        <h2>Popular books</h2>
+        <div class="popular">
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+        </div>
+        <h2>Recently added</h2>
+        <div class="recently">
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+            <div class="book">
+                <a href="#" class="book" >
+                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                </a>
+            </div>
+        </div>
+        
+        <div class="books">
+            <div id="book" th:each="book : ${catalogs}">
+                <a th:href="@{'/book/' + ${book.isbn}}" class="book" >
+                    <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
+    <!--                <img class="bookimage" th:src="@{assets/img/book.jpg}">-->
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- End Main section -->
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            <p>&copy; ucbc library <span id="date">2023</span></p>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+    <script>
+        document.getElementById("date").innerHTML = new Date().getFullYear()
+         
+       function manageTruncate(el){
+            el.addEventListener("mouseover",function(){
+                el.classList.remove('truncate')
+            })
+            el.addEventListener("mouseout",function(){
+                el.classList.add('truncate')
+            })
+       }
+        for(let i=1;i<=10;i++){
+            manageTruncate(document.getElementById('bookcase'+i))
+            if(i<10){
+                document.getElementById('bookcase'+i).classList.add('border-r')
+                document.getElementById('bookcase'+i).classList.add('border-yellow-600')
+            }
+        }
+               
+    </script>
+   
 </body>
 </html>
