@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <title>Library | Add book</title>
     <link th:href="@{/assets/css/styles.css}" rel="stylesheet" />
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css} "/>
     <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet" />
     <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="@{/assets/img/favicon.ico}">
 </head>
 
-<body>
+<body class="">
   <section id="newbook">
-    <form action="#" th:action="@{/addbook}" th:object="${bookDto}" method="post" enctype="multipart/form-data" autocomplete="off" >
+    <form action="#" th:action="@{/addbook}" th:object="${bookDto}" method="post" enctype="multipart/form-data" autocomplete="off" id="form">
       <h1>New Book</h1>
 
         <div class="form-group row">
