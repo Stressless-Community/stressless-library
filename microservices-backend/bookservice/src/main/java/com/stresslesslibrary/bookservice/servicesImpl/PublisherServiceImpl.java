@@ -39,11 +39,11 @@ public class PublisherServiceImpl implements PublisherService {
 
 	@Override
 	public Publisher save(Publisher publisher) {
-		if(Objects.isNull(findByName(publisher.getName()))){
+		if(publisherRepository.existsPublisherByName(publisher.getName())){
 			System.out.print("Publisher exist");
-			return publisherRepository.save(publisher);
-		}else{
 			return  findByName(publisher.getName());
+		}else{
+			return publisherRepository.save(publisher);
 		}
 
 	}

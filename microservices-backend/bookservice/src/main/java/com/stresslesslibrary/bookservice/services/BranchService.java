@@ -2,8 +2,9 @@ package com.stresslesslibrary.bookservice.services;
 
 import java.util.List;
 
-import com.stresslesslibrary.bookservice.entities.Branch;
+import org.springframework.stereotype.Service;
 
+import com.stresslesslibrary.bookservice.entities.Branch;
 
 public interface BranchService {
 

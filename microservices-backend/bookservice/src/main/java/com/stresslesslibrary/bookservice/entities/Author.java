@@ -30,7 +30,7 @@ public class Author implements Serializable {
 	
 	private String name;
 	
-	@Lob //for long text
+	@Column(name="description",columnDefinition="LONGTEXT")
 	private String description;
 	
 	
