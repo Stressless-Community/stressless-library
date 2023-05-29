@@ -3,11 +3,11 @@ package com.stresslesslibrary.bookservice.controller;
 import com.stresslesslibrary.bookservice.dtos.BookDTO;
 import com.stresslesslibrary.bookservice.entities.Book;
 import com.stresslesslibrary.bookservice.entities.BookImage;
-import com.stresslesslibrary.bookservice.services.BookImageService;
+import com.stresslesslibrary.bookservice.repositories.BookImageRepository;
 import com.stresslesslibrary.bookservice.services.BookService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-
+import org.hibernate.dialect.SybaseASE157Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import java.io.File;
 import java.io.IOException;
 
 
@@ -27,7 +27,9 @@ public class ThymeleafController {
     private BookService bookService;
 
     @Autowired
-    private BookImageService bookImageRepository;
+    private BookImageRepository bookImageRepository;
+    @Autowired
+    private HttpServletRequest request;
 
     public ThymeleafController(BookService bookService){
 
@@ -63,9 +65,12 @@ public class ThymeleafController {
 
         }else{
            MultipartFile file = bookDTO.getCover();
-           Book book= bookService.saveBook(bookDTO);
-           BookImage image= new BookImage(bookDTO.getIsbn(), file.getContentType(), file.getBytes(), book);
-           bookImageRepository.save(image);
+           BookImage image= new BookImage(bookDTO.getIsbn(), file.getContentType(), file.getBytes());
+           System.out.print(file.getOriginalFilename());
+           BookImage imagedb = bookImageRepository.save(image);
+           bookService.saveBook(bookDTO);
+           imagedb.setBook(bookService.saveBook(bookDTO));
+           bookImageRepository.save(imagedb);
 
 
             return "redirect:/";

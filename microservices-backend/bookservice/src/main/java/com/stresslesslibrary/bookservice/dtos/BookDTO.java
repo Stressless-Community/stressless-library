@@ -9,8 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import org.hibernate.mapping.List;
 import org.springframework.web.multipart.MultipartFile;
 
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
@@ -34,7 +32,6 @@ public class BookDTO {
 	private Boolean epubAvailble;
 	private Boolean isReference;
 	private String publisher;
+	
 	private String branchId;
-
-	private int[] authors;
 }

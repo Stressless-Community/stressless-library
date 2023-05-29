@@ -51,20 +51,16 @@
       </div>
 
       <div class="form-group row">
-        <label for="branch" class="col-sm-2 col-form-label">Branch</label>
+        <label for="branch">Branch</label>
         <div class="col-sm-10">
-          <input id="branch" type="text" th:field="*{branchId}" placeholder="Dewet thousand class" class="form-control" />
+          <input id="branch" type="text" th:field="*{branchId}" placeholder="Branch" />
         </div>
       </div>
 
       <div class="form-group row">
         <label for="authors" class="col-sm-2 col-form-label">Author(s)</label>
         <div class="col-sm-10">
-          <select class="form-control chosen" id="authors" required th:field="*{authors}" name="authors[]"  multiple data-placeholder="Choose tags ...">
-            <option value="1">Author 1</option>
-            <option value="2">Author 2</option>
-            <option value="3">Author 3</option>
-          </select>
+          <input id="authors" type="text" placeholder="Enter author(s) full name(s) separated by a comma"  class="form-control" />
         </div>
       </div>
 

@@ -11,36 +11,92 @@
 
     <!-- Header -->
     <header class="flex flex-col sticky top-0 z-30 bg-white shadow-md">
-        <div class="flex flex-row justify-between mx-10 py-5 ">
+        <div class="flex flex-row justify-between mx-10 py-3 ">
             <div class="flex flex-row gap-3">
-                <img class="logo h-20 w-16" alt="logo" th:src="@{/assets/img/logo-1.png}">
+                <img class="logo h-16 w-12" alt="logo" th:src="@{/assets/img/logo-1.png}">
                 <div class="flex flex-col justify-center">
                     <p class="text-3xl text-yellow-600 font-serif text-center font-bold text-justify">UCBC LIBRARY</p>
-                    <span class="text-gray-800">Read to be transformed</span>
+                    <span class="text-gray-800 text-sm font-extralight">Read to be transformed</span>
                 </div>
             </div>
             <div class="user flex flex-col justify-center">
-                <p class="text-md text-gray-600">Username</p>
+                <div class="flex flex-row">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-yellow-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg> 
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 w-8 h-8 text-yellow-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                      </svg>                      
+                </div>
             </div>
         </div>
 
         <!-- Bookcases -->
-        <div class="bookcases flex flex-row justify-between px-5 border-b border-t border-ray-300 gap-2 bg-gray-900 text-yellow-600 py-2">
-            <a href="#" class="p-4 w-40 truncate" id="bookcase1">Computer science, information & general works</a>
-            <a href="#" class="p-4 w-40 truncate" id="bookcase2">Philosophy & psychology</a>
-            <a href="#" class="p-4 w-40 truncate" id="bookcase3">Religion</a>
-            <a href="#" class="p-4 w-40 truncate" id="bookcase4">Social sciences</a>
-            <a href="#" class="p-4 w-40 truncate" id="bookcase5">Language</a>
-            <a href="#" class="p-4 w-40 truncate" id="bookcase6">Science</a>
-            <a href="#" class="p-4 w-40 truncate" id="bookcase7">Technology</a>
-            <a href="#" class="p-4 w-40 truncate" id="bookcase8">Arts & recreation</a>
-            <a href="#" class="p-4 w-40 truncate" id="bookcase9">Literature</a>
-            <a href="#" class="p-4 w-40 truncate" id="bookcase10">History & geography</a>
+        <div class="bookcases flex flex-row justify-between px-5 font-ligth  gap-2 bg-gray-900 text-yellow-600 py-2">
+            <a href="#" id="bookcase1" class="p-3 w-40 truncate">Computer science, information & general works
+                <div id="bookcaseover1" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center -left-3">
+                    <a>Computer science, information & general works</a>
+                </div>
+            </a>
+            <a href="#" class="p-3 w-40 truncate" id="bookcase2">Philosophy & psychology
+                <div id="bookcaseover2" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center left-6">
+                    <a>Philosophy & psychology</a>
+                </div>
+            </a>
+                
+            <a href="#" class="p-3 w-40 truncate" id="bookcase3">Religion
+                <div id="bookcaseover3" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center -left-3">
+                    <a>Religion</a>
+                </div>
+            </a>
+                
+            <a href="#" class="p-3 w-40 truncate" id="bookcase4">Social sciences
+                <div id="bookcaseover4" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center -left-3">
+                    <a>Social sciences</a>
+                </div>
+            </a>
+                
+            <a href="#" class="p-3 w-40 truncate" id="bookcase5">Language
+                <div id="bookcaseover5" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center -left-3">
+                    <a>Language</a>
+                </div>
+            </a>
+                
+            <a href="#" class="p-3 w-40 truncate" id="bookcase6">Science
+                <div id="bookcaseover6" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center -left-3">
+                    <a>Science</a>
+                </div>
+            </a>
+                
+            <a href="#" class="p-3 w-40 truncate" id="bookcase7">Technology
+                <div id="bookcaseover7" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center -left-3">
+                    <a>Technology</a>
+                </div>
+            </a>
+                
+            <a href="#" class="p-3 w-40 truncate" id="bookcase8">Arts & recreation
+                <div id="bookcaseover8" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center -left-3">
+                    <a>Arts & recreation</a>
+                </div>
+            </a>
+                
+            <a href="#" class="p-3 w-40 truncate" id="bookcase9">Literature
+                <div id="bookcaseover9" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center -left-3">
+                    <a>Literature</a>
+                </div>
+            </a>
+                
+            <a href="#" class="p-3 w-40 truncate" id="bookcase10">History & geography
+                <div id="bookcaseover10" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center -left-3">
+                    <a>History & geography</a>
+                </div>
+            </a>
+            
         </div>
 
         <!-- Search bar -->
         <div class="search-bar flex flex-row justify-center p-4 h-full w-full">
-            <div class="relative flex items-center h-12 w-72 rounded-lg focus-within:shadow-md bg-white overflow-hidden border border-yellow-600">
+            <div class="relative flex items-center h-10 w-96 rounded-3xl focus-within:shadow-md bg-white overflow-hidden border border-yellow-600">
                 <div class="grid place-items-center h-full w-12 text-gray-300">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -56,7 +112,7 @@
     <!-- End header -->
 
     <!-- Main section -->
-    <section class="">
+    <section class="bg-white pb-8">
         
            <!-- Swiper -->
         <div class=" overflow-x-hidden w-full h-64 flex justify-center items-center">
@@ -64,23 +120,23 @@
 
                 <!-- swiper slides -->
             <div class="swiper-wrapper h-max relative">
-                <div class="swiper-slide bg-gray-200">
+                <div class="swiper-slide bg-gray-200 p-5 text-center">
                     <h2>SIMPLE SWIPER 1</h2>
                 </div>
                 
-                <div class="swiper-slide bg-gray-100"> 
+                <div class="swiper-slide bg-gray-100 p-5 text-center"> 
                     <h2>SIMPLE SWIPER 2</h2>
                 </div>
                 
-                <div class="swiper-slide bg-gray-300">
+                <div class="swiper-slide bg-gray-300 p-5 text-center">
                     <h2>SIMPLE SWIPER 3</h2>
                 </div>
                 
-                <div class="swiper-slide bg-100">
+                <div class="swiper-slide bg-100 p-5 text-center">
                     <h2>SIMPLE SWIPER 4</h2>
                 </div>
                 
-                <div class="swiper-slide bg-300 text-center">
+                <div class="swiper-slide bg-300 text-center p-5">
                     <h2>SIMPLE SWIPER 5</h2>
                 </div>
             </div>
@@ -101,46 +157,65 @@
 
           <!-- End Swiper -->
 
-
-        <h2>Popular books</h2>
-        <div class="popular">
-            <div class="book">
-                <a href="#" class="book" >
-                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
-                </a>
+        <div class="p-5 my-6">
+            
+            <div class="flex flex-row justify-center gap-3"> 
+                <div class="w-96 h-4 border-b border-yellow-600"></div> 
+                <h2 class="text-center font-ligth text-2xl text-yellow-600">Popular books</h2> 
+                <div class="w-96 h-4 border-b border-yellow-600"></div>
             </div>
 
-            <div class="book">
-                <a href="#" class="book" >
-                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
-                </a>
+            <div class="flex flex-row justify-center my-10">
+                <div class="popularbooks grid grid-cols-3 justify-center gap-12">
+                    <div class="book h-52 w-52">
+                        <a href="#" class="book" >
+                        <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                        </a>
+                    </div>
+    
+                    <div class="book h-52 w-52">
+                        <a href="#" class="book" >
+                        <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                        </a>
+                    </div>
+                    <div class="book h-52 w-52">
+                        <a href="#" class="book" >
+                        <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="book">
-                <a href="#" class="book" >
-                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
-                </a>
+            
+        </div>
+
+
+        <div class="flex flex-row justify-center gap-3 mt-10"> 
+            <div class="w-96 h-4 border-b border-yellow-600"></div> 
+            <h2 class="text-center font-ligth text-2xl text-yellow-600">Recently added</h2> 
+            <div class="w-96 h-4 border-b border-yellow-600"></div>
+        </div>
+
+        <div class="flex flex-row justify-center my-10">
+            <div class="recently grid grid-cols-3 justify-center gap-12">
+                <div class="book h-52 w-52">
+                    <a href="#" class="book" >
+                    <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                    </a>
+                </div>
+
+                <div class="book h-52 w-52">
+                    <a href="#" class="book" >
+                    <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                    </a>
+                </div>
+                <div class="book h-52 w-52">
+                    <a href="#" class="book" >
+                    <img class="bookimage" th:src="@{assets/img/book.jpg}">
+                    </a>
+                </div>
             </div>
         </div>
-        <h2>Recently added</h2>
-        <div class="recently">
-            <div class="book">
-                <a href="#" class="book" >
-                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
-                </a>
-            </div>
 
-            <div class="book">
-                <a href="#" class="book" >
-                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
-                </a>
-            </div>
-            <div class="book">
-                <a href="#" class="book" >
-                   <img class="bookimage" th:src="@{assets/img/book.jpg}">
-                </a>
-            </div>
-        </div>
-        
         <div class="books">
             <div id="book" th:each="book : ${catalogs}">
                 <a th:href="@{'/book/' + ${book.isbn}}" class="book" >
@@ -149,12 +224,15 @@
                 </a>
             </div>
         </div>
+        
+    </div>        
+        
     </section>
     <!-- End Main section -->
 
     <!-- Footer -->
-    <footer>
-        <div>
+    <footer class="px-5 h-32 bg-gray-900 text-yellow-600 text-center bottom-0 flex flex-col justify-center">
+        <div class="text-xl">
             <p>&copy; ucbc library <span id="date">2023</span></p>
         </div>
     </footer>
@@ -165,18 +243,21 @@
     <script>
         document.getElementById("date").innerHTML = new Date().getFullYear()
          
-       function manageTruncate(el){
+       function manageTruncate(el,elover){
             el.addEventListener("mouseover",function(){
-                el.classList.remove('truncate')
+                elover.classList.remove('hidden')
             })
             el.addEventListener("mouseout",function(){
+                el.classList.remove('hidden')
                 el.classList.add('truncate')
+                elover.classList.add('hidden')
             })
        }
         for(let i=1;i<=10;i++){
-            manageTruncate(document.getElementById('bookcase'+i))
+            manageTruncate(document.getElementById('bookcase'+i),document.getElementById('bookcaseover'+i))
             if(i<10){
                 document.getElementById('bookcase'+i).classList.add('border-r')
+                document.getElementById('bookcase'+i).classList.add('border-yellow-600')
                 document.getElementById('bookcase'+i).classList.add('border-yellow-600')
             }
         }

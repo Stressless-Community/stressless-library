@@ -146,24 +146,9 @@ public class ExcelService {
             createCell(row, columnCount++, book.getPublishedDate(), style);
             createCell(row, columnCount++, book.getPublisher(), style);
             createCell(row, columnCount++, book.getAuthors(), style);
-            
-            if(book.getPdfAvailble()){
-               createCell(row, columnCount++, "OUI", style);  
-            }else{
-                createCell(row, columnCount++, "NON", style);  
-            }
-
-            if(book.getEpubAvailble()){
-                createCell(row, columnCount++, "OUI", style);  
-             }else{
-                 createCell(row, columnCount++, "NON", style);  
-             }
-
-             if(book.getIsReference()){
-                createCell(row, columnCount++, "OUI", style);  
-             }else{
-                 createCell(row, columnCount++, "NON", style);  
-             }
+            createCell(row, columnCount++, book.getPdfAvailble(), style);
+            createCell(row, columnCount++, book.getEpubAvailble(), style);
+            createCell(row, columnCount++, book.getIsReference(), style);
             createCell(row, columnCount++, book.getBranch(), style);
             
             
