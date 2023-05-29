@@ -56,7 +56,7 @@ public class BookImageController {
 	    public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) throws Exception {
 	        	BookImage dbImage=new BookImage();
 				try {
-					dbImage = bookImage.findByName(name);
+					dbImage = bookImage.findBookImageByName(name);
 					return ResponseEntity
 							.ok()
 							.contentType(MediaType.valueOf(dbImage.getType()))
