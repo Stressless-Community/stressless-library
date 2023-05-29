@@ -441,7 +441,129 @@
         </div>
     </section>
 
-    <!-- END FINDBOOK -->
+    <section class="bookinfo">
+        <div>
+            <div>
+                <img class="cover" th:src="@{assets/img/book.jpg}">
+                <p>Reference</p>
+            </div>
+            <div>
+                <p>Tilte</p>
+                <p>Subtitle</p>
+                <p>Authors</p>
+                <p>Short Description</p>
+                <div>
+                    <div>
+                        <p>pages</p>
+                    </div>
+                    <div>
+                        <p>Published date</p>
+                    </div>
+                    <div>
+                        <p>Publisher</p>
+                    </div>
+                    <div>
+                        <p>Print Kind</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BOOK FULL DESCRIPTION -->
+        <div >
+            <p>This is a test of a full decription.This is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decription
+            </p>
+        </div>
+        <div>
+            <p>About the authors</p>
+            <p>This is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors descriptionThis is a test for authors description.This is a test for authors descriptionThis is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors description</p>
+        </div>
+        <div>
+            <p>Suggested Readings</p>
+            <a href="#">
+                <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
+            </a>
+            <a href="#">
+                <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
+            </a>
+            <a href="#">
+                <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
+            </a>
+            <a href="#">
+                <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
+            </a>
+            
+        </div>
+    </section>
+
+    <!-- ADD BOOK SECTION -->
+    <section id="newbook">
+        <!-- PART 1 -->
+        <form action="#"  th:object="${bookDto}" enctype="multipart/form-data" autocomplete="off" id="form">
+          <div>
+            <label for="isbn">Isbn</label>
+            <input id="isbn" type="text" th:field="*{isbn}" placeholder="isbn"  required />
+            <label for="isbn">Title</label>
+            <input id="isbn" type="text" th:field="*{title}" placeholder="isbn"   required />
+            <label for="isbn">Subtitle</label>
+            <input id="isbn" type="text" th:field="*{subtitle}" placeholder="isbn"   required />
+            <p>Next</p>
+          </div>
+          <!-- PART 2 -->
+          <div>
+            <label for="Description">Description</label>
+            <textarea id="description" type="text" th:field="*{description}" placeholder="Description" required></textarea>
+            <label for="branch">Branch</label>
+            <input id="branch" type="text" th:field="*{branchId}" placeholder="branch"   required />
+            
+            <label for="authors">Authors</label>
+            <select id="authors" th:field="*{subtitle}"    required multiple>
+                <option value="1">Author 1</option>
+                <option value="2">Author 2</option>
+                <option value="3">Author 3</option>
+            </select>
+
+            <label for="publisher">Publisher</label>
+            <select id="publsher" th:field="*{publisher}"  required >
+                <option value="1">Publisher 1</option>
+                <option value="2">Publisher 2</option>
+                <option value="3">Publisher 3</option>
+            </select>
+            <label for="publisher">Published Date</label>
+            <input id="publishedDate" type="text" th:field="*{publishedDate}" placeholder="publishedDate" required />
+          </div>
+
+          <!-- PART 3 -->
+          <div>
+            <label for="pageCount">Page Count</label>
+            <input id="pageCount" type="number" th:field="*{pageCount}" placeholder="pageCount"  required />
+
+            <select id="kind" th:field="*{kind}" required >
+                <option value="HARDCOVER">HardCover</option>
+                <option value="BOOK">Book</option>
+            </select>
+            
+            <input id="isReference" type="checkbox" th:field="*{isReference}" />
+            <label for="isReference">Reference</label>
+    
+            <input id="pdfAvailable" type="checkbox" th:field="*{pdfAvailble}"/>
+            <label for="pdfAvailable">Pdf</label>
+    
+    
+            <input id="epubAvailable" type="checkbox"  th:field="*{epubAvailble}" />
+            <label for="epubAvailable">Epub</label>
+
+            
+           
+          </div>
+
+          <!-- PART 4 -->
+          <div>
+            <input id="cover" type="file" accept="image/*" th:field="*{cover}" required>
+
+            <button>Save</button>
+          </div>
+        </form>
+    </section>
 
     <!-- Footer -->
     <footer class="px-5 h-32 bg-gray-900 text-yellow-600 text-center bottom-0 flex flex-col justify-center">
@@ -450,6 +572,8 @@
         </div>
     </footer>
     <!-- End Footer -->
+
+
 
     <script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>

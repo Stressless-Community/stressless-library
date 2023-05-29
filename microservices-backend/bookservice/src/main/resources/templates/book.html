@@ -54,5 +54,13 @@
     </div>
 
 
+    <section id="newbook">
+        <form action="#" th:action="@{/addbook}" th:object="${bookDto}" method="post" enctype="multipart/form-data" autocomplete="off" id="form">
+          <div>
+            <input id="isbn" type="text" th:field="*{isbn}" placeholder="isbn" class="form-control"  required />
+          </div>
+        </form>
+    </section>
+
 </body>
 </html>

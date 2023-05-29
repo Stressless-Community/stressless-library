@@ -52,7 +52,7 @@ public class ThymeleafController {
     @GetMapping("/addbook")
     public String addbook(Model model) {
         model.addAttribute("bookDto", new BookDTO());
-        return "add-book";
+        return "index";
     }
 
     @PostMapping("/addbook")
@@ -61,7 +61,7 @@ public class ThymeleafController {
         model.addAttribute("bookDto", new BookDTO());
         if (result.hasErrors()) {
 
-            return "add-book";
+            return "index";
 
         }else{
            MultipartFile file = bookDTO.getCover();
@@ -73,7 +73,7 @@ public class ThymeleafController {
            bookImageRepository.save(imagedb);
 
 
-            return "redirect:/";
+            return "home";
         }
 
             }
