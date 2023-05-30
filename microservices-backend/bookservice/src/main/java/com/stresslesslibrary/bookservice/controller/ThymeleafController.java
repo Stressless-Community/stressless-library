@@ -37,46 +37,47 @@ public class ThymeleafController {
     @GetMapping("/")
     public String viewHomePage(Model model) {
         model.addAttribute("catalogs", bookService.findAll());
-        return "index";
-    }
-
-    @GetMapping("/book/{isbn}")
-    public String getbook(@PathVariable("isbn") String isbn, Model model) {
-
-        Book book = bookService.getOne(isbn);
-        model.addAttribute("book", book);
-
-        return "book";
-    }
-
-    @GetMapping("/addbook")
-    public String addbook(Model model) {
         model.addAttribute("bookDto", new BookDTO());
         return "index";
     }
 
-    @PostMapping("/addbook")
-    public String addbook(@Valid BookDTO bookDTO, BindingResult result, Model model) throws IOException {
+//     @GetMapping("/book/{isbn}")
+//     public String getbook(@PathVariable("isbn") String isbn, Model model) {
 
-        model.addAttribute("bookDto", new BookDTO());
-        if (result.hasErrors()) {
+//         Book book = bookService.getOne(isbn);
+//         model.addAttribute("book", book);
 
-            return "index";
+//         return "book";
+//     }
 
-        }else{
-           MultipartFile file = bookDTO.getCover();
-           BookImage image= new BookImage(bookDTO.getIsbn(), file.getContentType(), file.getBytes());
-           System.out.print(file.getOriginalFilename());
-           BookImage imagedb = bookImageRepository.save(image);
-           bookService.saveBook(bookDTO);
-           imagedb.setBook(bookService.saveBook(bookDTO));
-           bookImageRepository.save(imagedb);
+//     @GetMapping("/addbook")
+//     public String addbook(Model model) {
+//         model.addAttribute("bookDto", new BookDTO());
+//         return "index";
+//     }
+
+//     @PostMapping("/addbook")
+//     public String addbook(@Valid BookDTO bookDTO, BindingResult result, Model model) throws IOException {
+
+//         model.addAttribute("bookDto", new BookDTO());
+//         if (result.hasErrors()) {
+
+//             return "index";
+
+//         }else{
+//            MultipartFile file = bookDTO.getCover();
+//            BookImage image= new BookImage(bookDTO.getIsbn(), file.getContentType(), file.getBytes());
+//            System.out.print(file.getOriginalFilename());
+//            BookImage imagedb = bookImageRepository.save(image);
+//            bookService.saveBook(bookDTO);
+//            imagedb.setBook(bookService.saveBook(bookDTO));
+//            bookImageRepository.save(imagedb);
 
 
-            return "home";
-        }
+//             return "home";
+//         }
 
-            }
+//             }
 
 }
 
