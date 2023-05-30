@@ -155,5 +155,10 @@ public class BookServiceImpl implements BookService {
 		return bookRepository.save(book);
 	}
 
+	@Override
+	public List<Book> popularBooks() {
+		return bookRepository.findTop10ByOrderByRecordedDateDesc();
+	}
+
 
 }

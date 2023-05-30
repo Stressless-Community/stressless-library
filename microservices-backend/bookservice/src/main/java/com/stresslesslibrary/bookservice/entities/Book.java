@@ -45,6 +45,9 @@ public class Book implements Serializable {
 	private Boolean epubAvailble;
 	private Boolean isReference;
 	
+	@Temporal(TemporalType.DATE)
+	private Date recordedDate;
+
 	@OneToOne(mappedBy = "book")
 	private BookImage bookImage;
 	

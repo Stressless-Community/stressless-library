@@ -68,6 +68,11 @@ public class BookController {
 		return ResponseEntity.ok().body(bookService.searchPatern(keyword));
 	}
 	
+	@GetMapping("/popular")
+	public ResponseEntity<List<Book>> popular(){
+		return ResponseEntity.ok().body(bookService.popularBooks());
+	}
+
 	@PostMapping
 	public ResponseEntity<?> saveBook(@RequestBody BookDTO book){
 		try {

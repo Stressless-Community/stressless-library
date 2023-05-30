@@ -21,4 +21,6 @@ public interface BookService {
 	Book updateBook(BookDTO book);
 
 	Book update (Book book);
+
+	List<Book> popularBooks();
 }

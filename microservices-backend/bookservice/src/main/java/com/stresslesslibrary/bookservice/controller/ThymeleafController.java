@@ -38,6 +38,7 @@ public class ThymeleafController {
     public String viewHomePage(Model model) {
         model.addAttribute("catalogs", bookService.findAll());
         model.addAttribute("bookDto", new BookDTO());
+        model.addAttribute("popular", bookService.popularBooks());
         return "index";
     }
 

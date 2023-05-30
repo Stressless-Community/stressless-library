@@ -17,5 +17,6 @@ public interface BookRepository extends JpaRepository<Book, String> {
 			+ " OR b.description LIKE %:search%")
 	List<Book> search(@Param("search") String search);
 
-	// List<Book> findTop10ByOrderByLevelDesc();
+	List<Book> findTop10ByOrderByRecordedDateDesc();
+
 }
