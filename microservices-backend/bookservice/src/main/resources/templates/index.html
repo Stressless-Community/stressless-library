@@ -29,14 +29,27 @@
                     <span class="text-gray-800 text-sm font-extralight">Read to be transformed</span>
                 </div>
             </div>
+
             <div class="user flex flex-col justify-center">
                 <div class="flex flex-row">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-yellow-600">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg> 
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 w-8 h-8 text-yellow-600">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                      </svg>                      
+                    <button class="py-2 px-6 bg-teal-500 text-white rounded hover:bg-teal-700 mr-4" onclick="newBookModal()">Add Book</button>
+    
+                    <button class="bg-yellow-100 text-lg text-yellow-600 px-6 py-2 shadow-md hover:scale-105 transition-all mr-4">
+                        <span>Sign up</span>
+                    </button>
+
+                    <button class="bg-slate-50  text-lg text-yellow-600 px-6 py-2 shadow-md hover:scale-105 transition-all">
+                        <span>Sign in</span>
+                    </button>
+
+                   <div class="hidden flex flex-row">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-yellow-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg> 
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 w-8 h-8 text-yellow-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                        </svg> 
+                   </div>                     
                 </div>
             </div>
         </div>
@@ -122,7 +135,7 @@
     <!-- End header -->
 
     <!-- Main section -->
-    <section section id="home" class="bg-white pb-8">
+    <section section id="home" class="bg-white pb-8 hidden">
         
            <!-- Swiper -->
         <div class=" overflow-x-hidden w-full h-64 flex justify-center items-center">
@@ -168,44 +181,47 @@
 
           <!-- End Swiper -->
 
-        <div class="p-5 my-6">
+        <div class="mx-5">
+            <div class="pt-12 flex flex-col gap-4">
             
-            <div class="flex flex-row justify-center gap-3"> 
-                <div class="w-96 h-4 border-b border-yellow-600"></div> 
-                <h2 class="text-center font-ligth text-2xl text-yellow-600">Popular books</h2> 
-                <div class="w-96 h-4 border-b border-yellow-600"></div>
+                <div class="flex flex-row justify-center gap-3"> 
+                    <div class="w-96 h-4 border-b border-yellow-600"></div> 
+                    <h2 class="text-center font-ligth text-2xl text-yellow-600">Popular books</h2> 
+                    <div class="w-96 h-4 border-b border-yellow-600"></div>
+                </div>
+            
+                <div class="overflow-x-hidden">
+                    <div class="flex flex-row space-x-9 w-max p-8">
+                        <div class="popularbook shadow-lg cursor-pointer hover:scale-110 transition-all" th:each="book : ${catalogs}">
+                            <div class="book">
+                                <img class="bookimage h-72 w-52" alt="Cover" th:src="@{${book.largeCoverUrl}}" th:data-isbn="${book.isbn}" onclick="showBookInfo(this.dataset.isbn)">
+                            </div>
+                        </div>
+                    </div> 
+                </div>   
+                
             </div>
-
-            <div class="flex flex-row justify-center my-10">
-                <div class="popularbooks grid grid-cols-3 justify-center gap-12" th:each="book : ${catalogs}">
-                    <div class="book h-52 w-52">
-                        <a href="#" class="book" >
-                        <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
-                        </a>
+    
+    
+            <div class="flex flex-col gap-4 mt-10">
+                <div class="flex flex-row justify-center gap-3"> 
+                    <div class="w-96 h-4 border-b border-yellow-600"></div> 
+                    <h2 class="text-center font-ligth text-2xl text-yellow-600">Recently added</h2> 
+                    <div class="w-96 h-4 border-b border-yellow-600"></div>
+                </div>
+    
+                <div class="overflow-x-hidden">
+                    <div class="flex flex-row space-x-9 w-max p-8">
+                        <div class="recently shadow-lg cursor-pointer hover:scale-110 transition-all" th:each="book : ${popular}" onclick="showBookInfo()" >
+                            <div class="book" >
+                                <img class="bookimage h-72 w-52" alt="Cover" th:src="@{${book.largeCoverUrl}}">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-        </div>
-
-
-        <div class="flex flex-row justify-center gap-3 mt-10"> 
-            <div class="w-96 h-4 border-b border-yellow-600"></div> 
-            <h2 class="text-center font-ligth text-2xl text-yellow-600">Recently added</h2> 
-            <div class="w-96 h-4 border-b border-yellow-600"></div>
-        </div>
-
-        <div class="flex flex-row justify-center my-10">
-            <div class="recently grid grid-cols-3 justify-center gap-12" th:each="book : ${popular}" >
-                <div class="book h-52 w-52" >
-                    <a href="#" class="book" >
-                    <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-    </div>        
+            </div> 
+        </div>     
+               
         
     </section>
     <!-- End Main section -->
@@ -421,128 +437,237 @@
         </div>
     </section>
 
-    <section class="bookinfo">
-        <div>
-            <div>
-                <img class="cover" th:src="@{assets/img/book.jpg}">
-                <p>Reference</p>
+    <section id="bookinfo" class=" m-10 px-14 flex flex-col space-y-3">
+        <div class="flex flex-row space-x-9 w-full">
+            <div class="drop-shadow-xl w-max">
+                <img class="cover w-80" th:src="@{assets/img/book.jpg}">
+                <p class="p-3 font-semibold text-slate-900 bg-yellow-200">Reference : </p>
             </div>
-            <div>
-                <p>Tilte</p>
-                <p>Subtitle</p>
-                <p>Authors</p>
-                <p>Short Description</p>
+            <div class="flex flex-col text-slate-700 px-5 w-full space-y-4">
                 <div>
-                    <div>
-                        <p>pages</p>
+                    <p class="p-3 w-full text-4xl font-semibold">Title</p>
+                    <p class="p-3  w-full text-xl font-light ">Subtitle</p>
+                    <p class="p-3  w-full text-lg font-bold">Authors</p>
+                    <p class="truncate text-md font-light p-3">Short Description</p>
+                </div>
+
+                <div class="flex flex-row bottom-0 bg-gray-100 h-full px-8 items-center justify-between shadow-lg">
+                    <div class="flex flex-col space-y-2">
+                       <p class="text-xl font-bold">Print kind</p>
+
+                       <div class="flex flex-row space-x-2">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-yellow-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
+                        </svg>                          
+                        <span class="text-lg font-light">Hardcover</span>
+                       </div>
                     </div>
-                    <div>
-                        <p>Published date</p>
-                    </div>
-                    <div>
-                        <p>Publisher</p>
-                    </div>
-                    <div>
-                        <p>Print Kind</p>
-                    </div>
+
+                    <div class="flex flex-col space-y-2">
+                        <p class="text-xl font-bold">Pages</p>
+ 
+                        <div class="flex flex-row space-x-2">
+ 
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-yellow-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                        </svg>
+                                                        
+                         <span class="text-lg font-light">512</span>
+                        </div>
+                     </div>
+
+                     <div class="flex flex-col space-y-2">
+                        <p class="text-xl font-bold">Publish date</p>
+ 
+                        <div class="flex flex-row space-x-2">
+ 
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-yellow-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                        </svg>
+                                                        
+                         <span class="text-lg font-light">Feb 29, 2019</span>
+                        </div>
+                     </div>
+
+                     <div class="flex flex-col space-y-2">
+                        <p class="text-xl font-bold">Publisher</p>
+ 
+                        <div class="flex flex-row space-x-2">
+ 
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-yellow-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                        </svg>
+                                                        
+                         <span class="text-lg font-light">Eni</span>
+                        </div>
+                     </div>
                 </div>
             </div>
         </div>
+
         <!-- BOOK FULL DESCRIPTION -->
-        <div >
-            <p>This is a test of a full decription.This is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decription
-            </p>
+        <div class="flex flex-col space-y-3 pt-8">
+            <div class="flex flex-col space-y-2">
+                <p class="text-2xl font-bold">Full description</p>
+                <p class="text-slate-700 text-lg font-light whitespace-pre-wrap tracking-wide [word-spacing:3px]">
+                    This is a test of a full decription.This is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decription
+                </p>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <p class="text-2xl font-bold">About the author(s)</p>
+                <p class="text-slate-700 text-lg font-extralight tracking-wide [word-spacing:3px]">This is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors descriptionThis is a test for authors description.This is a test for authors descriptionThis is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors description</p>
+            </div>
+
+            <div class="flex flex-col gap-4 pt-5">
+                <div class="flex flex-row space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-16 h-10 font-bold text-yellow-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>                      
+                    <p class="text-gray-700 text-3xl font-extralight">Suggested Readings</p>
+                </div>
+
+                <div class="overflow-x-hidden">
+                    <div class="flex flex-row space-x-9 w-max p-8">
+                        <div class="popularbook shadow-lg cursor-pointer hover:scale-110 transition-all" onclick="showBookInfo()">
+                            <div class="book">
+                                <img class="bookimage h-72 w-52" alt="Cover" th:src="@{assets/img/book.jpg}">
+                            </div>
+                        </div>
+        
+                        <div class="popularbook shadow-lg cursor-pointer hover:scale-110 transition-all" onclick="showBookInfo()">
+                            <div class="book">
+                                <img class="bookimage h-72 w-52" alt="Cover" th:src="@{assets/img/book.jpg}">
+                            </div>
+                        </div>
+        
+                        <div class="popularbook shadow-lg cursor-pointer hover:scale-110 transition-all" onclick="showBookInfo()">
+                            <div class="book">
+                                <img class="bookimage h-72 w-52" alt="Cover" th:src="@{assets/img/book.jpg}">
+                            </div>
+                        </div>
+        
+                        <div class="popularbook shadow-lg cursor-pointer hover:scale-110 transition-all" onclick="showBookInfo()">
+                            <div class="book">
+                                <img class="bookimage h-72 w-52" alt="Cover" th:src="@{assets/img/book.jpg}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+       
+            </div>
         </div>
-        <div>
-            <p>About the authors</p>
-            <p>This is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors descriptionThis is a test for authors description.This is a test for authors descriptionThis is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors description</p>
-        </div>
-        <div>
-            <p>Suggested Readings</p>
-            <a href="#">
-                <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
-            </a>
-            <a href="#">
-                <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
-            </a>
-            <a href="#">
-                <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
-            </a>
-            <a href="#">
-                <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
-            </a>
-            
-        </div>
+        
+
     </section>
 
     <!-- ADD BOOK SECTION -->
-    <section id="newbook">
+    <section id="newbook" class="">
         <!-- PART 1 -->
-        <form action="#"  th:object="${bookDto}" enctype="multipart/form-data" autocomplete="off" id="form">
-          <div>
-            <label for="isbn">Isbn</label>
-            <input id="isbn" type="text" th:field="*{isbn}" placeholder="isbn"  required />
-            <label for="isbn">Title</label>
-            <input id="isbn" type="text" th:field="*{title}" placeholder="isbn"   required />
-            <label for="isbn">Subtitle</label>
-            <input id="isbn" type="text" th:field="*{subtitle}" placeholder="isbn"   required />
-            <p>Next</p>
+
+        <div class="fixed z-10 overflow-y-auto top-0 w-full left-0 transition-all hidden" style="z-index: 50;" id="modal">
+
+            <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                
+                <div class="fixed inset-0 transition-opacity">
+                    <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
+                </div>
+
+              <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+
+                <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                    <form action="#"  th:object="${bookDto}" enctype="multipart/form-data" autocomplete="off" id="form">
+                        <!-- PART ONE -->
+                        <div id="newbookInfo1" class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <label for="isbn">Isbn</label>
+                            <input id="isbn" type="text" th:field="*{isbn}" placeholder="Isbn"  required class="w-full bg-gray-100 p-2 mt-2 mb-3" />
+                            <label for="title">Title</label>
+                            <input id="title" type="text" th:field="*{title}" placeholder="Title of the book"  required  class="w-full bg-gray-100 p-2 mt-2 mb-3" />
+                            <label for="subtitle">Subtitle</label>
+                            <input id="subtitle" type="text" th:field="*{subtitle}" placeholder="Subtitle"  required  class="w-full bg-gray-100 p-2 mt-2 mb-3" />
+                        </div>
+                        <!-- END PART ONE -->
+
+                        <!-- PART TWO -->
+                        <div id="newbookInfo2" class="hidden bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <label for="description">Description</label>
+                            <textarea name="" id="description" type="text" th:field="*{isbn}" placeholder="Isbn"  required class="w-full bg-gray-100 p-2 mt-2 mb-3" cols="30" rows="10"></textarea>
+                            <label for="branch">Branch</label>
+                            <input id="branch" type="text" th:field="*{branchId}" placeholder="Branch" required class="w-full bg-gray-100 p-2 mt-2 mb-3" />
+                            <label for="authors">Authors</label>
+                            <select id="authors" th:field="*{subtitle}"    required multiple>
+                                <option value="1">Author 1</option>
+                                <option value="2">Author 2</option>
+                                <option value="3">Author 3</option>
+                            </select>
+                            <label for="publisher">Publisher</label>
+                            <select id="publsher" th:field="*{publisher}"  required >
+                                <option value="1">Publisher 1</option>
+                                <option value="2">Publisher 2</option>
+                                <option value="3">Publisher 3</option>
+                            </select>
+                            <label for="publishedDate">Published Date</label>
+                            <input id="publishedDate" type="text" th:field="*{publishedDate}" placeholder="publishedDate" required  class="w-full bg-gray-100 p-2 mt-2 mb-3" />
+                        </div>
+                        <!-- END PART TWO -->
+
+                        <!-- PART THREE -->
+                        <div id="newbookInfo3" class="hidden bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <label for="pageCount">Page Count</label>
+
+                            <input id="pageCount" type="number" min="1" th:field="*{pageCount}" placeholder="Page count"  required class="w-full bg-gray-100 p-2 mt-2 mb-3" />
+
+                            <select id="kind" th:field="*{kind}" required >
+                                <option value="HARDCOVER">HardCover</option>
+                                <option value="BOOK">Book</option>
+                            </select>
+
+                            <input id="isReference" type="checkbox" th:field="*{isReference}" />
+                            <label for="isReference">Reference</label>
+
+                            <input id="pdfAvailable" type="checkbox" th:field="*{pdfAvailble}"/>
+                            <label for="pdfAvailable">Pdf</label>
+
+                            <input id="epubAvailable" type="checkbox"  th:field="*{epubAvailble}" />
+                            <label for="epubAvailable">Epub</label>
+
+                        </div>
+                        <!-- END PART THREE -->
+
+                        <!-- PART FOUR -->
+                        <div id="newbookInfo4" class="hidden bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <label for="cover">Cover</label>
+                            <input id="cover" type="file" accept="image/*" th:field="*{cover}" required>
+                        </div>
+                        <!-- END PART FOUR -->
+
+                        <!-- Previous - Next buttons -->
+                        <div id="previousNextBox" class="flex justify-end px-4 py-3">
+                            <div onclick="previous()" id="previous" class="hidden py-2 px-4 flex flex-row items-center cursor-pointer hover:scale-105 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                </svg>
+                                <span class="text-md font-light text-gray-700">Previous</span>
+                            </div>
+
+                            <div onclick="next()" id="next" class="py-2 px-4 flex flex-row items-center cursor-pointer hover:scale-105 transition-all">
+                                <span class="text-md font-light text-gray-700">Next</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-200 px-4 py-3 text-right">
+                            <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newBookModal()"><i class="fas fa-times"></i> Cancel</button>
+                            <button type="button" class="py-2 px-4 bg-teal-500 text-white rounded hover:bg-teal-700 mr-2"><i class="fas fa-plus"></i>Save</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
           </div>
-          <!-- PART 2 -->
-          <div>
-            <label for="Description">Description</label>
-            <textarea id="description" type="text" th:field="*{description}" placeholder="Description" required></textarea>
-            <label for="branch">Branch</label>
-            <input id="branch" type="text" th:field="*{branchId}" placeholder="branch"   required />
-            
-            <label for="authors">Authors</label>
-            <select id="authors" th:field="*{subtitle}"    required multiple>
-                <option value="1">Author 1</option>
-                <option value="2">Author 2</option>
-                <option value="3">Author 3</option>
-            </select>
-
-            <label for="publisher">Publisher</label>
-            <select id="publsher" th:field="*{publisher}"  required >
-                <option value="1">Publisher 1</option>
-                <option value="2">Publisher 2</option>
-                <option value="3">Publisher 3</option>
-            </select>
-            <label for="publisher">Published Date</label>
-            <input id="publishedDate" type="text" th:field="*{publishedDate}" placeholder="publishedDate" required />
-          </div>
-
-          <!-- PART 3 -->
-          <div>
-            <label for="pageCount">Page Count</label>
-            <input id="pageCount" type="number" th:field="*{pageCount}" placeholder="pageCount"  required />
-
-            <select id="kind" th:field="*{kind}" required >
-                <option value="HARDCOVER">HardCover</option>
-                <option value="BOOK">Book</option>
-            </select>
-            
-            <input id="isReference" type="checkbox" th:field="*{isReference}" />
-            <label for="isReference">Reference</label>
-    
-            <input id="pdfAvailable" type="checkbox" th:field="*{pdfAvailble}"/>
-            <label for="pdfAvailable">Pdf</label>
-    
-    
-            <input id="epubAvailable" type="checkbox"  th:field="*{epubAvailble}" />
-            <label for="epubAvailable">Epub</label>
-
-            
-           
-          </div>
-
-          <!-- PART 4 -->
-          <div>
-            <input id="cover" type="file" accept="image/*" th:field="*{cover}" required>
-
-            <button>Save</button>
-          </div>
-        </form>
+          
     </section>
 
     <!-- Footer -->
@@ -578,16 +703,88 @@
             if(i<10){
                 document.getElementById('bookcase'+i).classList.add('border-r')
                 document.getElementById('bookcase'+i).classList.add('border-yellow-600')
-                document.getElementById('bookcase'+i).classList.add('border-yellow-600')
+                document.getElementById('bookcaseover'+i).classList.add('border-r')
+                document.getElementById('bookcaseover'+i).classList.add('border-yellow-600')
             }
         }
 
         // dealing with the search input
-        document.getElementById('search').addEventListener("search",function(){
-            document.getElementById('home').classList.add('hidden')
-            document.getElementById('findbook').classList.remove('hidden')
+        document.getElementById('search').addEventListener("input",function(){
+
+            if(document.getElementById('search').value){
+                document.getElementById('home').classList.add('hidden')
+                document.getElementById('findbook').classList.remove('hidden')
+            }else{
+                document.getElementById('home').classList.remove('hidden')
+                document.getElementById('findbook').classList.add('hidden')
+            }
+            
         })
-               
+
+        // show book info
+
+        function showBookInfo(isbn){
+            document.getElementById('home').classList.add('hidden')
+            document.getElementById('bookinfo').classList.remove('hidden')
+            
+            fetch('localhost:8082/books/'+isbn).then(data=>{
+                console.log(data.json())
+            })
+        }
+
+        // New book modal
+
+        function newBookModal(){ 
+            document.getElementById('modal').classList.toggle('hidden')
+        }
+
+        // Previous - Next functions in new book registration
+        
+        let currentDivNum = 1
+        let previousBtn = document.getElementById("previous")
+        let nextBtn = document.getElementById("next")
+        let previousNextBox = document.getElementById('previousNextBox')
+
+        function previous(){
+            currentDivNum--
+            document.getElementById('newbookInfo'+(currentDivNum+1)).classList.add('hidden')
+            document.getElementById('newbookInfo'+currentDivNum).classList.remove('hidden')
+            if(currentDivNum==1){
+                previousBtn.classList.add('hidden')
+                previousNextBox.classList.remove('flex-row')
+                previousNextBox.classList.remove('justify-between')
+                previousNextBox.classList.add('justify-end')
+            }else{
+                if(previousBtn.classList.contains('hidden')){
+                    previousBtn.classList.remove('hidden')
+                }
+                if(nextBtn.classList.contains('hidden')){
+                    nextBtn.classList.remove('hidden')
+                }
+            }
+        }
+
+        function next(){
+            currentDivNum++
+            document.getElementById('newbookInfo'+(currentDivNum-1)).classList.add('hidden')
+            document.getElementById('newbookInfo'+currentDivNum).classList.remove('hidden')
+            if(currentDivNum==4){
+                nextBtn.classList.add('hidden')
+            }else{
+
+                if(previousNextBox.classList.contains('justify-end')){
+                    previousNextBox.classList.remove('justify-end')
+                    previousNextBox.classList.add('flex-row')
+                    previousNextBox.classList.add('justify-between')
+                }
+                if(previousBtn.classList.contains('hidden')){
+                    previousBtn.classList.remove('hidden')
+                }
+                if(nextBtn.classList.contains('hidden')){
+                    nextBtn.classList.remove('hidden')
+                }
+            }
+        }
     </script>
    
 </body>
