@@ -167,7 +167,11 @@ public class Book implements Serializable {
 	}
 
 	public String getPublisher() {
+		if(this.publisher == null){
+			return null;
+		}
 		return publisher.getName();
+
 	}
 
 	public void setPublisher(Publisher publisher) {
