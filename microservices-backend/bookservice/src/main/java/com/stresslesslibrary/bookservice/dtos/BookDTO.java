@@ -32,6 +32,5 @@ public class BookDTO {
 	private Boolean epubAvailble;
 	private Boolean isReference;
 	private String publisher;
-	
 	private String branchId;
 }
