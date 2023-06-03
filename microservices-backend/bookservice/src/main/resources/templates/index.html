@@ -623,9 +623,17 @@
                         <!-- PART TWO -->
                         <div id="newbookInfo2" class="hidden bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <label for="description">Description</label>
-                            <textarea name="" id="description" type="text" th:field="*{isbn}" placeholder="Isbn"  required class="w-full bg-gray-100 p-2 mt-2 mb-3 focus:outline-none border-b border-yellow-200"></textarea>
-                            <label for="branch">Branch</label>
-                            <input id="branch" type="text" th:field="*{branchId}" placeholder="Branch" required class="w-full bg-gray-100 p-2 mt-2 mb-3" />
+                            <textarea name="" id="description" type="text" th:field="*{isbn}" placeholder="Isbn" rows="10" required class="w-full bg-gray-100 p-2 mt-2 mb-3 focus:outline-none border-b border-yellow-200"></textarea>
+                            <label for="language">Language</label>
+                            <select id="language" th:field="*{kind}" required >
+                                <option value="en">English</option>
+                                <option value="fr">French</option>
+                            </select>
+                        </div>
+                        <!-- END PART TWO -->
+
+                        <!-- PART THREE -->
+                        <div id="newbookInfo3" class="hidden bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <label for="authors">Authors</label>
                             <select id="authors" th:field="*{subtitle}"    required multiple>
                                 <option value="1">Author 1</option>
@@ -640,11 +648,7 @@
                             </select>
                             <label for="publishedDate">Published Date</label>
                             <input id="publishedDate" type="text" th:field="*{publishedDate}" placeholder="publishedDate" required  class="w-full bg-gray-100 p-2 mt-2 mb-3" />
-                        </div>
-                        <!-- END PART TWO -->
 
-                        <!-- PART THREE -->
-                        <div id="newbookInfo3" class="hidden bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <label for="pageCount">Page Count</label>
 
                             <input id="pageCount" type="number" min="1" th:field="*{pageCount}" placeholder="Page count"  required class="w-full bg-gray-100 p-2 mt-2 mb-3" />
@@ -652,6 +656,20 @@
                             <select id="kind" th:field="*{kind}" required >
                                 <option value="HARDCOVER">HardCover</option>
                                 <option value="BOOK">Book</option>
+                            </select>
+
+                            <label for="branch">Branch</label>
+                            <select id="branch" th:field="*{branchId}" required multiple>
+                                <option value="1">000</option>
+                                <option value="2">001</option>
+                                <option value="3">002</option>
+                                <option value="1">003</option>
+                                <option value="2">004</option>
+                                <option value="3">005</option>
+                                <option value="1">006</option>
+                                <option value="2">007</option>
+                                <option value="3">008</option>
+                                <option value="3">009</option>
                             </select>
 
                             <input id="isReference" type="checkbox" th:field="*{isReference}" />
