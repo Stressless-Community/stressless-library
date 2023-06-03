@@ -5,6 +5,7 @@
     <title>UCBC Library Catalog</title>
     <link th:href="@{/assets/css/styles.css}" rel="stylesheet" />
     <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
+    <link th:href="@{/assets/vendor/select2/select2.min.css}" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}">
     <style>
         #baner1{
@@ -613,7 +614,7 @@
                     <form action="#"  th:object="${bookDto}" enctype="multipart/form-data" autocomplete="off" id="form">
                         <p class="bg-gray-200 shadow-lg text-gray-600 text-2xl font-bold text-center py-3 px-4">New book</p>
                         <!-- PART ONE -->
-                        <div id="newbookInfo1" class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div id="newbookInfo1" class="bg-white px-4 pt-5  sm:p-6 sm:pb-2">
                             <input id="isbn" type="text" th:field="*{isbn}" placeholder="Isbn"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             <input id="title" type="text" th:field="*{title}" placeholder="Title"  required  class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             <input id="subtitle" type="text" th:field="*{subtitle}" placeholder="Subtitle"  required  class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
@@ -621,31 +622,48 @@
                         <!-- END PART ONE -->
 
                         <!-- PART TWO -->
-                        <div id="newbookInfo2" class="hidden bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <label for="description">Description</label>
-                            <textarea name="" id="description" type="text" th:field="*{isbn}" placeholder="Isbn" rows="10" required class="w-full bg-gray-100 p-2 mt-2 mb-3 focus:outline-none border-b border-yellow-200"></textarea>
-                            <label for="language">Language</label>
-                            <select id="language" th:field="*{kind}" required >
-                                <option value="en">English</option>
-                                <option value="fr">French</option>
-                            </select>
+                        <div id="newbookInfo2" class="hidden bg-white px-4 pt-5  sm:p-6 sm:pb-2 bg-gray-200">
+                            <div class="flex flex-row items-center space-x-2 p-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 font-bold text-yellow-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                </svg> 
+                                <label for="description" class="text-gray-600 text-lg">Full description</label>
+                            </div>
+                            <textarea name="" id="description" type="text" th:field="*{description}" placeholder="Write here the full description of the book" rows="8" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200"></textarea>
+
+                            <div class="flex flex-row items-center">
+                                <div class="flex flex-row items-center space-x-2 p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 font-bold text-yellow-600">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                    </svg> 
+                                    <label for="description" class="text-gray-600 text-lg">Select language</label>
+                                </div>
+                                <select id="language" th:field="*{kind}" required >
+                                    <option value="en">English</option>
+                                    <option value="fr">French</option>
+                                </select>
+                            </div>
                         </div>
                         <!-- END PART TWO -->
 
                         <!-- PART THREE -->
-                        <div id="newbookInfo3" class="hidden bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <label for="authors">Authors</label>
-                            <select id="authors" th:field="*{subtitle}"    required multiple>
+                        <div id="newbookInfo3" class="hidden bg-white px-4 pt-5  sm:p-6 sm:pb-2 flex flex-col">
+                            <div class="w-full bg-gray-200">
+                                <label for="authors">Authors</label>
+                            <select id="authors"  name="states[]" th:field="*{subtitle}" required multiple  style="width: 100%;">
                                 <option value="1">Author 1</option>
                                 <option value="2">Author 2</option>
                                 <option value="3">Author 3</option>
                             </select>
-                            <label for="publisher">Publisher</label>
-                            <select id="publsher" th:field="*{publisher}"  required >
-                                <option value="1">Publisher 1</option>
-                                <option value="2">Publisher 2</option>
-                                <option value="3">Publisher 3</option>
-                            </select>
+                            </div>
+                            <div class="w-full">
+                                <label for="publisher">Publisher</label>
+                                <select id="publisher" th:field="*{publisher}"  required style="width: 100%;">
+                                    <option value="1">Publisher 1</option>
+                                    <option value="2">Publisher 2</option>
+                                    <option value="3">Publisher 3</option>
+                                </select>
+                            </div>
                             <label for="publishedDate">Published Date</label>
                             <input id="publishedDate" type="text" th:field="*{publishedDate}" placeholder="publishedDate" required  class="w-full bg-gray-100 p-2 mt-2 mb-3" />
 
@@ -685,7 +703,7 @@
                         <!-- END PART THREE -->
 
                         <!-- PART FOUR -->
-                        <div id="newbookInfo4" class="hidden bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div id="newbookInfo4" class="hidden bg-white px-4 pt-5  sm:p-6 sm:pb-2">
                             <label for="cover">Cover</label>
                             <input id="cover" type="file" accept="image/*" th:field="*{cover}" required>
                         </div>
@@ -896,6 +914,8 @@
 
 
     <script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/vendor/select2/select2.min.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
     <script>
 
@@ -1031,7 +1051,37 @@
 
         }
 
-
+        // Author autocomplete 
+    
+        $(document).ready(function() {
+            $('#authors').select2({
+                data : [
+                {
+        id: 0,
+        text: 'enhancement'
+    },
+    {
+        id: 1,
+        text: 'bug'
+    },
+    {
+        id: 2,
+        text: 'duplicate'
+    },
+    {
+        id: 3,
+        text: 'invalid'
+    },
+    {
+        id: 4,
+        text: 'wontfix'
+    }
+                ]
+                
+            });
+            $('#publisher').select2()
+        });
+    
 
     </script>
    
