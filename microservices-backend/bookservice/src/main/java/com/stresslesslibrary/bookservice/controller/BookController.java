@@ -78,7 +78,6 @@ public class BookController {
 		try {
 			return ResponseEntity.ok().body(bookService.getOne(book.getIsbn()));
 		} catch (Exception e) {
-			
 			Book b=bookService.saveBook(book);
 			if(b!=null) {
 			return ResponseEntity.ok().body(b);}
