@@ -639,7 +639,7 @@
                         <div id="newbookInfo3" class="hidden px-4 pt-5 space-y-4 sm:p-6 sm:pb-2 flex flex-col">
                             <div class="w-full">
                                 <label for="authors">Authors</label>
-                                <select id="authors"  name="states[]" th:field="*{subtitle}" placeholder="Author(s)" required multiple  style="width: 100%;">
+                                <select id="authors"  name="states[]" th:field="*{authors}" placeholder="Author(s)" required multiple  style="width: 100%;">
                 
                                 </select>
                             </div>
@@ -1062,8 +1062,8 @@
                     let autoauthors = []
                     data.forEach(element => {
                        autoauthors.push({
-                            id:element.id,
-                            text:element.name
+                            "id":element.id,
+                            "text":element.name
                        })
                     });
                 return {
