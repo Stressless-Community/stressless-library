@@ -38,18 +38,9 @@ public class AuthorServiceImpl implements AuthorService {
 		
 	}
 
-	@Override
+	@Override 
 	public Author save(Author author)  {
-		Author au=new Author();
-		try {
-			au =findByName(author.getName());
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		if(au!=null) {
-			return au;
-		}
+		System.out.println(author.toString());
 		return authorRepository.save(author);
 		
 	}

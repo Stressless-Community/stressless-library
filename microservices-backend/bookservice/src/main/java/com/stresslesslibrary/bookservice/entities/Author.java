@@ -9,10 +9,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.ToString;
 
 
 
-@Entity
+@Entity @Data @ToString
 @Table(name = "authors")
 @JsonInclude(Include.NON_NULL)
 @JsonIdentityInfo(

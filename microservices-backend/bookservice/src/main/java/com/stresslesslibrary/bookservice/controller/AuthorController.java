@@ -42,7 +42,7 @@ public class AuthorController {
 	
 	@PostMapping
 	public ResponseEntity<Author> createAuthor(@RequestBody Author author) throws Exception{
-		
+		System.out.println(author.toString());
 		return ResponseEntity.ok().body(authorService.save(author));
 	}
 }

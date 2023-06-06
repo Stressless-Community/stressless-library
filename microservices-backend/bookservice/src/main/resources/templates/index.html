@@ -660,7 +660,7 @@
                             
                                     </select>
                                 </div>
-                                <div class="w-2/5 flex flex-row items-center text-teal-500">
+                                <div class="w-2/5 flex flex-row items-center text-teal-500" onclick="newPublisherModal()">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                     </svg>                                      
@@ -768,16 +768,44 @@
                     <form action="#"  th:object="${bookDto}" enctype="multipart/form-data" autocomplete="off" id="form">
                         <p class="bg-gray-200 text-gray-600 text-2xl font-bold text-center py-3 px-4">New author</p>
                         <!-- PART ONE -->
-                        <div id="newbookInfo1" class="px-4 pt-5  sm:p-6 sm:pb-2">
-                            <input id="isbn" type="text" th:field="*{isbn}" placeholder="Name of the author"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
-                            <textarea name="" id="description" type="text" th:field="*{description}" placeholder="About the author" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea>                   
+                        <div id="" class="px-4 pt-5  sm:p-6 sm:pb-2">
+                            <input id="newAuthorName" type="text" th:field="*{isbn}" placeholder="Name of the author"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
+                            <textarea name="" id="newAuthorDescription" type="text" th:field="*{description}" placeholder="About the author" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea>                   
                         </div>
                         <!-- END PART ONE -->
 
 
                         <div class="bg-gray-200 px-4 py-3 text-right">
-                            <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newAuthorModal()"><i class="fas fa-times"></i> Cancel</button>
-                            <button type="button" id="submitbook" class="py-2 px-4 bg-teal-500 text-white rounded hover:bg-teal-700 mr-2"><i class="fas fa-plus"></i>Save</button>
+                            <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newAuthorModal()"></i> Cancel</button>
+                            <button type="button" id="submitbook" class="py-2 px-4 bg-teal-500 text-white rounded hover:bg-teal-700 mr-2" onclick="addNewAuthor()">Save</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed z-10 overflow-y-auto top-0 w-full left-0 transition-all hidden" style="z-index: 40;" id="publishermodal">
+
+            <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                
+                <div class="fixed inset-0 transition-opacity">
+                    <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
+                </div>
+
+              <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+
+                <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                    <form action="#"  th:object="${bookDto}" enctype="multipart/form-data" autocomplete="off" id="form">
+                        <p class="bg-gray-200 text-gray-600 text-2xl font-bold text-center py-3 px-4">New publisher</p>
+                        
+                        <div id="" class="px-4 pt-5  sm:p-6 sm:pb-2">
+                            <input id="newPublisherName" type="text"  placeholder="Name of the publisher"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
+                        </div>
+                        
+                        <div class="bg-gray-200 px-4 py-3 text-right">
+                            <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newPublisherModal()"></i> Cancel</button>
+                            <button type="button" id="submitbook" class="py-2 px-4 bg-teal-500 text-white rounded hover:bg-teal-700 mr-2" onclick="addNewPublisher()">Save</button>
                         </div>
 
                     </form>
@@ -1026,6 +1054,10 @@
             document.getElementById('authormodal').classList.toggle('hidden')
         }
 
+        function newPublisherModal(){
+            document.getElementById('publishermodal').classList.toggle('hidden')
+        }
+
         // Previous - Next functions in new book registration
         
         let currentDivNum = 1
@@ -1147,6 +1179,40 @@
             )
         });
     
+        // Example POST method implementation:
+        async function postData(url = "", data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+        }
+
+        
+
+        function addNewAuthor(){
+            // console.log(document.getElementById('newAuthorName').value,'desc',document.getElementById('newAuthorDescription').value)
+            postData("/authors", { name : document.getElementById('newAuthorName').value, description : document.getElementById('newAuthorDescription').value }).then((data) => {
+                console.log(data);
+            });
+        }
+
+        function addNewPublisher(){
+            // console.log(document.getElementById('newAuthorName').value,'desc',document.getElementById('newAuthorDescription').value)
+            postData("/publishers", { name : document.getElementById('newPublisherName').value }).then((data) => {
+                console.log(data);
+            });
+        }
 
     </script>
    
