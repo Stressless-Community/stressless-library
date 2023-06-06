@@ -600,7 +600,7 @@
     <section id="newbook" class="">
         <!-- PART 1 -->
 
-        <div class="fixed z-10 overflow-y-auto top-0 w-full left-0 transition-all hidden" style="z-index: 50;" id="modal">
+        <div class="fixed z-10 overflow-y-auto top-0 w-full left-0 transition-all hidden" style="z-index: 30;" id="modal">
 
             <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 
@@ -612,9 +612,9 @@
 
                 <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                     <form action="#"  th:object="${bookDto}" enctype="multipart/form-data" autocomplete="off" id="form">
-                        <p class="bg-gray-200 shadow-lg text-gray-600 text-2xl font-bold text-center py-3 px-4">New book</p>
+                        <p class="bg-gray-200 text-gray-600 text-2xl font-bold text-center py-3 px-4">New book</p>
                         <!-- PART ONE -->
-                        <div id="newbookInfo1" class="bg-white px-4 pt-5  sm:p-6 sm:pb-2">
+                        <div id="newbookInfo1" class="px-4 pt-5  sm:p-6 sm:pb-2">
                             <input id="isbn" type="text" th:field="*{isbn}" placeholder="Isbn"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             <input id="title" type="text" th:field="*{title}" placeholder="Title"  required  class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             <input id="subtitle" type="text" th:field="*{subtitle}" placeholder="Subtitle"  required  class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
@@ -622,7 +622,7 @@
                         <!-- END PART ONE -->
 
                         <!-- PART TWO -->
-                        <div id="newbookInfo2" class="hidden bg-white px-4 pt-5 space-y-2 sm:p-6 sm:pb-2 bg-gray-200">
+                        <div id="newbookInfo2" class="hidden px-4 pt-5 space-y-2 sm:p-6 sm:pb-2">
                             <label for="description" class="text-gray-600 text-lg">Full description</label>
                             <textarea name="" id="description" type="text" th:field="*{description}" placeholder="Write here the full description of the book" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea>                   
                             <div class="flex flex-col justify-start">
@@ -637,18 +637,35 @@
 
                         <!-- PART THREE -->
                         <div id="newbookInfo3" class="hidden px-4 pt-5 space-y-4 sm:p-6 sm:pb-2 flex flex-col">
-                            <div class="w-full">
-                                <label for="authors">Authors</label>
-                                <select id="authors"  name="states[]" th:field="*{subtitle}" placeholder="Author(s)" required multiple  style="width: 100%;">
-                
-                                </select>
+                            
+                            <div class="w-full flex flex-row space-x-3 justify-between items-center">
+                                <div class="w-3/5">
+                                    <label for="authors">Authors</label>
+                                    <select id="authors"  name="states[]" th:field="*{subtitle}" placeholder="Author(s)" required multiple  style="width: 100%;">
+                                       
+                                    </select>
+                                </div>
+                                <div class="w-2/5 flex flex-row items-center text-teal-500 cursor-pointer mt-4" onclick="newAuthorModal()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>                                      
+                                    <span>Add author</span>
+                                </div>
                             </div>
 
-                            <div class="w-full">
-                                <label for="publisher">Publisher</label>
-                                <select id="publisher" th:field="*{publisher}"  required style="width: 100%;">
-                                    
-                                </select>
+                            <div class="w-full flex flex-row space-x-3 justify-between items-center">
+                                <div class="w-3/5">
+                                    <label for="publisher">Publisher</label>
+                                    <select id="publisher" th:field="*{publisher}"  required style="width: 100%;">
+                            
+                                    </select>
+                                </div>
+                                <div class="w-2/5 flex flex-row items-center text-teal-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>                                      
+                                    <span>Add publisher</span>
+                                </div>
                             </div>
 
                             <input id="publishedDate" type="text" th:field="*{publishedDate}" placeholder="publishedDate" required  class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
@@ -735,7 +752,38 @@
                     </form>
                 </div>
             </div>
-          </div>
+        </div>
+
+        <div class="fixed z-10 overflow-y-auto top-0 w-full left-0 transition-all hidden" style="z-index: 40;" id="authormodal">
+
+            <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                
+                <div class="fixed inset-0 transition-opacity">
+                    <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
+                </div>
+
+              <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+
+                <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                    <form action="#"  th:object="${bookDto}" enctype="multipart/form-data" autocomplete="off" id="form">
+                        <p class="bg-gray-200 text-gray-600 text-2xl font-bold text-center py-3 px-4">New author</p>
+                        <!-- PART ONE -->
+                        <div id="newbookInfo1" class="px-4 pt-5  sm:p-6 sm:pb-2">
+                            <input id="isbn" type="text" th:field="*{isbn}" placeholder="Name of the author"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
+                            <textarea name="" id="description" type="text" th:field="*{description}" placeholder="About the author" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea>                   
+                        </div>
+                        <!-- END PART ONE -->
+
+
+                        <div class="bg-gray-200 px-4 py-3 text-right">
+                            <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newAuthorModal()"><i class="fas fa-times"></i> Cancel</button>
+                            <button type="button" id="submitbook" class="py-2 px-4 bg-teal-500 text-white rounded hover:bg-teal-700 mr-2"><i class="fas fa-plus"></i>Save</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
           
     </section>
 
@@ -972,6 +1020,10 @@
 
         function newBookModal(){ 
             document.getElementById('modal').classList.toggle('hidden')
+        }
+
+        function newAuthorModal(){
+            document.getElementById('authormodal').classList.toggle('hidden')
         }
 
         // Previous - Next functions in new book registration
