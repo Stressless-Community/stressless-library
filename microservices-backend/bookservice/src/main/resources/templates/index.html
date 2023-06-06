@@ -153,7 +153,7 @@
     <!-- End header -->
 
     <!-- Main section -->
-    <section section id="home" class="bg-white pb-8 hidden">
+    <section section id="home" class="bg-white pb-8">
         
            <!-- Swiper -->
         <div class=" overflow-x-hidden w-full h-64 flex justify-center items-center">
@@ -464,18 +464,18 @@
         </div>
     </section>
 
-    <section id="bookinfo" class=" m-10 px-14 flex flex-col space-y-3">
+    <section id="bookinfo" class=" m-10 px-14 flex flex-col space-y-3 hidden" >
         <div class="flex flex-row space-x-9 w-full">
             <div class="drop-shadow-xl w-max">
-                <img class="cover w-80" th:src="@{assets/img/book.jpg}">
+                <img id="infocover" class="cover w-80" src="">
                 <p class="p-3 font-semibold text-slate-900 bg-yellow-200">Reference : </p>
             </div>
             <div class="flex flex-col text-slate-700 px-5 w-full space-y-4">
                 <div>
-                    <p class="p-3 w-full text-4xl font-semibold">Title</p>
-                    <p class="p-3  w-full text-xl font-light ">Subtitle</p>
-                    <p class="p-3  w-full text-lg font-bold">Authors</p>
-                    <p class="truncate text-md font-light p-3">Short Description</p>
+                    <p id="infotitle" class="p-3 w-full text-4xl font-semibold"></p>
+                    <p id="infosubtitle" class="p-3  w-full text-xl font-light "></p>
+                    <p id="infoauthors" class="p-3  w-full text-lg font-bold">Authors</p>
+                    <p id="infodescription1" class="truncate text-md font-light p-3"></p>
                 </div>
 
                 <div class="flex flex-row bg-gray-50 h-full px-8 justify-between shadow-lg">
@@ -490,7 +490,7 @@
 
                        <div class="flex flex-col ">
                         <p class="text-xl font-bold">Print kind</p>                         
-                        <span class="text-lg font-light">Hardcover</span>
+                        <span id="infoprintkind" class="text-lg font-light"></span>
                        </div>
                     </div>
 
@@ -505,7 +505,7 @@
                         <div class="flex flex-col ">
                         <p class="text-xl font-bold">Pages</p>
 
-                         <span class="text-lg font-light">512</span>
+                         <span id="infopages" class="text-lg font-light"></span>
                         </div>
                      </div>
 
@@ -518,7 +518,7 @@
                         
                         <div class="flex flex-col ">
                         <p class="text-xl font-bold">Publish date</p>                           
-                         <span class="text-lg font-light">Feb 29, 2019</span>
+                         <span id="infopublisheddate" class="text-lg font-light"></span>
                         </div>
                      </div>
 
@@ -532,7 +532,7 @@
                         
                         <div class="flex flex-col">
                         <p class="text-xl font-bold">Publisher</p>                            
-                         <span class="text-lg font-light">Eni</span>
+                         <span id="infopublisher" class="text-lg font-light"></span>
                         </div>
                      </div>
                 </div>
@@ -540,12 +540,12 @@
         </div>
 
         <!-- BOOK FULL DESCRIPTION -->
-        <div class="flex flex-col space-y-10 pt-8">
+        <div class="flex flex-col space-y-10 pt-8 ">
             <div class="flex flex-col space-y-4">
-                <p class="text-2xl font-bold">Full description</p>
+                <p class="text-2xl font-bold">Description</p>
                 <hr>
-                <p class="text-slate-700 text-lg font-light  tracking-wide [word-spacing:3px]">
-                    This is a test of a full decription.This is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decription
+                <p id="fulldescription" class="text-slate-700 text-lg font-light  tracking-wide [word-spacing:3px]">
+               
                 </p>
             </div>
             <div class="flex flex-col space-y-4">
@@ -739,7 +739,7 @@
           
     </section>
 
-    <section class="dashbord">
+    <section class="dashbord hidden">
         <div>
             <div>
                 <button>Loan</button>
@@ -953,6 +953,7 @@
             }else{
                 document.getElementById('home').classList.remove('hidden')
                 document.getElementById('findbook').classList.add('hidden')
+                document.getElementById('bookinfo').classList.add('hidden')
             }
             
         })
@@ -960,12 +961,39 @@
         // show book info
 
         function showBookInfo(isbn){
-            document.getElementById('home').classList.add('hidden')
-            document.getElementById('bookinfo').classList.remove('hidden')
             
-            fetch('localhost:8082/books/'+isbn).then(data=>{
-                console.log(data.json())
+            
+            fetch('/books/'+isbn).then(response=> response.json())
+            .then(data =>{
+                console.log(data)
+                // document.getElementById("infotitle").replaceChildren(document.createTextNode(data.title))
+                document.getElementById("infotitle").innerText=data.title
+                document.getElementById("infosubtitle").innerText=data.subtitle
+                document.getElementById("infoprintkind").innerText=data.kinds
+                document.getElementById("infopages").replaceChildren(document.createTextNode(data.pageCount))
+                document.getElementById("infopublisheddate").replaceChildren(document.createTextNode(data.publishedDate))
+                document.getElementById("infopublisher").replaceChildren(document.createTextNode(data.publisher))
+                document.getElementById("infodescription1").replaceChildren(document.createTextNode(data.description))
+                document.getElementById("fulldescription").replaceChildren(document.createTextNode(data.description))
+                document.getElementById("infocover").src=data.largeCoverUrl
+                // if(data.authors){
+                //     authors=''
+                //     for(let i =0; i<data.authors.length;i++){
+                //         if(i<=data.authors.length-1 ){
+                //            authors = authors+data.authors[i].name+"," 
+                //         }
+                //         else{
+                //             authors = authors+data.authors[i].name;
+                //         }
+                //         console.log(authors)
+                //     }
+                // }
+                document.getElementById('home').classList.add('hidden')
+                document.getElementById('bookinfo').classList.remove('hidden')
+                
+            
             })
+            
         }
 
         // New book modal
@@ -1056,8 +1084,16 @@
     
         $(document).ready(function() {
             $('#authors').select2({
+                placeholder: "Select author(s)",
                 ajax: {
                 url: '/authors',
+                dataType: 'json',
+                data    : function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
                 processResults: function (data) {
                     let autoauthors = []
                     data.forEach(element => {
@@ -1074,6 +1110,7 @@
             }
             });
             $('#publisher').select2({
+                placeholder: "Select a Publisher",
                 ajax: {
                 url: '/publishers',
                 processResults: function (data) {
