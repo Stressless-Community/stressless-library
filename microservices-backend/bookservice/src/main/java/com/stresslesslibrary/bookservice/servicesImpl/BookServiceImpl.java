@@ -95,11 +95,12 @@ public class BookServiceImpl implements BookService {
 		b.setLanguage(Language.valueOf(book.getLanguage()));
 		b.setPageCount(book.getPageCount());
 		b.setPublishedDate(book.getPublishedDate());
-		b.setKinds(PrintKind.valueOf(book.getKind()));
+		
+		b.setKind(PrintKind.valueOf(book.getKind()));
 		b.setPdfAvailble(book.getPdfAvailble());
 		b.setEpubAvailble(book.getEpubAvailble());
 		b.setIsReference(book.getIsReference());
-		b.setPublisher(publisherService.save(new Publisher(book.getPublisher())));
+		b.setPublisher(publisherService.getOne(book.getPublisher()));
 		b.setBranch(branchService.getOne(book.getBranchId()));
 		return bookRepository.save(b);
 	} catch (Exception e) {
@@ -141,7 +142,7 @@ public class BookServiceImpl implements BookService {
 			b.setPdfAvailble(book.getPdfAvailble());
 			b.setEpubAvailble(book.getEpubAvailble());
 			b.setIsReference(book.getIsReference());
-			b.setPublisher(publisherService.save(new Publisher(book.getPublisher())));
+			b.setPublisher(publisherService.getOne(book.getPublisher()));
 			b.setBranch(branchService.getOne(book.getBranchId()));
 			return bookRepository.save(b);
 		} catch (Exception e) {

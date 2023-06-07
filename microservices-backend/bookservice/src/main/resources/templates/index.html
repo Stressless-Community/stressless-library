@@ -627,9 +627,9 @@
                             <textarea name="" id="description" type="text" th:field="*{description}" placeholder="Write here the full description of the book" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea>                   
                             <div class="flex flex-col justify-start">
                                 <label for="language" class="text-gray-600 text-lg">Select language</label>
-                                <select id="language" th:field="*{kind}" class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
+                                <select id="language"  class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
                                     <option value="ENGLISH">English</option>
-                                    <option value="FRENCH">French</option>
+                                    <option value="FRANÇAIS">French</option>
                                 </select>
                             </div>
                         </div>
@@ -641,7 +641,7 @@
                             <div class="w-full flex flex-row space-x-3 justify-between items-center">
                                 <div class="w-3/5">
                                     <label for="authors">Authors</label>
-                                    <select id="authors"  name="states[]" placeholder="Author(s)" required multiple  style="width: 100%;">
+                                    <select id="authors"  name="authors[]" placeholder="Author(s)" required multiple  style="width: 100%;">
                                        
                                     </select>
                                 </div>
@@ -680,24 +680,15 @@
                                 <input id="pageCount" type="number" min="1" th:field="*{pageCount}" placeholder="Page count"  required class="p-2 text-left border-b border-yellow-200 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             </div>
 
-                            <select id="kind" th:field="*{kind}" class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
+                            <select id="kind"  class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
                                 <option value="HARDCOVER">HardCover</option>
                                 <option value="BOOK">Book</option>
                             </select>
 
-                            <div class="flex flex-row space-x-3 p-2 mt-2">
+                            <div class="w-full flex flex-row space-x-3 p-2 mt-2">
                                 <label for="branch" class="text-gray-600 p-2">Branch</label>
-                                <select id="branch" th:field="*{branchId}" placeholder="Branch" class="text-left p-2 border-b border-yellow-200 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required>
-                                    <option value="1">000</option>
-                                    <option value="2">001</option>
-                                    <option value="3">002</option>
-                                    <option value="4">003</option>
-                                    <option value="5">004</option>
-                                    <option value="6">005</option>
-                                    <option value="7">006</option>
-                                    <option value="8">007</option>
-                                    <option value="9">008</option>
-                                    <option value="10">009</option>
+                                <select id="branch" placeholder="Branch" class="text-left p-2 border-b border-yellow-200 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" style="width: 100%;" required>
+                                 
                                 </select>
                             </div>
 
@@ -1124,16 +1115,18 @@
             .then(response => response.json())
             .then(json => {
                 console.log(json.items[0].volumeInfo)
-        //            document.getElementById("isbn").value=json.items[0].volumeInfo
+
                 document.getElementById("title").value=json.items[0].volumeInfo.title
                 document.getElementById("subtitle").value=json.items[0].volumeInfo.subtitle
                 document.getElementById("description").value=json.items[0].volumeInfo.description
                 document.getElementById("pageCount").value=json.items[0].volumeInfo.pageCount
                 document.getElementById("publishedDate").value=json.items[0].volumeInfo.publishedDate
                 document.getElementById("kind").value=json.items[0].volumeInfo.printType
-                document.getElementById("language").value=json.items[0].volumeInfo.language
-                // document.getElementById("publisher").value=json.items[0].volumeInfo.printType
-        //            document.getElementById("branch").value="000"
+                
+                if(json.items[0].volumeInfo.language="fr"){
+                    document.getElementById("language").value="FRANÇAIS"
+                }
+                
         });
 
         }
@@ -1159,6 +1152,29 @@
                 }
             }
             });
+
+            $('#branch').select2({
+                ajax: {
+                url: '/branches',
+                processResults: function (data) {
+                    let autoauthors = []
+                    data.forEach(element => {
+                       autoauthors.push({
+                            id:element.id,
+                            text:element.id
+                       })
+                    });
+                return {
+                    results: autoauthors
+                };
+
+                }
+            }
+            });
+            
+            
+
+
             $('#publisher').select2({
                 ajax: {
                 url: '/publishers',
@@ -1221,7 +1237,7 @@
                 el = Number(el)
                 authors.push(el)
             })
-
+            
             postData("/books", { 
                 isbn : $('#isbn').val(),
                 title: $('#title').val(),
@@ -1230,17 +1246,17 @@
                 language : $('#language').val(),
                 pageCount : $('#pageCount').val(),
                 publishedDate : $('#publishedDate').val(),
-                kinds : $('#kind').val(),
+                kind : document.getElementById("kind").value,
                 pdfAvailble: $('#pdfAvailable').is(':checked'),
                 epubAvailble: $('#epubAvailable').is(':checked'),
                 isReference: $('#isReference').is(':checked'),
-                publisher: Number($('#publisher').val()),
-                branch: $('#branch').val(),
+                publisher: $('#publisher').val(),
+                branchId: $('#branch').val(),
                 authors: authors,
-                largeCoverUrl: $('#cover')[0].files[0],
+                // cover: $('#cover')[0].files[0],
                 availableItems: 0
             
-            }).then((data) => {
+            }).then(data => {
                 console.log(data);
             });
 

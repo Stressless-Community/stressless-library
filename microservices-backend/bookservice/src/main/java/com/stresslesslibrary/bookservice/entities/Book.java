@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import lombok.Data;
 import lombok.ToString;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
@@ -19,6 +19,7 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
+@Data
 @Table(name = "books")
 @ToString
 @JsonInclude(Include.NON_NULL)
@@ -41,7 +42,7 @@ public class Book implements Serializable {
 	private Language language;
 	private int pageCount;
 	private String publishedDate;
-	private PrintKind kinds;
+	private PrintKind kind;
 	private Boolean pdfAvailble;
 	private Boolean epubAvailble;
 	private Boolean isReference;
@@ -133,14 +134,6 @@ public class Book implements Serializable {
 
 	public void setPublishedDate(String publishedDate) {
 		this.publishedDate = publishedDate;
-	}
-
-	public PrintKind getKinds() {
-		return kinds;
-	}
-
-	public void setKinds(PrintKind kinds) {
-		this.kinds = kinds;
 	}
 
 	public Boolean getPdfAvailble() {
