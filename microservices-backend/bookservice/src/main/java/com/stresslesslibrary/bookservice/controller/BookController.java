@@ -74,7 +74,7 @@ public class BookController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Book> saveBook(@RequestBody BookDTO book){
+	public ResponseEntity<?> saveBook(@RequestBody BookDTO book){
 		System.out.print(book.toString());
 		try {
 			return ResponseEntity.ok().body(bookService.getOne(book.getIsbn()));
@@ -82,7 +82,7 @@ public class BookController {
 			Book b=bookService.saveBook(book);
 			if(b!=null) {
 			return ResponseEntity.ok().body(b);}
-			return ResponseEntity.badRequest().body( new Book());
+			return ResponseEntity.badRequest().body(book);
 		}
 		
 	}

@@ -102,6 +102,7 @@ public class BookServiceImpl implements BookService {
 		b.setIsReference(book.getIsReference());
 		b.setPublisher(publisherService.getOne(book.getPublisher()));
 		b.setBranch(branchService.getOne(book.getBranchId()));
+		
 		return bookRepository.save(b);
 	} catch (Exception e) {
 		e.printStackTrace();

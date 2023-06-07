@@ -1213,7 +1213,7 @@
             referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(data), // body data type must match "Content-Type" header
         });
-        return response.json(); // parses JSON response into native JavaScript objects
+        return response; // parses JSON response into native JavaScript objects
         }
 
         
@@ -1253,14 +1253,40 @@
                 publisher: $('#publisher').val(),
                 branchId: $('#branch').val(),
                 authors: authors,
-                // cover: $('#cover')[0].files[0],
+                // 
                 availableItems: 0
             
             }).then(data => {
-                console.log(data);
+                book = data.json()
+                if (data.status==200){
+                    sendData("/image",{
+                        "file":$('#cover')[0].files[0],
+                        "isbn" : $('#isbn').val()
+                    }).then(res =>{
+                        console.log(res)
+                    })
+                }
+            }).catch( err =>{
+            console.log(err)
             });
 
             // newBookModal()
+        }
+
+        async function sendData(url, data) {
+        const formData  = new FormData();
+
+        for(const name in data) {
+            formData.append(name, data[name]);
+        }
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+
+        return response
+
         }
 
     </script>
