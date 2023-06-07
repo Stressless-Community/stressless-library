@@ -628,8 +628,8 @@
                             <div class="flex flex-col justify-start">
                                 <label for="language" class="text-gray-600 text-lg">Select language</label>
                                 <select id="language" th:field="*{kind}" class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
-                                    <option value="en">English</option>
-                                    <option value="fr">French</option>
+                                    <option value="ENGLISH">English</option>
+                                    <option value="FRENCH">French</option>
                                 </select>
                             </div>
                         </div>
@@ -641,7 +641,7 @@
                             <div class="w-full flex flex-row space-x-3 justify-between items-center">
                                 <div class="w-3/5">
                                     <label for="authors">Authors</label>
-                                    <select id="authors"  name="states[]" th:field="*{subtitle}" placeholder="Author(s)" required multiple  style="width: 100%;">
+                                    <select id="authors"  name="states[]" placeholder="Author(s)" required multiple  style="width: 100%;">
                                        
                                     </select>
                                 </div>
@@ -703,15 +703,15 @@
 
                             <div class="flex flex-row space-x-4 text-lg text-gray-600 m-4">
                                 <div class="space-x-2">
-                                    <input id="isReference" type="checkbox" th:field="*{isReference}" class="border border-yellow-200 bg-white outline-none focus:outline-none hover:scale-95 transition-all" />
+                                    <input id="isReference" type="checkbox" class="border border-yellow-200 bg-white outline-none focus:outline-none hover:scale-95 transition-all" />
                                     <label for="isReference">Reference</label>
                                 </div>
                                 <div>
-                                    <input id="pdfAvailable" type="checkbox" th:field="*{pdfAvailble}"/>
+                                    <input id="pdfAvailable" type="checkbox"/>
                                     <label for="pdfAvailable">Pdf</label>
                                 </div>
                                 <div>
-                                    <input id="epubAvailable" type="checkbox"  th:field="*{epubAvailble}" />
+                                    <input id="epubAvailable" type="checkbox" />
                                     <label for="epubAvailable">Epub</label>
                                 </div>
                             
@@ -745,8 +745,8 @@
                         </div>
 
                         <div class="bg-gray-200 px-4 py-3 text-right">
-                            <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newBookModal()"><i class="fas fa-times"></i> Cancel</button>
-                            <button type="button" id="submitbook" class="hidden py-2 px-4 bg-teal-500 text-white rounded hover:bg-teal-700 mr-2"><i class="fas fa-plus"></i>Save</button>
+                            <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newBookModal()">Cancel</button>
+                            <button type="button" id="submitbook" class="hidden py-2 px-4 bg-teal-500 text-white rounded hover:bg-teal-700 mr-2" onclick="addNewBook()">Save</button>
                         </div>
 
                     </form>
@@ -1179,7 +1179,7 @@
             )
         });
     
-        // Example POST method implementation:
+        // POST method implementation:
         async function postData(url = "", data = {}) {
         // Default options are marked with *
         const response = await fetch(url, {
@@ -1201,17 +1201,48 @@
         
 
         function addNewAuthor(){
-            // console.log(document.getElementById('newAuthorName').value,'desc',document.getElementById('newAuthorDescription').value)
             postData("/authors", { name : document.getElementById('newAuthorName').value, description : document.getElementById('newAuthorDescription').value }).then((data) => {
                 console.log(data);
             });
         }
 
         function addNewPublisher(){
-            // console.log(document.getElementById('newAuthorName').value,'desc',document.getElementById('newAuthorDescription').value)
             postData("/publishers", { name : document.getElementById('newPublisherName').value }).then((data) => {
                 console.log(data);
             });
+        }
+
+        function addNewBook(){
+
+            let authors = []
+            $("#authors").val().forEach(el =>{
+                el = Number(el)
+                authors.push(el)
+            })
+
+            postData("/books", { 
+                isbn : $('#isbn').val(),
+                title: $('#title').val(),
+                subtitle : $('#subtitle').val(),
+                description : $('#description').val(),
+                language : $('#language').val(),
+                pageCount : $('#pageCount').val(),
+                publishedDate : $('#publishedDate').val(),
+                kinds : $('#kind').val(),
+                pdfAvailble: $('#pdfAvailable').is(':checked'),
+                epubAvailble: $('#epubAvailable').is(':checked'),
+                isReference: $('#isReference').is(':checked'),
+                publisher: Number($('#publisher').val()),
+                branch: $('#branch').val(),
+                authors: authors,
+                largeCoverUrl: $('#cover')[0].files[0],
+                availableItems: 0
+            
+            }).then((data) => {
+                console.log(data);
+            });
+
+            // newBookModal()
         }
 
     </script>
