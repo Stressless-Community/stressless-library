@@ -2,6 +2,7 @@ package com.stresslesslibrary.bookservice.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -195,12 +196,9 @@ public class Book implements Serializable {
 	}
 	
 	@JsonInclude(Include.NON_EMPTY)
-	public String getAuthors() {
-		String listauthors="";
-		for (int i=0;i<this.authors.size();i++) {
-			listauthors=listauthors+authors.get(i).getName()+",";
-			}
-		return listauthors;
+	public List<Author> getAuthors() {
+	
+		return this.authors;
 	}
 
 	public void setAuthors(List<Author> authors) {
