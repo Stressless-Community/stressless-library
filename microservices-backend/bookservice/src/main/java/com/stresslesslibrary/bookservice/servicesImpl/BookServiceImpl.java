@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 
 import com.stresslesslibrary.bookservice.dtos.BookDTO;
+import com.stresslesslibrary.bookservice.entities.Author;
 import com.stresslesslibrary.bookservice.entities.Book;
 import com.stresslesslibrary.bookservice.repositories.AuthorRepository;
 import com.stresslesslibrary.bookservice.repositories.BookIndexRepository;
@@ -95,14 +96,17 @@ public class BookServiceImpl implements BookService {
 		b.setLanguage(Language.valueOf(book.getLanguage()));
 		b.setPageCount(book.getPageCount());
 		b.setPublishedDate(book.getPublishedDate());
-		
 		b.setKind(PrintKind.valueOf(book.getKind()));
 		b.setPdfAvailble(book.getPdfAvailble());
 		b.setEpubAvailble(book.getEpubAvailble());
 		b.setIsReference(book.getIsReference());
 		b.setPublisher(publisherService.getOne(book.getPublisher()));
 		b.setBranch(branchService.getOne(book.getBranchId()));
-		
+		List<Author> authors = new ArrayList<Author>();
+		for (int author : book.getAuthors()) {
+		 authors.add(authorService.getOne(author));	
+		}
+		b.setAuthors(authors);
 		return bookRepository.save(b);
 	} catch (Exception e) {
 		e.printStackTrace();

@@ -239,9 +239,9 @@
     
                 <div class="overflow-x-hidden">
                     <div class="flex flex-row space-x-9 w-max p-8">
-                        <div class="recently shadow-lg cursor-pointer hover:scale-110 transition-all" th:each="book : ${popular}" onclick="showBookInfo()" >
+                        <div class="recently shadow-lg cursor-pointer hover:scale-110 transition-all"  th:each="book : ${popular}"  >
                             <div class="book" >
-                                <img class="bookimage h-72 w-52" alt="Cover" th:src="@{${book.largeCoverUrl}}">
+                                <img class="bookimage h-72 w-52" alt="Cover" th:data-isbn="${book.isbn}" th:src="@{${book.largeCoverUrl}}" onclick="showBookInfo(this.dataset.isbn)"/>
                             </div>
                         </div>
                     </div>
@@ -467,15 +467,15 @@
     <section id="bookinfo" class=" m-10 px-14 flex flex-col space-y-3 hidden">
         <div class="flex flex-row space-x-9 w-full">
             <div class="drop-shadow-xl w-max">
-                <img class="cover w-80" th:src="@{assets/img/book.jpg}">
+                <img id="infoImage" class="cover w-80" th:src="@{assets/img/book.jpg}">
                 <p class="p-3 font-semibold text-slate-900 bg-yellow-200">Reference : </p>
             </div>
             <div class="flex flex-col text-slate-700 px-5 w-full space-y-4">
                 <div>
-                    <p class="p-3 w-full text-4xl font-semibold">Title</p>
-                    <p class="p-3  w-full text-xl font-light ">Subtitle</p>
-                    <p class="p-3  w-full text-lg font-bold">Authors</p>
-                    <p class="truncate text-md font-light p-3">Short Description</p>
+                    <p id="infoTitle" class="p-3 w-full text-4xl font-semibold"></p>
+                    <p id="infoSubtitle"class="p-3  w-full text-xl font-light "></p>
+                    <p id="infoAuthors"class="p-3  w-full text-lg font-bold"></p>
+                    <p id="infoShortDescription"class="truncate text-md font-light p-3"></p>
                 </div>
 
                 <div class="flex flex-row bg-gray-50 h-full px-8 justify-between shadow-lg">
@@ -489,8 +489,8 @@
                         
 
                        <div class="flex flex-col ">
-                        <p class="text-xl font-bold">Print kind</p>                         
-                        <span class="text-lg font-light">Hardcover</span>
+                        <p  class="text-xl font-bold">Print kind</p>                         
+                        <span id="infoPrintKind" class="text-lg font-light"></span>
                        </div>
                     </div>
 
@@ -505,7 +505,7 @@
                         <div class="flex flex-col ">
                         <p class="text-xl font-bold">Pages</p>
 
-                         <span class="text-lg font-light">512</span>
+                         <span id="infoPages" class="text-lg font-light"></span>
                         </div>
                      </div>
 
@@ -518,7 +518,7 @@
                         
                         <div class="flex flex-col ">
                         <p class="text-xl font-bold">Publish date</p>                           
-                         <span class="text-lg font-light">Feb 29, 2019</span>
+                         <span id="infoPublishedDate" class="text-lg font-light"></span>
                         </div>
                      </div>
 
@@ -532,7 +532,7 @@
                         
                         <div class="flex flex-col">
                         <p class="text-xl font-bold">Publisher</p>                            
-                         <span class="text-lg font-light">Eni</span>
+                         <span id="infoPublisher" class="text-lg font-light"></span>
                         </div>
                      </div>
                 </div>
@@ -542,16 +542,16 @@
         <!-- BOOK FULL DESCRIPTION -->
         <div class="flex flex-col space-y-10 pt-8">
             <div class="flex flex-col space-y-4">
-                <p class="text-2xl font-bold">Full description</p>
+                <p  class="text-2xl font-bold">Description</p>
                 <hr>
-                <p class="text-slate-700 text-lg font-light  tracking-wide [word-spacing:3px]">
-                    This is a test of a full decription.This is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decription
+                <p id="infoDescription" lass="text-slate-700 text-lg font-light  tracking-wide [word-spacing:3px]">
+                    
                 </p>
             </div>
-            <div class="flex flex-col space-y-4">
-                <p class="text-2xl font-bold">About the author(s)</p>
+            <div id="infoAuthorsDetails" class="flex flex-col space-y-4">
+                <p class="text-2xl font-bold"></p>
                 <hr>
-                <p class="text-slate-700 text-lg font-extralight tracking-wide [word-spacing:3px]">This is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors descriptionThis is a test for authors description.This is a test for authors descriptionThis is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors description</p>
+                <p class="text-slate-700 text-lg font-extralight tracking-wide [word-spacing:3px]"></p>
             </div>
 
             <div class="flex flex-col gap-4 pt-5">
@@ -1019,20 +1019,48 @@
                 document.getElementById('findbook').classList.remove('hidden')
             }else{
                 document.getElementById('home').classList.remove('hidden')
+                document.getElementById('bookinfo').classList.add('hidden')
                 document.getElementById('findbook').classList.add('hidden')
             }
             
         })
 
+        function displayInfo(data={}){
+
+            document.getElementById("infoImage").src=data.largeCoverUrl
+            document.getElementById("infoTitle").innerText=data.title 
+            if(data.subtitle){
+                document.getElementById('infoSubtitle').innerText=data.subtitle
+            }
+            
+            let authors =''
+            data.authors.forEach(element => {
+                authors= authors + " " + element.name
+                
+            });
+            document.getElementById ('infoAuthors').innerText=authors
+            
+            document.getElementById ('infoShortDescription').innerText=data.description
+            document.getElementById ('infoPrintKind').innerText=data.kind
+            document.getElementById ('infoPublishedDate').innerText=data.publishedDate
+            document.getElementById ('infoPublisher').innerText=data.publisher
+            document.getElementById ("infoDescription").innerText=data.description
+            document.getElementById ("infoPages").innerText=data.pageCount
+            infoAuthorsDetails
+
+            document.getElementById('home').classList.add('hidden')
+            document.getElementById('bookinfo').classList.remove('hidden')
+        }
+
         // show book info
 
         function showBookInfo(isbn){
-            document.getElementById('home').classList.add('hidden')
-            document.getElementById('bookinfo').classList.remove('hidden')
             
             fetch('/books/'+isbn).then(data => data.json())
             .then (json =>{
                 console.log(json)
+                displayInfo(json)
+           
             })
            
         }

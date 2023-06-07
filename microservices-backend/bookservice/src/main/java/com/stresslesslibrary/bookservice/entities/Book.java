@@ -7,6 +7,8 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.ToString;
+
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
@@ -48,6 +50,7 @@ public class Book implements Serializable {
 	private Boolean isReference;
 	
 	@Temporal(TemporalType.DATE)
+	@CreatedDate
 	private Date recordedDate;
 
 	@OneToOne(mappedBy = "book")
