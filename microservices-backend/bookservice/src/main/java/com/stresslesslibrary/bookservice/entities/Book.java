@@ -2,14 +2,18 @@ package com.stresslesslibrary.bookservice.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-
+import lombok.Data;
 import lombok.ToString;
+
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -18,6 +22,7 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
+@Data
 @Table(name = "books")
 @ToString
 @JsonInclude(Include.NON_NULL)
@@ -40,14 +45,16 @@ public class Book implements Serializable {
 	private Language language;
 	private int pageCount;
 	private String publishedDate;
-	private PrintKind kinds;
+	private PrintKind kind;
 	private Boolean pdfAvailble;
 	private Boolean epubAvailble;
 	private Boolean isReference;
 	
 	@Temporal(TemporalType.DATE)
+	@CreatedDate
 	private Date recordedDate;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "book")
 	private BookImage bookImage;
 	
@@ -134,14 +141,6 @@ public class Book implements Serializable {
 		this.publishedDate = publishedDate;
 	}
 
-	public PrintKind getKinds() {
-		return kinds;
-	}
-
-	public void setKinds(PrintKind kinds) {
-		this.kinds = kinds;
-	}
-
 	public Boolean getPdfAvailble() {
 		return pdfAvailble;
 	}
@@ -195,12 +194,9 @@ public class Book implements Serializable {
 	}
 	
 	@JsonInclude(Include.NON_EMPTY)
-	public String getAuthors() {
-		String listauthors="";
-		for (int i=0;i<this.authors.size();i++) {
-			listauthors=listauthors+authors.get(i).getName()+",";
-			}
-		return listauthors;
+	public List<Author> getAuthors() {
+	
+		return this.authors;
 	}
 
 	public void setAuthors(List<Author> authors) {

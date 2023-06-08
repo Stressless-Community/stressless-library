@@ -75,6 +75,7 @@ public class BookController {
 
 	@PostMapping
 	public ResponseEntity<?> saveBook(@RequestBody BookDTO book){
+		System.out.print(book.toString());
 		try {
 			return ResponseEntity.ok().body(bookService.getOne(book.getIsbn()));
 		} catch (Exception e) {

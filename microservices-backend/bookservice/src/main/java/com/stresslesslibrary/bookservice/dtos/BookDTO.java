@@ -26,11 +26,12 @@ public class BookDTO {
 	private String description;
 	private String language;
 	private int pageCount;
+	private int[] authors;
 	private String publishedDate;
 	private String kind;
 	private Boolean pdfAvailble;
 	private Boolean epubAvailble;
 	private Boolean isReference;
-	private String publisher;
+	private int publisher;
 	private String branchId;
 }

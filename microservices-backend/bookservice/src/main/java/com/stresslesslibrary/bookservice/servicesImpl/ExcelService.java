@@ -142,7 +142,7 @@ public class ExcelService {
             createCell(row, columnCount++, book.getLanguage().name(), style);
             createCell(row, columnCount++, book.getDescription(), style);
             createCell(row, columnCount++, book.getPageCount(), style);
-            createCell(row, columnCount++, book.getKinds().name(), style);
+            createCell(row, columnCount++, book.getKind().name(), style);
             createCell(row, columnCount++, book.getPublishedDate(), style);
             createCell(row, columnCount++, book.getPublisher(), style);
             createCell(row, columnCount++, book.getAuthors(), style);
