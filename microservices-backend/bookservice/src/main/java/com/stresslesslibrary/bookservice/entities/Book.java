@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -53,6 +54,7 @@ public class Book implements Serializable {
 	@CreatedDate
 	private Date recordedDate;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "book")
 	private BookImage bookImage;
 	
