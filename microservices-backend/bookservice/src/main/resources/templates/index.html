@@ -153,7 +153,7 @@
     <!-- End header -->
 
     <!-- Main section -->
-    <section section id="home" class="bg-white pb-8 hidden">
+    <section section id="home" class="bg-white pb-8">
         
            <!-- Swiper -->
         <div class=" overflow-x-hidden w-full h-64 flex justify-center items-center">
@@ -239,9 +239,9 @@
     
                 <div class="overflow-x-hidden">
                     <div class="flex flex-row space-x-9 w-max p-8">
-                        <div class="recently shadow-lg cursor-pointer hover:scale-110 transition-all" th:each="book : ${popular}" onclick="showBookInfo()" >
+                        <div class="recently shadow-lg cursor-pointer hover:scale-110 transition-all"  th:each="book : ${popular}"  >
                             <div class="book" >
-                                <img class="bookimage h-72 w-52" alt="Cover" th:src="@{${book.largeCoverUrl}}">
+                                <img class="bookimage h-72 w-52" alt="Cover" th:data-isbn="${book.isbn}" th:src="@{${book.largeCoverUrl}}" onclick="showBookInfo(this.dataset.isbn)"/>
                             </div>
                         </div>
                     </div>
@@ -270,14 +270,14 @@
                 <div class="flex flex-row justify-center gap-2">
                     <!-- trash icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
                     </a>
 
                     <!-- edit icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </a>
@@ -292,14 +292,14 @@
                 <div class="flex flex-row justify-center gap-2">
                     <!-- trash icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
                     </a>
 
                     <!-- edit icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </a>
@@ -314,14 +314,14 @@
                 <div class="flex flex-row justify-center gap-2">
                     <!-- trash icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
                     </a>
 
                     <!-- edit icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </a>
@@ -336,14 +336,14 @@
                 <div class="flex flex-row justify-center gap-2">
                     <!-- trash icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
                     </a>
 
                     <!-- edit icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </a>
@@ -358,14 +358,14 @@
                 <div class="flex flex-row justify-center gap-2">
                     <!-- trash icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
                     </a>
 
                     <!-- edit icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </a>
@@ -380,14 +380,14 @@
                 <div class="flex flex-row justify-center gap-2">
                     <!-- trash icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
                     </a>
 
                     <!-- edit icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </a>
@@ -402,14 +402,14 @@
                 <div class="flex flex-row justify-center gap-2">
                     <!-- trash icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
                     </a>
 
                     <!-- edit icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </a>
@@ -424,14 +424,14 @@
                 <div class="flex flex-row justify-center gap-2">
                     <!-- trash icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
                     </a>
 
                     <!-- edit icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </a>
@@ -446,14 +446,14 @@
                 <div class="flex flex-row justify-center gap-2">
                     <!-- trash icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
                     </a>
 
                     <!-- edit icon -->
                     <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:h-8 hover:w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </a>
@@ -464,18 +464,18 @@
         </div>
     </section>
 
-    <section id="bookinfo" class=" m-10 px-14 flex flex-col space-y-3">
+    <section id="bookinfo" class=" m-10 px-14 flex flex-col space-y-3 hidden">
         <div class="flex flex-row space-x-9 w-full">
             <div class="drop-shadow-xl w-max">
-                <img class="cover w-80" th:src="@{assets/img/book.jpg}">
+                <img id="infoImage" class="cover w-80" th:src="@{assets/img/book.jpg}">
                 <p class="p-3 font-semibold text-slate-900 bg-yellow-200">Reference : </p>
             </div>
             <div class="flex flex-col text-slate-700 px-5 w-full space-y-4">
                 <div>
-                    <p class="p-3 w-full text-4xl font-semibold">Title</p>
-                    <p class="p-3  w-full text-xl font-light ">Subtitle</p>
-                    <p class="p-3  w-full text-lg font-bold">Authors</p>
-                    <p class="truncate text-md font-light p-3">Short Description</p>
+                    <p id="infoTitle" class="p-3 w-full text-4xl font-semibold"></p>
+                    <p id="infoSubtitle"class="p-3  w-full text-xl font-light "></p>
+                    <p id="infoAuthors"class="p-3  w-full text-lg font-bold"></p>
+                    <p id="infoShortDescription"class="truncate text-md font-light p-3"></p>
                 </div>
 
                 <div class="flex flex-row bg-gray-50 h-full px-8 justify-between shadow-lg">
@@ -489,8 +489,8 @@
                         
 
                        <div class="flex flex-col ">
-                        <p class="text-xl font-bold">Print kind</p>                         
-                        <span class="text-lg font-light">Hardcover</span>
+                        <p  class="text-xl font-bold">Print kind</p>                         
+                        <span id="infoPrintKind" class="text-lg font-light"></span>
                        </div>
                     </div>
 
@@ -505,7 +505,7 @@
                         <div class="flex flex-col ">
                         <p class="text-xl font-bold">Pages</p>
 
-                         <span class="text-lg font-light">512</span>
+                         <span id="infoPages" class="text-lg font-light"></span>
                         </div>
                      </div>
 
@@ -518,7 +518,7 @@
                         
                         <div class="flex flex-col ">
                         <p class="text-xl font-bold">Publish date</p>                           
-                         <span class="text-lg font-light">Feb 29, 2019</span>
+                         <span id="infoPublishedDate" class="text-lg font-light"></span>
                         </div>
                      </div>
 
@@ -532,7 +532,7 @@
                         
                         <div class="flex flex-col">
                         <p class="text-xl font-bold">Publisher</p>                            
-                         <span class="text-lg font-light">Eni</span>
+                         <span id="infoPublisher" class="text-lg font-light"></span>
                         </div>
                      </div>
                 </div>
@@ -542,16 +542,16 @@
         <!-- BOOK FULL DESCRIPTION -->
         <div class="flex flex-col space-y-10 pt-8">
             <div class="flex flex-col space-y-4">
-                <p class="text-2xl font-bold">Full description</p>
+                <p  class="text-2xl font-bold">Description</p>
                 <hr>
-                <p class="text-slate-700 text-lg font-light  tracking-wide [word-spacing:3px]">
-                    This is a test of a full decription.This is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decriptionThis is a test of a full decription
+                <p id="infoDescription" lass="text-slate-700 text-lg font-light  tracking-wide [word-spacing:3px]">
+                    
                 </p>
             </div>
-            <div class="flex flex-col space-y-4">
-                <p class="text-2xl font-bold">About the author(s)</p>
+            <div id="infoAuthorsDetails" class="flex flex-col space-y-4">
+                <p class="text-2xl font-bold"></p>
                 <hr>
-                <p class="text-slate-700 text-lg font-extralight tracking-wide [word-spacing:3px]">This is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors descriptionThis is a test for authors description.This is a test for authors descriptionThis is a test for authors description.This is a test for authors description.This is a test for authors description.This is a test for authors description</p>
+                <p class="text-slate-700 text-lg font-extralight tracking-wide [word-spacing:3px]"></p>
             </div>
 
             <div class="flex flex-col gap-4 pt-5">
@@ -618,6 +618,7 @@
                             <input id="isbn" type="text" th:field="*{isbn}" placeholder="Isbn"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             <input id="title" type="text" th:field="*{title}" placeholder="Title"  required  class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             <input id="subtitle" type="text" th:field="*{subtitle}" placeholder="Subtitle"  required  class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
+                            <span id="msg" class="text-red-500 text-center w-full hidden"></span>
                         </div>
                         <!-- END PART ONE -->
 
@@ -627,9 +628,9 @@
                             <textarea name="" id="description" type="text" th:field="*{description}" placeholder="Write here the full description of the book" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea>                   
                             <div class="flex flex-col justify-start">
                                 <label for="language" class="text-gray-600 text-lg">Select language</label>
-                                <select id="language" th:field="*{kind}" class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
+                                <select id="language"  class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
                                     <option value="ENGLISH">English</option>
-                                    <option value="FRENCH">French</option>
+                                    <option value="FRANÇAIS">French</option>
                                 </select>
                             </div>
                         </div>
@@ -641,7 +642,7 @@
                             <div class="w-full flex flex-row space-x-3 justify-between items-center">
                                 <div class="w-3/5">
                                     <label for="authors">Authors</label>
-                                    <select id="authors"  name="states[]" placeholder="Author(s)" required multiple  style="width: 100%;">
+                                    <select id="authors"  name="authors[]" placeholder="Author(s)" required multiple  style="width: 100%;">
                                        
                                     </select>
                                 </div>
@@ -680,24 +681,15 @@
                                 <input id="pageCount" type="number" min="1" th:field="*{pageCount}" placeholder="Page count"  required class="p-2 text-left border-b border-yellow-200 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             </div>
 
-                            <select id="kind" th:field="*{kind}" class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
+                            <select id="kind"  class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
                                 <option value="HARDCOVER">HardCover</option>
                                 <option value="BOOK">Book</option>
                             </select>
 
-                            <div class="flex flex-row space-x-3 p-2 mt-2">
+                            <div class="w-full flex flex-row space-x-3 p-2 mt-2">
                                 <label for="branch" class="text-gray-600 p-2">Branch</label>
-                                <select id="branch" th:field="*{branchId}" placeholder="Branch" class="text-left p-2 border-b border-yellow-200 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required>
-                                    <option value="1">000</option>
-                                    <option value="2">001</option>
-                                    <option value="3">002</option>
-                                    <option value="4">003</option>
-                                    <option value="5">004</option>
-                                    <option value="6">005</option>
-                                    <option value="7">006</option>
-                                    <option value="8">007</option>
-                                    <option value="9">008</option>
-                                    <option value="10">009</option>
+                                <select id="branch" placeholder="Branch" class="text-left p-2 border-b border-yellow-200 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" style="width: 100%;" required>
+                                 
                                 </select>
                             </div>
 
@@ -815,7 +807,7 @@
           
     </section>
 
-    <section class="dashbord">
+    <section class="dashbord hidden">
         <div>
             <div>
                 <button>Loan</button>
@@ -1028,20 +1020,50 @@
                 document.getElementById('findbook').classList.remove('hidden')
             }else{
                 document.getElementById('home').classList.remove('hidden')
+                document.getElementById('bookinfo').classList.add('hidden')
                 document.getElementById('findbook').classList.add('hidden')
             }
             
         })
 
+        function displayInfo(data={}){
+
+            document.getElementById("infoImage").src=data.largeCoverUrl
+            document.getElementById("infoTitle").innerText=data.title 
+            if(data.subtitle){
+                document.getElementById('infoSubtitle').innerText=data.subtitle
+            }
+            
+            let authors =''
+            data.authors.forEach(element => {
+                authors= authors + " " + element.name
+                
+            });
+            document.getElementById ('infoAuthors').innerText=authors
+            
+            document.getElementById ('infoShortDescription').innerText=data.description
+            document.getElementById ('infoPrintKind').innerText=data.kind
+            document.getElementById ('infoPublishedDate').innerText=data.publishedDate
+            document.getElementById ('infoPublisher').innerText=data.publisher
+            document.getElementById ("infoDescription").innerText=data.description
+            document.getElementById ("infoPages").innerText=data.pageCount
+            infoAuthorsDetails
+
+            document.getElementById('home').classList.add('hidden')
+            document.getElementById('bookinfo').classList.remove('hidden')
+        }
+
         // show book info
 
         function showBookInfo(isbn){
-            document.getElementById('home').classList.add('hidden')
-            document.getElementById('bookinfo').classList.remove('hidden')
             
-            fetch('localhost:8082/books/'+isbn).then(data=>{
-                console.log(data.json())
+            fetch('/books/'+isbn).then(data => data.json())
+            .then (json =>{
+                console.log(json)
+                displayInfo(json)
+           
             })
+           
         }
 
         // New book modal
@@ -1066,6 +1088,42 @@
         let previousNextBox = document.getElementById('previousNextBox')
         let submitbook = document.getElementById('submitbook')
 
+        function isBookDataValid(currentDiv){
+            msg = ''
+            switch (currentDiv) {
+            default:
+                return true
+                break;
+            case 1:
+                console.log(document.getElementById('isbn').value.length<5)
+                if(!(document.getElementById('isbn').value && document.getElementById('isbn').value.length===10 && document.getElementById('isbn').value.length===13)){
+                    document.getElementById('isbn').classList.remove('border-b')
+                    document.getElementById('isbn').classList.remove('border-yellow-200')
+                    document.getElementById('isbn').classList.add('border-b')
+                    document.getElementById('isbn').classList.add('border-red-500')
+                    msg+='Please complete valid ISBN'
+                    document.getElementById('msg').innerText = msg
+                    document.getElementById('msg').classList.remove('hidden')
+                    return false
+                }else{
+                    return true
+                }
+                break;
+            case 2:
+                msg = "Today is Sunday";
+                break
+            case 3:
+                msg = "Today is Sunday";
+                break
+            case 4:
+                msg = "Today is Sunday";
+                break
+            case 5:
+                msg = "Today is Sunday";
+                break
+            }
+        }
+
         function previous(){
             currentDivNum--
             document.getElementById('newbookInfo'+(currentDivNum+1)).classList.add('hidden')
@@ -1089,26 +1147,28 @@
         }
 
         function next(){
-            currentDivNum++
-            document.getElementById('newbookInfo'+(currentDivNum-1)).classList.add('hidden')
-            document.getElementById('newbookInfo'+currentDivNum).classList.remove('hidden')
-            if(currentDivNum==5){
-                nextBtn.classList.add('hidden')
-                submitbook.classList.remove('hidden')
-            }else{
 
-                if(previousNextBox.classList.contains('justify-end')){
-                    previousNextBox.classList.remove('justify-end')
-                    previousNextBox.classList.add('flex-row')
-                    previousNextBox.classList.add('justify-between')
-                }
-                if(previousBtn.classList.contains('hidden')){
-                    previousBtn.classList.remove('hidden')
-                }
-                if(nextBtn.classList.contains('hidden')){
-                    nextBtn.classList.remove('hidden')
-                }
+            if(isBookDataValid(currentDivNum)){
+                currentDivNum++
+                document.getElementById('newbookInfo'+(currentDivNum-1)).classList.add('hidden')
+                document.getElementById('newbookInfo'+currentDivNum).classList.remove('hidden')
+                if(currentDivNum==5){
+                    nextBtn.classList.add('hidden')
+                    submitbook.classList.remove('hidden')
+                }else{
 
+                    if(previousNextBox.classList.contains('justify-end')){
+                        previousNextBox.classList.remove('justify-end')
+                        previousNextBox.classList.add('flex-row')
+                        previousNextBox.classList.add('justify-between')
+                    }
+                    if(previousBtn.classList.contains('hidden')){
+                        previousBtn.classList.remove('hidden')
+                    }
+                    if(nextBtn.classList.contains('hidden')){
+                        nextBtn.classList.remove('hidden')
+                    }
+                }
 
             }
         }
@@ -1122,16 +1182,18 @@
             .then(response => response.json())
             .then(json => {
                 console.log(json.items[0].volumeInfo)
-        //            document.getElementById("isbn").value=json.items[0].volumeInfo
+
                 document.getElementById("title").value=json.items[0].volumeInfo.title
                 document.getElementById("subtitle").value=json.items[0].volumeInfo.subtitle
                 document.getElementById("description").value=json.items[0].volumeInfo.description
                 document.getElementById("pageCount").value=json.items[0].volumeInfo.pageCount
                 document.getElementById("publishedDate").value=json.items[0].volumeInfo.publishedDate
                 document.getElementById("kind").value=json.items[0].volumeInfo.printType
-                document.getElementById("language").value=json.items[0].volumeInfo.language
-                // document.getElementById("publisher").value=json.items[0].volumeInfo.printType
-        //            document.getElementById("branch").value="000"
+                
+                if(json.items[0].volumeInfo.language="fr"){
+                    document.getElementById("language").value="FRANÇAIS"
+                }
+                
         });
 
         }
@@ -1157,6 +1219,29 @@
                 }
             }
             });
+
+            $('#branch').select2({
+                ajax: {
+                url: '/branches',
+                processResults: function (data) {
+                    let autoauthors = []
+                    data.forEach(element => {
+                       autoauthors.push({
+                            id:element.id,
+                            text:element.id
+                       })
+                    });
+                return {
+                    results: autoauthors
+                };
+
+                }
+            }
+            });
+            
+            
+
+
             $('#publisher').select2({
                 ajax: {
                 url: '/publishers',
@@ -1195,19 +1280,24 @@
             referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(data), // body data type must match "Content-Type" header
         });
-        return response.json(); // parses JSON response into native JavaScript objects
+        return response; // parses JSON response into native JavaScript objects
         }
 
         
 
         function addNewAuthor(){
-            postData("/authors", { name : document.getElementById('newAuthorName').value, description : document.getElementById('newAuthorDescription').value }).then((data) => {
+            postData("/authors", { 
+                name : document.getElementById('newAuthorName').value, 
+                description : document.getElementById('newAuthorDescription').value 
+            }).then((data) => {
                 console.log(data);
             });
         }
 
         function addNewPublisher(){
-            postData("/publishers", { name : document.getElementById('newPublisherName').value }).then((data) => {
+            postData("/publishers", {
+                name : document.getElementById('newPublisherName').value 
+            }).then((data) => {
                 console.log(data);
             });
         }
@@ -1219,7 +1309,7 @@
                 el = Number(el)
                 authors.push(el)
             })
-
+            
             postData("/books", { 
                 isbn : $('#isbn').val(),
                 title: $('#title').val(),
@@ -1228,21 +1318,47 @@
                 language : $('#language').val(),
                 pageCount : $('#pageCount').val(),
                 publishedDate : $('#publishedDate').val(),
-                kinds : $('#kind').val(),
+                kind : document.getElementById("kind").value,
                 pdfAvailble: $('#pdfAvailable').is(':checked'),
                 epubAvailble: $('#epubAvailable').is(':checked'),
                 isReference: $('#isReference').is(':checked'),
-                publisher: Number($('#publisher').val()),
-                branch: $('#branch').val(),
+                publisher: $('#publisher').val(),
+                branchId: $('#branch').val(),
                 authors: authors,
-                largeCoverUrl: $('#cover')[0].files[0],
+                // 
                 availableItems: 0
             
-            }).then((data) => {
-                console.log(data);
+            }).then(data => {
+                book = data.json()
+                if (data.status==200){
+                    sendData("/image",{
+                        "file":$('#cover')[0].files[0],
+                        "isbn" : $('#isbn').val()
+                    }).then(res =>{
+                        console.log(res)
+                    })
+                }
+            }).catch( err =>{
+            console.log(err)
             });
 
             // newBookModal()
+        }
+
+        async function sendData(url, data) {
+        const formData  = new FormData();
+
+        for(const name in data) {
+            formData.append(name, data[name]);
+        }
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+
+        return response
+
         }
 
     </script>
