@@ -43,20 +43,20 @@
             <div class="flex flex-row gap-3">
                 <img class="logo h-16 w-12" alt="logo" th:src="@{/assets/img/logo-1.png}">
                 <div class="flex flex-col justify-center">
-                    <p class="text-3xl text-yellow-600 font-serif text-center font-bold text-justify">UCBC LIBRARY</p>
-                    <span class="text-gray-800 text-sm font-extralight">Read to be transformed</span>
+                    <p class="text-3xl text-yellow-700 font-serif text-center font-bold text-justify">UCBC LIBRARY</p>
+                    <span class="text-black text-sm font-light">Read to be transformed</span>
                 </div>
             </div>
 
             <div class="user flex flex-col justify-center">
                 <div class="flex flex-row">
-                    <button class="py-2 px-6 bg-teal-500 text-white rounded hover:bg-teal-700 mr-4" onclick="newBookModal()">Add Book</button>
+                    <button class="py-2 px-6 bg-teal-500 text-white rounded hover:bg-teal-700 mr-4" onclick="newBookModal()">Add a Book</button>
     
-                    <button class="bg-yellow-100 text-lg text-yellow-600 px-6 py-2 shadow-md hover:scale-105 transition-all mr-4">
+                    <button class="hidden bg-yellow-100 text-lg text-yellow-600 px-6 py-2 shadow-md hover:scale-105 transition-all mr-4">
                         <span>Sign up</span>
                     </button>
 
-                    <button class="bg-slate-50  text-lg text-yellow-600 px-6 py-2 shadow-md hover:scale-105 transition-all">
+                    <button class="hidden bg-slate-50  text-lg text-yellow-600 px-6 py-2 shadow-md hover:scale-105 transition-all">
                         <span>Sign in</span>
                     </button>
 
@@ -614,10 +614,10 @@
                     <form action="#"  th:object="${bookDto}" enctype="multipart/form-data" autocomplete="off" id="form">
                         <p class="bg-gray-200 text-gray-600 text-2xl font-bold text-center py-3 px-4">New book</p>
                         <!-- PART ONE -->
-                        <div id="newbookInfo1" class="px-4 pt-5  sm:p-6 sm:pb-2">
+                        <div id="newbookInfo1" class="hidden px-4 pt-5  sm:p-6 sm:pb-2">
                             <input id="isbn" type="number" min="1000000000" max="9999999999999"  placeholder="Isbn"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             <input id="title" type="text"  placeholder="Title"  required  class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
-                            <input id="subtitle" type="text"  placeholder="Subtitle"  required  class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
+                            <input id="subtitle" type="text"  placeholder="Subtitle (optional)"  required  class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                         </div>
                         <!-- END PART ONE -->
 
@@ -718,8 +718,15 @@
                         </div>
                         <!-- END PART FIVE -->
 
+                        <!-- Data validation message block -->
+                        <div class="w-full">
+                            <p id="errmsg" class="bg-yellow-600 p-2 mx-5 text-center text-lg text-white hidden"></p>
+                            <p id="succmsg" class="bg-teal-600 p-2 mx-5 text-center text-lg text-white hidden">The book has been added successfully !</p>
+                        </div>
+                        <!-- End Data validation message block -->
+
+
                         <!-- Previous - Next buttons -->
-                        <span id="errmsg" class="text-red-500 text-center w-full hidden mx-5 py-3"></span>
                         <div id="previousNextBox" class="flex justify-end px-4 py-3">
                             <div onclick="previous()" id="previous" class="hidden py-2 px-4 flex flex-row items-center cursor-pointer hover:scale-105 transition-all">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-yellow-600">
@@ -737,8 +744,19 @@
                         </div>
 
                         <div class="bg-gray-200 px-4 py-3 text-right">
-                            <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newBookModal()">Cancel</button>
-                            <button type="button" id="submitbook" class="hidden py-2 px-4 bg-teal-500 text-white rounded hover:bg-teal-700 mr-2" onclick="addNewBook()">Save</button>
+                            <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newBookModal();clearAddBookForm()">Cancel</button>
+                            <button type="button" id="submitbook" class="hidden py-2 px-4 bg-teal-500 text-white rounded hover:bg-teal-700 mr-2" 
+                            onclick="
+                                if(document.getElementById('cover').value!=''){
+                                    addNewBook()
+                                }else{
+                                    errmsg.innerText = 'Please upload the book cover.'
+                                    errmsg.classList.remove('hidden')
+                                    setTimeout(() => {
+                                        errmsg.classList.add('hidden')   
+                                    }, 2500); 
+                                }
+                            ">Save</button>
                         </div>
 
                     </form>
@@ -763,10 +781,15 @@
                         <div id="" class="px-4 pt-5  sm:p-6 sm:pb-2">
                             <input id="newAuthorName" type="text" th:field="*{isbn}" placeholder="Name of the author"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             <textarea name="" id="newAuthorDescription" type="text" th:field="*{description}" placeholder="About the author" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea> 
-                            <p id="newAuthorAddedMsg" class="hidden w-full border-b border-teal-700 p-2 mt-2 mb-3 text-white text-lg"></p>                  
                         </div>
                         <!-- END PART ONE -->
-
+                        
+                        <!-- Data validation message block -->
+                        <div class="w-full">
+                            <p id="errmsgAu" class="bg-yellow-600 p-2 mx-5 text-center text-lg text-white hidden">Something went wrong, please try again.</p>
+                            <p id="succmsgAu" class="bg-teal-600 p-2 mx-5 text-center text-lg text-white hidden">New author added successfully !</p>
+                        </div>
+                        <!-- End Data validation message block -->
 
                         <div class="bg-gray-200 px-4 py-3 text-right">
                             <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newAuthorModal()"></i> Cancel</button>
@@ -795,7 +818,14 @@
                         <div id="" class="px-4 pt-5  sm:p-6 sm:pb-2">
                             <input id="newPublisherName" type="text"  placeholder="Name of the publisher"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                         </div>
-                        <p id="newPublisherAddedMsg" class="hidden w-full border-b border-teal-700 p-2 mt-2 mb-3 text-white text-lg"></p>
+
+                        <!-- Data validation message block -->
+                        <div class="w-full">
+                            <p id="errmsgPub" class="bg-yellow-600 p-2 mx-5 text-center text-lg text-white hidden">Something went wrong, please try again.</p>
+                            <p id="succmsgPub" class="bg-teal-600 p-2 mx-5 text-center text-lg text-white hidden">New publisher added successfully !</p>
+                        </div>
+                        <!-- End Data validation message block -->
+
                         <div class="bg-gray-200 px-4 py-3 text-right">
                             <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="newPublisherModal()"></i> Cancel</button>
                             <button type="button" id="submitbook" class="py-2 px-4 bg-teal-500 text-white rounded hover:bg-teal-700 mr-2" onclick="addNewPublisher()">Save</button>
@@ -1085,6 +1115,8 @@
         // New book modal
 
         function newBookModal(){ 
+
+            document.getElementById('newbookInfo1').classList.remove('hidden')
             document.getElementById('modal').classList.toggle('hidden')
         }
 
@@ -1106,13 +1138,18 @@
 
         //Data validation function
         const errmsg = document.getElementById('errmsg')
+        let isbExists = false
 
         function fieldsEmpty(currentSecion){
             switch (currentSecion) {
                 case 1:
-                    if(isbn.value=='' || bookTitle.value==''){
-                        errmsg.innerText = 'The ISBN and the title are required !'
+                    if(isbn.value=='' || bookTitle.value=='' || isbExists){
+                        errmsg.innerText = 'Give valid ISBN or valid title !'
+                        if(isbExists)errmsg.innerText = 'The book with this ISBN is already registered !'
                         errmsg.classList.remove('hidden')
+                        setTimeout(() => {
+                            errmsg.classList.add('hidden')   
+                        }, 2500);
                         return true
                     }else{
                         errmsg.innerText = ''
@@ -1124,6 +1161,9 @@
                         if(bookDescription.value=='' || bookLanguage.value==''){
                             errmsg.innerText = 'All the fields must be completed'
                             errmsg.classList.remove('hidden')
+                            setTimeout(() => {
+                                errmsg.classList.add('hidden')   
+                            }, 2500);
                             return true
                         }else{
                             errmsg.innerText = ''
@@ -1135,6 +1175,9 @@
                         if(bookAuthors.value=='' || bookPublisher.value=='' || bookPublishedDate.value==''){
                             errmsg.innerText = 'All the fields must be completed'
                             errmsg.classList.remove('hidden')
+                            setTimeout(() => {
+                                errmsg.classList.add('hidden')   
+                            }, 2500);
                             return true
                         }else{
                             errmsg.innerText = ''
@@ -1146,6 +1189,9 @@
                         if(bookPages.value=='' || bookPrintKind.value=='' || bookBranch.value==''){
                             errmsg.innerText = 'All the fields must be completed'
                             errmsg.classList.remove('hidden')
+                            setTimeout(() => {
+                                errmsg.classList.add('hidden')   
+                            }, 2500);
                             return true
                         }else{
                             errmsg.innerText = ''
@@ -1160,13 +1206,13 @@
 
         isbn.addEventListener('input',function(){
             if(!(isbn.value.length==10 || isbn.value.length==13)){
-                    isbn.classList.remove('border-yellow-200')
-                    isbn.classList.add('border-red-500')
                     errmsg.innerText = 'ISBN must be of 10 or 13 digits'
                     errmsg.classList.remove('hidden')
+                    setTimeout(() => {
+                                errmsg.classList.add('hidden')   
+                    }, 2500);
                 }else{
-                    isbn.classList.remove('border-red-500')
-                    isbn.classList.add('border-yellow-200')
+                    verifyBook(isbn.value)
                     errmsg.innerText = ''
                     errmsg.classList.add('hidden')
                 }
@@ -1219,19 +1265,18 @@
 
             }
         }
-        // Add on input even listener
-        document.getElementById("isbn").addEventListener("input",getBookInfo)
-        document.getElementById("isbn").addEventListener("change",getBookInfo)
-        
+        // Add on input even listener      
         function getBookInfo(){
-   
-        fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:"+document.getElementById("isbn").value)
+
+        fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:"+isbn)
             .then(response => response.json())
             .then(json => {
                 console.log(json.items[0].volumeInfo)
 
                 document.getElementById("title").value=json.items[0].volumeInfo.title
-                document.getElementById("subtitle").value=json.items[0].volumeInfo.subtitle
+                if(json.items[0].volumeInfo.subtitle){
+                    document.getElementById("subtitle").value=json.items[0].volumeInfo.subtitle
+                }
                 document.getElementById("description").value=json.items[0].volumeInfo.description
                 document.getElementById("pageCount").value=json.items[0].volumeInfo.pageCount
                 document.getElementById("publishedDate").value=json.items[0].volumeInfo.publishedDate
@@ -1241,8 +1286,36 @@
                     document.getElementById("language").value="FRANÇAIS"
                 }
                 
+        }).catch((err)=>{
+            isbExists = false
+            console.log(err)
         });
 
+        }
+
+        // Verify if book exists in database
+
+        function verifyBook(isbn){
+            if(isbn){  
+              fetch("/books/"+isbn)
+              
+            .then(res=>{
+                if(res.status===200){
+                    isbExists = true
+                    errmsg.innerText='The book with this isbn is already registered !'
+                    if(errmsg.classList.contains('hidden')){
+                        errmsg.classList.remove('hidden')
+                        setTimeout(() => {
+                                errmsg.classList.add('hidden')   
+                        }, 2500);
+                    }
+                }else{
+                    getBookInfo()
+                }
+            }) 
+
+            }
+            
         }
 
         // Author autocomplete 
@@ -1310,8 +1383,12 @@
                 
             )
         });
-    
-        // POST method implementation:
+
+
+        //
+        // POST methods implementation:
+        //
+
         async function postData(url = "", data = {}) {
         // Default options are marked with *
         const response = await fetch(url, {
@@ -1327,45 +1404,57 @@
             referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(data), // body data type must match "Content-Type" header
         });
-        return response; // parses JSON response into native JavaScript objects
+        return response;
         }
 
         
 
         function addNewAuthor(){
+
+            addAuSuccMsg = document.getElementById('succmsgAu')
+
             postData("/authors", { 
                 name : document.getElementById('newAuthorName').value, 
                 description : document.getElementById('newAuthorDescription').value 
             }).then((data) => {               
                 console.log(data);
                 if(data.status==200){
-                    document.getElementById('newAuthorAddedMsg').innerText = 'Author added successfully'
-                    document.getElementById('newAuthorAddedMsg').classList.remove('hidden')
+                    addAuSuccMsg.classList.remove('hidden')
                     setTimeout(() => {
-                        document.getElementById('newAuthorName').innerText=''
-                        document.getElementById('newAuthorAddedMsg').classList.add('hidden').innerText=''
-                        document.getElementById('newAuthorAddedMsg').classList.add('hidden')
-                        document.getElementById('authormodal').classList.add('hidden')     
-                     }, 5000);
+                        addAuSuccMsg.classList.add('hidden')   
+                    }, 2500);
+                    document.getElementById('newAuthorName').value = ''
+                    document.getElementById('newAuthorDescription').value=''
+                    document.getElementById('authormodal').classList.add('hidden')
+
+                }else{
+                    errmsgAu.classList.remove('hidden')
+                    setTimeout(() => {
+                        errmsgAu.classList.add('hidden')   
+                    }, 2500);
                 }
             });
         }
 
         function addNewPublisher(){
+
+            addPubSuccMsg = document.getElementById('succmsgPub')
             postData("/publishers", {
                 name : document.getElementById('newPublisherName').value 
             }).then((data) => {
                 console.log(data);
                 if(data.status==200){
-                    document.getElementById('newPublisherAddedMsg').innerText = 'Publisher added successfully'
-                    document.getElementById('newPublisherAddedMsg').classList.remove('hidden')
-                    
+                    addPubSuccMsg.classList.remove('hidden')
                     setTimeout(() => {
-                        document.getElementById('newPublisherName').innerText=''
-                        document.getElementById('newPublisherAddedMsg').classList.add('hidden').innerText=''
-                        document.getElementById('newPublisherAddedMsg').classList.add('hidden')
-                        document.getElementById('authormodal').classList.add('hidden')     
-                     }, 5000);
+                        addPubSuccMsg.classList.add('hidden')   
+                    }, 2500);
+                    document.getElementById('newPublisherName').value = ''
+                    document.getElementById('publishermodal').classList.add('hidden')
+                }else{
+                    errmsgPub.classList.remove('hidden')
+                    setTimeout(() => {
+                        errmsgPub.classList.add('hidden')   
+                    }, 2500);
                 }
             });
         }
@@ -1386,7 +1475,7 @@
                 language : $('#language').val(),
                 pageCount : $('#pageCount').val(),
                 publishedDate : $('#publishedDate').val(),
-                kind : document.getElementById("kind").value,
+                kind : $("kind").val(),
                 pdfAvailble: $('#pdfAvailable').is(':checked'),
                 epubAvailble: $('#epubAvailable').is(':checked'),
                 isReference: $('#isReference').is(':checked'),
@@ -1405,33 +1494,27 @@
                     }).then(res =>{
                         console.log(res)
                         if(res.status==200){
-                        errmsg.innerText = 'Book added successfully !'
-                        errmsg.classList.add('border-b')
-                        errmsg.classList.add('border-teal-200')
-                        errmsg.classList.remove('text-red-500')
-                        errmsg.classList.add('text-white')
-                        errmsg.classList.remove('text-lg')
-                        errmsg.classList.add('p-2')
-                        errmsg.classList.add('m-3')
-                        errmsg.classList.remove('hidden')
-                        
-                        setTimeout(() => {
-                            errmsg.innerText=''
-                            errmsg.classList.add('hidden')
-
-                            //clear all add-book fields
-                            isbn.innerText=''
-                            bookTitle.innerText=''
-                            bookSubTitle.innerText=''
-                            bookPublishedDate.innerText=''
-                            bookPublisher.innerText=''
-                            bookDescription.innerText=''
-                            bookPages.innerText=''
-                            document.getElementById('modal').classList.add('hidden')     
-                        }, 5000);
-                }
+                            succmsg.classList.remove('hidden')     
+                            setTimeout(() => {
+                                succmsg.classList.add('hidden')
+                                clearAddBookForm()                                
+                                document.getElementById('modal').classList.add('hidden')     
+                            }, 2000);
+                        }else{
+                            errmsg.innerText = 'Couldn\'t upload the book cover, please try again.'
+                            errmsg.classList.remove('hidden')
+                            setTimeout(() => {
+                                errmsg.classList.add('hidden')   
+                            }, 2500);
+                        }
 
                     })
+                }else{
+                    errmsg.innerText = 'Some thing went wrong, please try again.'
+                    errmsg.classList.remove('hidden')
+                    setTimeout(() => {
+                        errmsg.classList.add('hidden')   
+                    }, 2500);  
                 }
             }).catch( err =>{
             console.log(err)
@@ -1454,6 +1537,28 @@
 
         return response
 
+        }
+
+        //Add book Form reinitialization
+
+        function clearAddBookForm(){
+
+            //clear all add-book fields
+            isbn.value=''
+            bookTitle.value=''
+            bookSubTitle.value=''
+            bookPublishedDate.value=''
+            bookPublisher.value=''
+            bookDescription.value=''
+            bookPages.value=0
+
+            //Form parts reinitialization
+            for(let i=1;i<6;i++){
+                if(!document.getElementById('newbookInfo'+i).classList.contains('hidden')){
+                    document.getElementById('newbookInfo'+i).classList.add('hidden')
+                }
+            }
+            currentDivNum = 1
         }
 
     </script>
