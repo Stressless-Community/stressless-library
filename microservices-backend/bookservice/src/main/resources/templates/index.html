@@ -1165,6 +1165,14 @@
             $('#authors').select2({
                 ajax: {
                 url: '/authors',
+                data: function (params) {
+                var query = {
+                    search: params.term
+                }
+
+                // Query parameters will be ?search=[term]
+                return query;
+                },
                 processResults: function (data) {
                     let autoauthors = []
                     data.forEach(element => {

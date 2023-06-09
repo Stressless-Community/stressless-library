@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stresslesslibrary.bookservice.entities.Author;
@@ -38,6 +39,12 @@ public class AuthorController {
 			return ResponseEntity.notFound().build();
 			
 		}
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<?> search(@RequestParam("keyword") String keyword){
+		System.out.print(keyword);
+		return ResponseEntity.ok().build();
 	}
 	
 	@PostMapping
