@@ -1231,7 +1231,9 @@
                 console.log(json.items[0].volumeInfo)
 
                 document.getElementById("title").value=json.items[0].volumeInfo.title
-                document.getElementById("subtitle").value=json.items[0].volumeInfo.subtitle
+                if(json.items[0].volumeInfo.subtitle){
+                    document.getElementById("subtitle").value=json.items[0].volumeInfo.subtitle 
+                }
                 document.getElementById("description").value=json.items[0].volumeInfo.description
                 document.getElementById("pageCount").value=json.items[0].volumeInfo.pageCount
                 document.getElementById("publishedDate").value=json.items[0].volumeInfo.publishedDate
@@ -1239,6 +1241,9 @@
                 
                 if(json.items[0].volumeInfo.language="fr"){
                     document.getElementById("language").value="FRANÇAIS"
+                }
+                if(json.items[0].volumeInfo.language="en"){
+                    document.getElementById("language").value="ENGLISH"
                 }
                 
         });
