@@ -1,8 +1,8 @@
 package com.stresslesslibrary.bookservice.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
@@ -53,6 +53,8 @@ public class Book implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@CreatedDate
 	private Date recordedDate;
+
+	
 
 	@JsonIgnore
 	@OneToOne(mappedBy = "book")
