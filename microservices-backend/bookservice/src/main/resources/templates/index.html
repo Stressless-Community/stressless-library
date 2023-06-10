@@ -51,10 +51,6 @@
             <div class="user flex flex-col justify-center">
                 <div class="flex flex-row">
                     <button class="py-2 px-6 bg-teal-500 text-white rounded hover:bg-teal-700 mr-4" onclick="newBookModal()">Add a Book</button>
-    
-                    <button class="hidden bg-yellow-100 text-lg text-yellow-600 px-6 py-2 shadow-md hover:scale-105 transition-all mr-4">
-                        <span>Sign up</span>
-                    </button>
 
                     <button class="hidden bg-slate-50  text-lg text-yellow-600 px-6 py-2 shadow-md hover:scale-105 transition-all">
                         <span>Sign in</span>
@@ -712,9 +708,18 @@
                         <!-- END PART FOUR -->
 
                         <!-- PART FIVE -->
-                        <div id="newbookInfo5" class="hidden bg-white px-4 pt-5  sm:p-6 sm:pb-2">
-                            <label for="cover">Cover</label>
-                            <input id="cover" type="file" accept="image/*" th:field="*{cover}" required>
+                        <div  id="newbookInfo5" class="hidden w-full">
+                            <div class="px-4 pt-5  sm:p-6 sm:pb-2">
+                                <img id="book-image-preview"
+                                    src=""
+                                    class="w-52 mx-auto hidden" alt="placeholder"
+                                    >
+                            </div>
+                             
+                             <div class="bg-white px-4 pt-5 flex flex-row justify-center sm:p-6 sm:pb-2">
+                                <label for="cover">Cover</label>
+                                <input id="cover" class="p-2" type="file" accept="image/*" th:field="*{cover}" onchange="updatePreview(this, 'book-image-preview')" required>
+                            </div>
                         </div>
                         <!-- END PART FIVE -->
 
@@ -754,7 +759,7 @@
                                     errmsg.classList.remove('hidden')
                                     setTimeout(() => {
                                         errmsg.classList.add('hidden')   
-                                    }, 2500); 
+                                    },2000); 
                                 }
                             ">Save</button>
                         </div>
@@ -786,7 +791,7 @@
                         
                         <!-- Data validation message block -->
                         <div class="w-full">
-                            <p id="errmsgAu" class="bg-yellow-600 p-2 mx-5 text-center text-lg text-white hidden">Something went wrong, please try again.</p>
+                            <p id="errmsgAu" class="bg-yellow-600 p-2 mx-5 text-center text-lg text-white hidden"></p>
                             <p id="succmsgAu" class="bg-teal-600 p-2 mx-5 text-center text-lg text-white hidden">New author added successfully !</p>
                         </div>
                         <!-- End Data validation message block -->
@@ -821,7 +826,7 @@
 
                         <!-- Data validation message block -->
                         <div class="w-full">
-                            <p id="errmsgPub" class="bg-yellow-600 p-2 mx-5 text-center text-lg text-white hidden">Something went wrong, please try again.</p>
+                            <p id="errmsgPub" class="bg-yellow-600 p-2 mx-5 text-center text-lg text-white hidden"></p>
                             <p id="succmsgPub" class="bg-teal-600 p-2 mx-5 text-center text-lg text-white hidden">New publisher added successfully !</p>
                         </div>
                         <!-- End Data validation message block -->
@@ -1138,18 +1143,21 @@
 
         //Data validation function
         const errmsg = document.getElementById('errmsg')
-        let isbExists = false
+        let isbnErr = false
+        let isbnExistsErr = false
 
         function fieldsEmpty(currentSecion){
             switch (currentSecion) {
                 case 1:
-                    if(isbn.value=='' || bookTitle.value=='' || isbExists){
-                        errmsg.innerText = 'Give valid ISBN or valid title !'
-                        if(isbExists)errmsg.innerText = 'The book with this ISBN is already registered !'
+                    if(isbn.value=='' || bookTitle.value=='' || isbnErr || isbnExistsErr){
+                        errmsg.innerText = 'ISBN and title can\'t be empty !'
+                        if(isbnExistsErr)errmsg.innerText = 'The book with this ISBN is already registered !'
+                        if(isbnErr)errmsg.innerText = 'ISBN must be of 10 or 13 digits!'
+
                         errmsg.classList.remove('hidden')
                         setTimeout(() => {
                             errmsg.classList.add('hidden')   
-                        }, 2500);
+                        },2000);
                         return true
                     }else{
                         errmsg.innerText = ''
@@ -1163,7 +1171,7 @@
                             errmsg.classList.remove('hidden')
                             setTimeout(() => {
                                 errmsg.classList.add('hidden')   
-                            }, 2500);
+                            },2000);
                             return true
                         }else{
                             errmsg.innerText = ''
@@ -1177,7 +1185,7 @@
                             errmsg.classList.remove('hidden')
                             setTimeout(() => {
                                 errmsg.classList.add('hidden')   
-                            }, 2500);
+                            },2000);
                             return true
                         }else{
                             errmsg.innerText = ''
@@ -1191,7 +1199,7 @@
                             errmsg.classList.remove('hidden')
                             setTimeout(() => {
                                 errmsg.classList.add('hidden')   
-                            }, 2500);
+                            },2000);
                             return true
                         }else{
                             errmsg.innerText = ''
@@ -1206,18 +1214,19 @@
 
         isbn.addEventListener('input',function(){
             if(!(isbn.value.length==10 || isbn.value.length==13)){
+                    isbnErr = true
                     errmsg.innerText = 'ISBN must be of 10 or 13 digits'
                     errmsg.classList.remove('hidden')
                     setTimeout(() => {
                                 errmsg.classList.add('hidden')   
-                    }, 2500);
+                    },2000);
                 }else{
                     verifyBook(isbn.value)
-                    errmsg.innerText = ''
-                    errmsg.classList.add('hidden')
+                    isbnErr = false
                 }
         })
 
+        //Previous - Next add book modal functions
         function previous(){
             currentDivNum--
             document.getElementById('newbookInfo'+(currentDivNum+1)).classList.add('hidden')
@@ -1241,7 +1250,7 @@
         }
 
         function next(){
-            if(!fieldsEmpty(currentDivNum) && !errmsg.innerText){
+            if(!fieldsEmpty(currentDivNum)){
                 currentDivNum++
                 document.getElementById('newbookInfo'+(currentDivNum-1)).classList.add('hidden')
                 document.getElementById('newbookInfo'+currentDivNum).classList.remove('hidden')
@@ -1265,7 +1274,9 @@
 
             }
         }
-        // Add on input even listener      
+        // End Previous-Next add-book functions
+
+        // verify book from google apis     
         function getBookInfo(){
 
         fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:"+isbn)
@@ -1287,7 +1298,7 @@
                 }
                 
         }).catch((err)=>{
-            isbExists = false
+            isbnExistsErr = false
             console.log(err)
         });
 
@@ -1301,13 +1312,13 @@
               
             .then(res=>{
                 if(res.status===200){
-                    isbExists = true
+                    isbnExistsErr = true
                     errmsg.innerText='The book with this isbn is already registered !'
                     if(errmsg.classList.contains('hidden')){
                         errmsg.classList.remove('hidden')
                         setTimeout(() => {
                                 errmsg.classList.add('hidden')   
-                        }, 2500);
+                        },2000);
                     }
                 }else{
                     getBookInfo()
@@ -1411,52 +1422,86 @@
 
         function addNewAuthor(){
 
+            authorName = document.getElementById('newAuthorName')
+            authorDes = document.getElementById('newAuthorDescription')
             addAuSuccMsg = document.getElementById('succmsgAu')
+            errmsgAu = document.getElementById('errmsgAu')
 
-            postData("/authors", { 
-                name : document.getElementById('newAuthorName').value, 
-                description : document.getElementById('newAuthorDescription').value 
-            }).then((data) => {               
-                console.log(data);
-                if(data.status==200){
-                    addAuSuccMsg.classList.remove('hidden')
-                    setTimeout(() => {
-                        addAuSuccMsg.classList.add('hidden')   
-                    }, 2500);
-                    document.getElementById('newAuthorName').value = ''
-                    document.getElementById('newAuthorDescription').value=''
-                    document.getElementById('authormodal').classList.add('hidden')
+            if(authorName.val!=''){
+                    postData("/authors", { 
+                    name : authorName.value, 
+                    description : authorDes.value 
+                }).then((data) => {               
+                    console.log(data);
+                    if(data.status==200){
+                        addAuSuccMsg.classList.remove('hidden')
+                        setTimeout(() => {
+                            authorName.value = ''
+                            authorDes.value = ''
+                            addAuSuccMsg.classList.add('hidden') 
+                            document.getElementById('authormodal').classList.add('hidden')  
+                        },2000);
 
-                }else{
-                    errmsgAu.classList.remove('hidden')
-                    setTimeout(() => {
-                        errmsgAu.classList.add('hidden')   
-                    }, 2500);
-                }
-            });
+                    }else{
+                        errmsgAu.innerText = 'Something went wrong, please try again.'
+                        errmsgAu.classList.remove('hidden')
+                        setTimeout(() => {
+                            errmsgAu.classList.add('hidden')   
+                        },2000);
+                    }
+                });
+            }else{
+                errmsgAu.innerText = 'The author\'s name can\'t be empty !'
+                errmsgAu.classList.remove('hidden')
+                setTimeout(() => {
+                    errmsgAu.classList.add('hidden')   
+                },2000);
+            }
+            
         }
 
         function addNewPublisher(){
-
+            publisherName = document.getElementById('newPublisherName')
             addPubSuccMsg = document.getElementById('succmsgPub')
-            postData("/publishers", {
-                name : document.getElementById('newPublisherName').value 
-            }).then((data) => {
-                console.log(data);
-                if(data.status==200){
-                    addPubSuccMsg.classList.remove('hidden')
-                    setTimeout(() => {
-                        addPubSuccMsg.classList.add('hidden')   
-                    }, 2500);
-                    document.getElementById('newPublisherName').value = ''
-                    document.getElementById('publishermodal').classList.add('hidden')
-                }else{
-                    errmsgPub.classList.remove('hidden')
-                    setTimeout(() => {
-                        errmsgPub.classList.add('hidden')   
-                    }, 2500);
-                }
-            });
+            errmsgPub = document.getElementById('errmsgPub')
+
+            if(publisherName.value!=''){
+                    postData("/publishers", {
+                    name : publisherName.value 
+                    }).then((data) => {
+                        console.log(data);
+                        if(data.status==200){
+
+                            addPubSuccMsg.classList.remove('hidden')
+                            setTimeout(() => {
+                                publisherName.value = ''
+                                addPubSuccMsg.classList.add('hidden')
+                                document.getElementById('publishermodal').classList.add('hidden')   
+                            },2000);
+                            
+                        }else{
+                            errmsgPub.innerText = 'Something went wrong, please try again.'
+                            errmsgPub.classList.remove('hidden')
+                            setTimeout(() => {
+                                errmsgPub.classList.add('hidden')   
+                            },2000);
+                        }
+                    }).catch(err=>{
+                        errmsgPub.innerText = 'Something went wrong, please try again.'
+                        errmsgPub.classList.remove('hidden')
+                        setTimeout(() => {
+                            errmsgPub.classList.add('hidden')   
+                        },2000);
+                        console.log('====>',err)
+                    });
+            }else{
+                errmsgPub.innerText='Publisher name can\'t be empty !'
+                errmsgPub.classList.remove('hidden')
+                setTimeout(() => {
+                    errmsgPub.classList.add('hidden')   
+                },2000);
+            }
+            
         }
 
         function addNewBook(){
@@ -1466,11 +1511,10 @@
                 el = Number(el)
                 authors.push(el)
             })
-            
-            postData("/books", { 
+
+            let body= { 
                 isbn : $('#isbn').val(),
                 title: $('#title').val(),
-                subtitle : $('#subtitle').val(),
                 description : $('#description').val(),
                 language : $('#language').val(),
                 pageCount : $('#pageCount').val(),
@@ -1485,7 +1529,13 @@
                 // 
                 availableItems: 0
             
-            }).then(data => {
+            }
+
+            if($('#subtitle').val()){
+                body.subtitle = $('#subtitle').val()
+            }
+            
+            postData("/books",body).then(data => {
                 book = data.json()
                 if (data.status==200){
                     sendData("/image",{
@@ -1505,7 +1555,7 @@
                             errmsg.classList.remove('hidden')
                             setTimeout(() => {
                                 errmsg.classList.add('hidden')   
-                            }, 2500);
+                            },2000);
                         }
 
                     })
@@ -1514,7 +1564,7 @@
                     errmsg.classList.remove('hidden')
                     setTimeout(() => {
                         errmsg.classList.add('hidden')   
-                    }, 2500);  
+                    },2000);  
                 }
             }).catch( err =>{
             console.log(err)
@@ -1539,6 +1589,20 @@
 
         }
 
+        // Add-book image preview
+
+        function updatePreview(input, target) {
+            let file = input.files[0];
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+            let img = document.getElementById(target);
+                // can also use "this.result"
+                img.src = reader.result;
+                img.classList.remove('hidden')
+            }
+        }
+
         //Add book Form reinitialization
 
         function clearAddBookForm(){
@@ -1551,6 +1615,11 @@
             bookPublisher.value=''
             bookDescription.value=''
             bookPages.value=0
+            // reinitialize add-book image preview
+            bookImgPrev = document.getElementById('book-image-preview')
+            if(!bookImgPrev.classList.contains('hidden')){
+                bookImgPrev.classList.add('hidden')
+            }
 
             //Form parts reinitialization
             for(let i=1;i<6;i++){
