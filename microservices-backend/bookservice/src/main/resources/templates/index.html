@@ -1296,6 +1296,9 @@
                 if(json.items[0].volumeInfo.language="fr"){
                     document.getElementById("language").value="FRANÇAIS"
                 }
+                if(json.items[0].volumeInfo.language="en"){
+                    document.getElementById("language").value="ENGLISH"
+                }
                 
         }).catch((err)=>{
             isbnExistsErr = false
@@ -1335,6 +1338,14 @@
             $('#authors').select2({
                 ajax: {
                 url: '/authors',
+                data: function (params) {
+                var query = {
+                    search: params.term
+                }
+
+                // Query parameters will be ?search=[term]
+                return query;
+                },
                 processResults: function (data) {
                     let autoauthors = []
                     data.forEach(element => {
