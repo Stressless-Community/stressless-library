@@ -48,23 +48,34 @@
                 </div>
             </div>
 
-            <div class="user flex flex-col justify-center">
+            <div class="flex flex-row py-2 items-center">
+                <button class="py-2 px-6 bg-teal-500 text-white rounded hover:bg-teal-700 mr-4" onclick="newBookModal()">Add a Book</button>
+
+                <button class="hidden bg-slate-50  text-lg text-yellow-600 px-6 py-2 shadow-md hover:scale-105 transition-all">
+                    <span>Sign in</span>
+                </button>
+
                 <div class="flex flex-row">
-                    <button class="py-2 px-6 bg-teal-500 text-white rounded hover:bg-teal-700 mr-4" onclick="newBookModal()">Add a Book</button>
-
-                    <button class="hidden bg-slate-50  text-lg text-yellow-600 px-6 py-2 shadow-md hover:scale-105 transition-all">
-                        <span>Sign in</span>
-                    </button>
-
-                   <div class="hidden flex flex-row">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-yellow-600">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg> 
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 w-8 h-8 text-yellow-600">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                        </svg> 
-                   </div>                     
-                </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-yellow-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg> 
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 w-8 h-8 text-yellow-600 cursor-pointer hover:scale-110 transition-all" onclick="document.getElementById('dropdownDots').classList.toggle('hidden')">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                    </svg>
+                    <div id="dropdownDots" class="z-10 absolute hidden bg-white right-2 top-16 divide-y divide-gray-100 rounded-lg shadow-lg w-44">
+                        <ul class="py-2 text-md text-yellow-600" aria-labelledby="dropdownMenuIconButton">
+                          <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Dashboard</a>
+                          </li>
+                          <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
+                          </li>
+                          <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Logout</a>
+                          </li>
+                        </ul>
+                    </div>
+                </div>                     
             </div>
         </div>
 
@@ -251,7 +262,7 @@
 
     <!-- FINDBOOK SECION  -->
     <section id="findbook" class="hidden flex flex-row justify-center p-5 mb-12">
-        <div class="books grid grid-cols-3 justify-center">
+        <div class="books grid grid-cols-4 justify-center">
             <!-- <div id="book" th:each="book : ${catalogs}">
                 <a th:href="@{'/book/' + ${book.isbn}}" class="book" >
                     <img class="bookimage" alt="Cover" th:src="@{${book.largeCoverUrl}}">
@@ -263,19 +274,22 @@
                 <a href="#" class="book" >
                    <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
                 </a>
-                <div class="flex flex-row justify-center gap-2">
+                <div class="flex flex-row justify-between px-5">
                     <!-- trash icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
+                    <a href="" class="text-red-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
+
+                        <p>Delete</p>
                     </a>
 
                     <!-- edit icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
+                    <a href="" class="text-blue-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
+                        <p>Edit</p>
                     </a>
                       
                 </div>
@@ -285,19 +299,22 @@
                 <a href="#" class="book" >
                    <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
                 </a>
-                <div class="flex flex-row justify-center gap-2">
+                <div class="flex flex-row justify-between px-5">
                     <!-- trash icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
+                    <a href="" class="text-red-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
+
+                        <p>Delete</p>
                     </a>
 
                     <!-- edit icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
+                    <a href="" class="text-blue-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
+                        <p>Edit</p>
                     </a>
                       
                 </div>
@@ -307,19 +324,22 @@
                 <a href="#" class="book" >
                    <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
                 </a>
-                <div class="flex flex-row justify-center gap-2">
+                <div class="flex flex-row justify-between px-5">
                     <!-- trash icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
+                    <a href="" class="text-red-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
+
+                        <p>Delete</p>
                     </a>
 
                     <!-- edit icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
+                    <a href="" class="text-blue-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
+                        <p>Edit</p>
                     </a>
                       
                 </div>
@@ -329,19 +349,22 @@
                 <a href="#" class="book" >
                    <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
                 </a>
-                <div class="flex flex-row justify-center gap-2">
+                <div class="flex flex-row justify-between px-5">
                     <!-- trash icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
+                    <a href="" class="text-red-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
+
+                        <p>Delete</p>
                     </a>
 
                     <!-- edit icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
+                    <a href="" class="text-blue-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
+                        <p>Edit</p>
                     </a>
                       
                 </div>
@@ -351,19 +374,22 @@
                 <a href="#" class="book" >
                    <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
                 </a>
-                <div class="flex flex-row justify-center gap-2">
+                <div class="flex flex-row justify-between px-5">
                     <!-- trash icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
+                    <a href="" class="text-red-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
+
+                        <p>Delete</p>
                     </a>
 
                     <!-- edit icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
+                    <a href="" class="text-blue-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
+                        <p>Edit</p>
                     </a>
                       
                 </div>
@@ -373,19 +399,22 @@
                 <a href="#" class="book" >
                    <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
                 </a>
-                <div class="flex flex-row justify-center gap-2">
+                <div class="flex flex-row justify-between px-5">
                     <!-- trash icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
+                    <a href="" class="text-red-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
+
+                        <p>Delete</p>
                     </a>
 
                     <!-- edit icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
+                    <a href="" class="text-blue-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
+                        <p>Edit</p>
                     </a>
                       
                 </div>
@@ -395,19 +424,22 @@
                 <a href="#" class="book" >
                    <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
                 </a>
-                <div class="flex flex-row justify-center gap-2">
+                <div class="flex flex-row justify-between px-5">
                     <!-- trash icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
+                    <a href="" class="text-red-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
+
+                        <p>Delete</p>
                     </a>
 
                     <!-- edit icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
+                    <a href="" class="text-blue-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
+                        <p>Edit</p>
                     </a>
                       
                 </div>
@@ -417,41 +449,22 @@
                 <a href="#" class="book" >
                    <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
                 </a>
-                <div class="flex flex-row justify-center gap-2">
+                <div class="flex flex-row justify-between px-5">
                     <!-- trash icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
+                    <a href="" class="text-red-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
+
+                        <p>Delete</p>
                     </a>
 
                     <!-- edit icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
+                    <a href="" class="text-blue-500 flex flex-row gap-2 hover:scale-110 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
-                    </a>
-                      
-                </div>
-            </div>
-
-            <div class="book m-4 p-3">
-                <a href="#" class="book" >
-                   <img class="bookimage w-52 m-4" th:src="@{assets/img/book.jpg}">
-                </a>
-                <div class="flex flex-row justify-center gap-2">
-                    <!-- trash icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-red-500 hover:scale-110">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                          </svg>
-                    </a>
-
-                    <!-- edit icon -->
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 text-blue-500 hover:scale-110">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                        </svg>
+                        <p>Edit</p>
                     </a>
                       
                 </div>
@@ -461,20 +474,20 @@
     </section>
 
     <section id="bookinfo" class=" m-10 px-14 flex flex-col space-y-3 hidden">
-        <div class="flex flex-row space-x-9 w-full">
-            <div class="drop-shadow-xl w-max">
-                <img id="infoImage" class="cover w-80" th:src="@{assets/img/book.jpg}">
-                <p class="p-3 font-semibold text-slate-900 bg-yellow-200">Reference : </p>
+        <div class="flex flex-row justify-between  w-full shadow-lg">
+            <div class="drop-shadow-xl w-1/5">
+                <img id="infoImage" class="cover h-80 w-60" th:src="@{assets/img/book.jpg}">
             </div>
-            <div class="flex flex-col text-slate-700 px-5 w-full space-y-4">
-                <div>
-                    <p id="infoTitle" class="p-3 w-full text-4xl font-semibold"></p>
-                    <p id="infoSubtitle"class="p-3  w-full text-xl font-light "></p>
-                    <p id="infoAuthors"class="p-3  w-full text-lg font-bold"></p>
-                    <p id="infoShortDescription"class="truncate text-md font-light p-3"></p>
+
+            <div class="flex flex-col text-slate-700  w-4/5 space-y-2">
+                <div class="mx-12">
+                    <p id="infoTitle" class="py-3 w-full text-4xl font-semibold"></p>
+                    <p id="infoSubtitle"class="py-3  w-full text-xl font-light "></p>
+                    <p id="infoAuthors"class="py-3  w-full text-lg font-bold"></p>
+                    <p id="infoShortDescription"class="truncate text-md font-light py-3"></p>
                 </div>
 
-                <div class="flex flex-row bg-gray-50 h-full px-8 justify-between shadow-lg">
+                <div class="flex flex-row bg-gray-100 h-full px-8 justify-between">
                     <div class="flex flex-row space-x-3 items-center">
 
                         <div class="bg-yellow-500 p-2 rounded-full">
@@ -540,15 +553,9 @@
             <div class="flex flex-col space-y-4">
                 <p  class="text-2xl font-bold">Description</p>
                 <hr>
-                <p id="infoDescription" lass="text-slate-700 text-lg font-light  tracking-wide [word-spacing:3px]">
-                    
-                </p>
+                <p id="infoDescription" class="text-slate-700 text-lg font-light  tracking-wide [word-spacing:3px]"></p>
             </div>
-            <div id="infoAuthorsDetails" class="flex flex-col space-y-4">
-                <p class="text-2xl font-bold"></p>
-                <hr>
-                <p class="text-slate-700 text-lg font-extralight tracking-wide [word-spacing:3px]"></p>
-            </div>
+            <div id="infoAuthorsDetails"></div>
 
             <div class="flex flex-col gap-4 pt-5">
                 <div class="flex flex-row space-x-2">
@@ -1087,9 +1094,12 @@
             
             let authors =''
             data.authors.forEach(element => {
-                authors= authors + " " + element.name
+                authors += element.name+ ", "
                 
             });
+
+            authors = authors.substr(0, authors.length - 1)
+            authors = authors.substr(0, authors.length - 1)
             document.getElementById ('infoAuthors').innerText=authors
             
             document.getElementById ('infoShortDescription').innerText=data.description
@@ -1098,7 +1108,13 @@
             document.getElementById ('infoPublisher').innerText=data.publisher
             document.getElementById ("infoDescription").innerText=data.description
             document.getElementById ("infoPages").innerText=data.pageCount
-            infoAuthorsDetails
+
+            authorsData = ''
+            data.authors.forEach(author=>{
+                authorsData += '<div class="flex flex-col space-y-4"><p class="text-2xl font-bold">'+author.name+'</p><hr><p class="text-slate-700 text-lg font-extralight tracking-wide [word-spacing:3px]">'+author.description+'</p></div>'
+            })
+            
+            document.getElementById('infoAuthorsDetails').innerHTML = authorsData
 
             document.getElementById('home').classList.add('hidden')
             document.getElementById('bookinfo').classList.remove('hidden')
