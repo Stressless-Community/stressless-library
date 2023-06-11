@@ -1,6 +1,8 @@
 package com.stresslesslibrary.bookservice.servicesImpl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -102,6 +104,9 @@ public class BookServiceImpl implements BookService {
 		b.setIsReference(book.getIsReference());
 		b.setPublisher(publisherService.getOne(book.getPublisher()));
 		b.setBranch(branchService.getOne(book.getBranchId()));
+		LocalDate localDate = LocalDate.now();
+		System.out.print(localDate);
+		b.setRecordedDate(new Date(localDate.getYear(),localDate.getMonthValue(), localDate.getDayOfMonth()));
 		List<Author> authors = new ArrayList<Author>();
 		for (int author : book.getAuthors()) {
 		 authors.add(authorService.getOne(author));	
