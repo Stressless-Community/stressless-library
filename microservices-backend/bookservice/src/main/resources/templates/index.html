@@ -1353,10 +1353,11 @@
         $(document).ready(function() {
             $('#authors').select2({
                 ajax: {
-                url: '/authors',
+                url: '/authors/search',
                 data: function (params) {
+                console.log(params)
                 var query = {
-                    search: params.term
+                    keyword : params.term
                 }
 
                 // Query parameters will be ?search=[term]

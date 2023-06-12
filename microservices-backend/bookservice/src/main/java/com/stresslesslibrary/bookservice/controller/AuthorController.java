@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException.NotFound;
 
 import com.stresslesslibrary.bookservice.entities.Author;
 import com.stresslesslibrary.bookservice.services.AuthorService;
@@ -42,9 +43,15 @@ public class AuthorController {
 	}
 	
 	@GetMapping("/search")
-	public ResponseEntity<?> search(@RequestParam("keyword") String keyword){
-		System.out.print(keyword);
-		return ResponseEntity.ok().build();
+	public ResponseEntity<?> search(@RequestParam(defaultValue = "") String keyword){
+			if (keyword=="" || authorService.search(keyword).size()==0 ){
+				return ResponseEntity.ok().body(authorService.findAll());
+			}
+			else{
+					List <Author> result= authorService.search(keyword);
+					return ResponseEntity.ok().body(result);
+			}	
+		
 	}
 	
 	@PostMapping

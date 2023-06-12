@@ -37,12 +37,19 @@ public class AuthorServiceImpl implements AuthorService {
 		}
 		
 	}
+	
 
 	@Override 
 	public Author save(Author author)  {
 		System.out.println(author.toString());
 		return authorRepository.save(author);
 		
+	}
+
+	@Override
+	public List<Author> search(String keyword) {
+		// TODO Auto-generated method stub
+		return authorRepository.search(keyword);
 	}
 
 }
