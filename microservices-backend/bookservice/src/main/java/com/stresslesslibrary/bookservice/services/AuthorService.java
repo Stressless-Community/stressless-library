@@ -15,4 +15,7 @@ public interface AuthorService {
 	Author findByName(String name) throws Exception;
 	
 	Author save(Author author) throws Exception;
+
+	List<Author> search(String keyword);
+
 }
