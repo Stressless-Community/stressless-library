@@ -12,4 +12,6 @@ public interface BranchService {
 	Branch getOne(String id);
 	
 	Branch save(Branch branch);
+	
+	List<Branch> search(String keyword);
 }

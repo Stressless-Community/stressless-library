@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stresslesslibrary.bookservice.entities.Branch;
@@ -36,5 +37,16 @@ public class BranchController {
 			return ResponseEntity.notFound().build();
 			
 		}
+	}
+	@GetMapping("/search")
+	public ResponseEntity<?> search(@RequestParam(defaultValue = "") String keyword){
+			if (keyword=="" || branchService.search(keyword).size()==0 ){
+				return ResponseEntity.ok().body(branchService.findAll());
+			}
+			else{
+					List <Branch> result= branchService.search(keyword);
+					return ResponseEntity.ok().body(result);
+			}	
+		
 	}
 }

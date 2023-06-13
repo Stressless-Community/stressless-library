@@ -34,4 +34,9 @@ public class BranchServiceImpl implements BranchService {
 		return branchRepository.save(branch);
 	}
 
+	@Override
+	public List<Branch> search(String keyword) {
+		return branchRepository.searchById(keyword);
+	}
+
 }

@@ -53,4 +53,10 @@ public class PublisherServiceImpl implements PublisherService {
 		return publisherRepository.existsPublisherByName(name);
 	}
 
+	@Override
+	public List<Publisher> search(String keyword) {
+		
+		return publisherRepository.search(keyword);
+	}
+
 }
