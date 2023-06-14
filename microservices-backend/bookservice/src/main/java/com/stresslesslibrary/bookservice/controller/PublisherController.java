@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stresslesslibrary.bookservice.entities.Publisher;
@@ -44,5 +45,17 @@ public class PublisherController {
 		return ResponseEntity.ok().body(publisherService.save(publisher));
 		
 	};
+
+	@GetMapping("/search")
+	public ResponseEntity<?> search(@RequestParam(defaultValue = "") String keyword){
+			if (keyword=="" || publisherService.search(keyword).size()==0 ){
+				return ResponseEntity.ok().body(publisherService.findAll());
+			}
+			else{
+					List <Publisher> result= publisherService.search(keyword);
+					return ResponseEntity.ok().body(result);
+			}	
+		
+	}
 	
 }

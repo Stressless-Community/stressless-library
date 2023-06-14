@@ -16,4 +16,7 @@ public interface PublisherRepository extends JpaRepository<Publisher, Integer> {
 
 	Publisher findPublisherByName(String name);
 	boolean existsPublisherByName(String name);
+
+	@Query(value="SELECT pu  FROM Publisher pu WHERE pu.name LIKE %:search%")
+	List<Publisher> search(@Param("search") String search);
 }
