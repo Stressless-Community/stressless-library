@@ -2,6 +2,7 @@ package com.stresslesslibrary.bookservice.servicesImpl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.poi.ss.SpreadsheetVersion;
@@ -145,7 +146,7 @@ public class ExcelService {
             createCell(row, columnCount++, book.getKind().name(), style);
             createCell(row, columnCount++, book.getPublishedDate(), style);
             createCell(row, columnCount++, book.getPublisher(), style);
-            createCell(row, columnCount++, book.getAuthors(), style);
+            createCell(row, columnCount++, book.getAuthors().stream().map(x->x.getName()).collect(Collectors.toList()), style);
             createCell(row, columnCount++, book.getPdfAvailble(), style);
             createCell(row, columnCount++, book.getEpubAvailble(), style);
             createCell(row, columnCount++, book.getIsReference(), style);
