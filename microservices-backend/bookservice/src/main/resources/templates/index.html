@@ -59,19 +59,20 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-yellow-600">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg> 
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 w-8 h-8 text-yellow-600 cursor-pointer hover:scale-110 transition-all" onclick="document.getElementById('dropdownDots').classList.toggle('hidden')">
+                    <svg id="menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 w-8 h-8 text-yellow-600 cursor-pointer hover:scale-110 transition-all">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
                     </svg>
+
                     <div id="dropdownDots" class="z-10 absolute hidden bg-white right-2 top-16 divide-y divide-gray-100 rounded-lg shadow-lg w-44">
                         <ul class="py-2 text-md text-yellow-600" aria-labelledby="dropdownMenuIconButton">
                           <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Dashboard</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 " onclick="sectionNavigation('dashbord')">Dashboard</a>
                           </li>
                           <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 " id="settings">Settings</a>
                           </li>
                           <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Logout</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 " id="logout">Logout</a>
                           </li>
                         </ul>
                     </div>
@@ -80,7 +81,7 @@
         </div>
 
         <!-- Bookcases -->
-        <div class="bookcases flex flex-row justify-between px-5 font-ligth  gap-2 bg-gray-900 text-yellow-600 py-2">
+        <div id="bookCasesBar" class="bookcases flex flex-row justify-between px-5 font-ligth  gap-2 bg-gray-900 text-yellow-600 py-2">
             <a href="#" id="bookcase1" class="p-3 w-40 truncate">Computer science, information & general works
                 <div id="bookcaseover1" class="hidden z-50 absolute p-3 w-40 font-ligth bg-gray-900 text-yellow-600 text-center -left-3">
                     <a>Computer science, information & general works</a>
@@ -160,7 +161,7 @@
     <!-- End header -->
 
     <!-- Main section -->
-    <section section id="home" class="bg-white pb-8">
+    <section section id="home" class="section bg-white pb-8">
         
            <!-- Swiper -->
         <div class=" overflow-x-hidden w-full h-64 flex justify-center items-center">
@@ -261,7 +262,7 @@
     <!-- End Main section -->
 
     <!-- FINDBOOK SECION  -->
-    <section id="findbook" class="hidden flex flex-row justify-center p-5 mb-12">
+    <section id="findbook" class="section hidden flex flex-row justify-center p-5 mb-12">
         <div class="books grid grid-cols-4 justify-center">
             <!-- <div id="book" th:each="book : ${catalogs}">
                 <a th:href="@{'/book/' + ${book.isbn}}" class="book" >
@@ -473,13 +474,8 @@
         </div>
     </section>
 
-<<<<<<< HEAD
     <section id="bookinfo" class="section m-10 px-14 flex flex-col space-y-3 hidden">
         <div class="flex flex-row w-full gap-4">
-=======
-    <section id="bookinfo" class=" m-10 px-14 flex flex-col space-y-3 hidden">
-        <div class="flex flex-row justify-between  w-full shadow-lg">
->>>>>>> b9e4d815c1651e060c9a334a2fbb619c13c6581e
             <div class="drop-shadow-xl w-1/5">
                 <img id="infoImage" class="cover h-full w-full" th:src="@{assets/img/book.jpg}">
             </div>
@@ -855,7 +851,7 @@
           
     </section>
 
-    <section class="dashbord hidden">
+    <section id="dashbord" class="section hidden">
         <div>
             <div>
                 <button>Loan</button>
@@ -1029,641 +1025,9 @@
     <!-- End Footer -->
 
 
-
     <script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
     <script type="text/javascript" th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/assets/vendor/select2/select2.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
-    <script>
-
-        // dealing with the copyright date
-        document.getElementById("date").innerHTML = new Date().getFullYear()
-    
-        //dealing with the bookcases truncate style and other styles
-       function manageTruncate(el,elover){
-            el.addEventListener("mouseover",function(){
-                elover.classList.remove('hidden')
-            })
-            el.addEventListener("mouseout",function(){
-                el.classList.remove('hidden')
-                el.classList.add('truncate')
-                elover.classList.add('hidden')
-            })
-       }
-        for(let i=1;i<=10;i++){
-            manageTruncate(document.getElementById('bookcase'+i),document.getElementById('bookcaseover'+i))
-            if(i<10){
-                document.getElementById('bookcase'+i).classList.add('border-r')
-                document.getElementById('bookcase'+i).classList.add('border-yellow-600')
-                document.getElementById('bookcaseover'+i).classList.add('border-r')
-                document.getElementById('bookcaseover'+i).classList.add('border-yellow-600')
-            }
-        }
-
-        // dealing with the search input
-        document.getElementById('search').addEventListener("input",function(){
-
-            if(document.getElementById('search').value){
-                document.getElementById('home').classList.add('hidden')
-                document.getElementById('findbook').classList.remove('hidden')
-            }else{
-                document.getElementById('home').classList.remove('hidden')
-                document.getElementById('bookinfo').classList.add('hidden')
-                document.getElementById('findbook').classList.add('hidden')
-            }
-            
-        })
-
-        //Add book input fields
-
-        const isbn = document.getElementById('isbn')
-        const bookImg = document.getElementById("cover")
-        const bookTitle = document.getElementById("title")
-        const bookSubTitle =  document.getElementById('subtitle')
-        const bookAuthors = document.getElementById ('authors')   
-        const bookPrintKind = document.getElementById ('kind')
-        const bookPublishedDate =  document.getElementById ('publishedDate')
-        const bookPublisher =  document.getElementById ('publisher')
-        const bookDescription =  document.getElementById ("description")
-        const bookLanguage = document.getElementById('language')
-        const bookPages =  document.getElementById ("pageCount")
-        const bookBranch = document.getElementById ("branch")
-
-        function displayInfo(data={}){
-
-            document.getElementById("infoImage").src=data.largeCoverUrl
-            document.getElementById("infoTitle").innerText=data.title 
-            if(data.subtitle){
-                document.getElementById('infoSubtitle').innerText=data.subtitle
-            }
-            
-            let authors =''
-            data.authors.forEach(element => {
-                authors += element.name+ ", "
-                
-            });
-
-            authors = authors.substr(0, authors.length - 1)
-            authors = authors.substr(0, authors.length - 1)
-            document.getElementById ('infoAuthors').innerText=authors
-            
-            document.getElementById ('infoShortDescription').innerText=data.description
-            document.getElementById ('infoPrintKind').innerText=data.kind
-            document.getElementById ('infoPublishedDate').innerText=data.publishedDate
-            document.getElementById ('infoPublisher').innerText=data.publisher
-            document.getElementById ("infoDescription").innerText=data.description
-            document.getElementById ("infoPages").innerText=data.pageCount
-
-            authorsData = ''
-            data.authors.forEach(author=>{
-                authorsData += '<div class="flex flex-col space-y-4"><p class="text-2xl font-bold">'+author.name+'</p><hr><p class="text-slate-700 text-lg font-extralight tracking-wide [word-spacing:3px]">'+author.description+'</p></div>'
-            })
-            
-            document.getElementById('infoAuthorsDetails').innerHTML = authorsData
-
-            document.getElementById('home').classList.add('hidden')
-            document.getElementById('bookinfo').classList.remove('hidden')
-        }
-
-        // show book info
-
-        function showBookInfo(isbn){
-            
-            fetch('/books/'+isbn).then(data => data.json())
-            .then (json =>{
-                console.log(json)
-                displayInfo(json)
-           
-            })
-           
-        }
-
-        // New book modal
-
-        function newBookModal(){ 
-
-            document.getElementById('newbookInfo1').classList.remove('hidden')
-            document.getElementById('modal').classList.toggle('hidden')
-        }
-
-        function newAuthorModal(){
-            document.getElementById('authormodal').classList.toggle('hidden')
-        }
-
-        function newPublisherModal(){
-            document.getElementById('publishermodal').classList.toggle('hidden')
-        }
-
-        // Previous - Next functions in new book registration
-        
-        let currentDivNum = 1
-        let previousBtn = document.getElementById("previous")
-        let nextBtn = document.getElementById("next")
-        let previousNextBox = document.getElementById('previousNextBox')
-        let submitbook = document.getElementById('submitbook')
-
-        //Data validation function
-        const errmsg = document.getElementById('errmsg')
-        let isbnErr = false
-        let isbnExistsErr = false
-
-        function fieldsEmpty(currentSecion){
-            switch (currentSecion) {
-                case 1:
-                    if(isbn.value=='' || bookTitle.value=='' || isbnErr || isbnExistsErr){
-                        errmsg.innerText = 'ISBN and title can\'t be empty !'
-                        if(isbnExistsErr)errmsg.innerText = 'The book with this ISBN is already registered !'
-                        if(isbnErr)errmsg.innerText = 'ISBN must be of 10 or 13 digits!'
-
-                        errmsg.classList.remove('hidden')
-                        setTimeout(() => {
-                            errmsg.classList.add('hidden')   
-                        },2000);
-                        return true
-                    }else{
-                        errmsg.innerText = ''
-                        return false
-                    }
-                    break;
-
-                    case 2:
-                        if(bookDescription.value=='' || bookLanguage.value==''){
-                            errmsg.innerText = 'All the fields must be completed'
-                            errmsg.classList.remove('hidden')
-                            setTimeout(() => {
-                                errmsg.classList.add('hidden')   
-                            },2000);
-                            return true
-                        }else{
-                            errmsg.innerText = ''
-                            return false
-                        }
-                    break;
-
-                    case 3:
-                        if(bookAuthors.value=='' || bookPublisher.value=='' || bookPublishedDate.value==''){
-                            errmsg.innerText = 'All the fields must be completed'
-                            errmsg.classList.remove('hidden')
-                            setTimeout(() => {
-                                errmsg.classList.add('hidden')   
-                            },2000);
-                            return true
-                        }else{
-                            errmsg.innerText = ''
-                            return false
-                        }
-                    break;
-
-                    case 4:
-                        if(bookPages.value=='' || bookPrintKind.value=='' || bookBranch.value==''){
-                            errmsg.innerText = 'All the fields must be completed'
-                            errmsg.classList.remove('hidden')
-                            setTimeout(() => {
-                                errmsg.classList.add('hidden')   
-                            },2000);
-                            return true
-                        }else{
-                            errmsg.innerText = ''
-                            return false
-                        }
-                    break;
-            
-                default:
-                    break;
-            }
-        }
-
-        isbn.addEventListener('input',function(){
-            if(!(isbn.value.length==10 || isbn.value.length==13)){
-                    isbnErr = true
-                    errmsg.innerText = 'ISBN must be of 10 or 13 digits'
-                    errmsg.classList.remove('hidden')
-                    setTimeout(() => {
-                                errmsg.classList.add('hidden')   
-                    },2000);
-                }else{
-                    verifyBook(isbn.value)
-                    isbnErr = false
-                }
-        })
-
-        //Previous - Next add book modal functions
-        function previous(){
-            currentDivNum--
-            document.getElementById('newbookInfo'+(currentDivNum+1)).classList.add('hidden')
-            document.getElementById('newbookInfo'+currentDivNum).classList.remove('hidden')
-            if(!submitbook.classList.contains('hidden')){
-                submitbook.classList.add('hidden')
-            }
-            if(currentDivNum==1){
-                previousBtn.classList.add('hidden')
-                previousNextBox.classList.remove('flex-row')
-                previousNextBox.classList.remove('justify-between')
-                previousNextBox.classList.add('justify-end')
-            }else{
-                if(previousBtn.classList.contains('hidden')){
-                    previousBtn.classList.remove('hidden')
-                }
-                if(nextBtn.classList.contains('hidden')){
-                    nextBtn.classList.remove('hidden')
-                }
-            }
-        }
-
-        function next(){
-            if(!fieldsEmpty(currentDivNum)){
-                currentDivNum++
-                document.getElementById('newbookInfo'+(currentDivNum-1)).classList.add('hidden')
-                document.getElementById('newbookInfo'+currentDivNum).classList.remove('hidden')
-                if(currentDivNum==5){
-                    nextBtn.classList.add('hidden')
-                    submitbook.classList.remove('hidden')
-                }else{
-
-                    if(previousNextBox.classList.contains('justify-end')){
-                        previousNextBox.classList.remove('justify-end')
-                        previousNextBox.classList.add('flex-row')
-                        previousNextBox.classList.add('justify-between')
-                    }
-                    if(previousBtn.classList.contains('hidden')){
-                        previousBtn.classList.remove('hidden')
-                    }
-                    if(nextBtn.classList.contains('hidden')){
-                        nextBtn.classList.remove('hidden')
-                    }
-                }
-
-            }
-        }
-        // End Previous-Next add-book functions
-
-        // verify book from google apis     
-        function getBookInfo(){
-
-        fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:"+isbn.value)
-            .then(response => response.json())
-            .then(json => {
-                console.log(json.items[0].volumeInfo)
-
-                document.getElementById("title").value=json.items[0].volumeInfo.title
-                if(json.items[0].volumeInfo.subtitle){
-                    document.getElementById("subtitle").value=json.items[0].volumeInfo.subtitle
-                }
-                document.getElementById("description").value=json.items[0].volumeInfo.description
-                document.getElementById("pageCount").value=json.items[0].volumeInfo.pageCount
-                document.getElementById("publishedDate").value=json.items[0].volumeInfo.publishedDate
-                document.getElementById("kind").value=json.items[0].volumeInfo.printType
-                
-                if(json.items[0].volumeInfo.language="fr"){
-                    document.getElementById("language").value="FRANÇAIS"
-                }
-                if(json.items[0].volumeInfo.language="en"){
-                    document.getElementById("language").value="ENGLISH"
-                }
-                
-        }).catch((err)=>{
-            isbnExistsErr = false
-            console.log(err)
-        });
-
-        }
-
-        // Verify if book exists in database
-
-        function verifyBook(isbn){
-            if(isbn){  
-              fetch("/books/"+isbn)
-              
-            .then(res=>{
-                if(res.status===200){
-                    isbnExistsErr = true
-                    errmsg.innerText='The book with this isbn is already registered !'
-                    if(errmsg.classList.contains('hidden')){
-                        errmsg.classList.remove('hidden')
-                        setTimeout(() => {
-                                errmsg.classList.add('hidden')   
-                        },2000);
-                    }
-                }else{
-                    getBookInfo()
-                }
-            }) 
-
-            }
-            
-        }
-
-        // Author autocomplete 
-    
-        $(document).ready(function() {
-            $('#authors').select2({
-                ajax: {
-                url: '/authors/search',
-                data: function (params) {
-                console.log(params)
-                var query = {
-                    keyword : params.term
-                }
-
-                // Query parameters will be ?search=[term]
-                return query;
-                },
-                processResults: function (data) {
-                    let autoauthors = []
-                    data.forEach(element => {
-                       autoauthors.push({
-                            id:element.id,
-                            text:element.name
-                       })
-                    });
-                return {
-                    results: autoauthors
-                };
-
-                }
-            }
-            });
-
-            $('#branch').select2({
-                ajax: {
-                url: '/branches',
-                processResults: function (data) {
-                    let autoauthors = []
-                    data.forEach(element => {
-                       autoauthors.push({
-                            id:element.id,
-                            text:element.id
-                       })
-                    });
-                return {
-                    results: autoauthors
-                };
-
-                }
-            }
-            });
-            
-            
-
-
-            $('#publisher').select2({
-                ajax: {
-                url: '/publishers',
-                processResults: function (data) {
-                    let autoauthors = []
-                    data.forEach(element => {
-                       autoauthors.push({
-                            id:element.id,
-                            text:element.name
-                       })
-                    });
-                return {
-                    results: autoauthors
-                };
-
-                }
-            }
-            }
-                
-            )
-        });
-
-
-        //
-        // POST methods implementation:
-        //
-
-        async function postData(url = "", data = {}) {
-        // Default options are marked with *
-        const response = await fetch(url, {
-            method: "POST", // *GET, POST, PUT, DELETE, etc.
-            mode: "cors", // no-cors, *cors, same-origin
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "same-origin", // include, *same-origin, omit
-            headers: {
-            "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            redirect: "follow", // manual, *follow, error
-            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: JSON.stringify(data), // body data type must match "Content-Type" header
-        });
-        return response;
-        }
-
-        
-
-        function addNewAuthor(){
-
-            authorName = document.getElementById('newAuthorName')
-            authorDes = document.getElementById('newAuthorDescription')
-            addAuSuccMsg = document.getElementById('succmsgAu')
-            errmsgAu = document.getElementById('errmsgAu')
-
-            if(authorName.val!=''){
-                    postData("/authors", { 
-                    name : authorName.value, 
-                    description : authorDes.value 
-                }).then((data) => {               
-                    console.log(data);
-                    if(data.status==200){
-                        addAuSuccMsg.classList.remove('hidden')
-                        setTimeout(() => {
-                            authorName.value = ''
-                            authorDes.value = ''
-                            addAuSuccMsg.classList.add('hidden') 
-                            document.getElementById('authormodal').classList.add('hidden')  
-                        },2000);
-
-                    }else{
-                        errmsgAu.innerText = 'Something went wrong, please try again.'
-                        errmsgAu.classList.remove('hidden')
-                        setTimeout(() => {
-                            errmsgAu.classList.add('hidden')   
-                        },2000);
-                    }
-                });
-            }else{
-                errmsgAu.innerText = 'The author\'s name can\'t be empty !'
-                errmsgAu.classList.remove('hidden')
-                setTimeout(() => {
-                    errmsgAu.classList.add('hidden')   
-                },2000);
-            }
-            
-        }
-
-        function addNewPublisher(){
-            publisherName = document.getElementById('newPublisherName')
-            addPubSuccMsg = document.getElementById('succmsgPub')
-            errmsgPub = document.getElementById('errmsgPub')
-
-            if(publisherName.value!=''){
-                    postData("/publishers", {
-                    name : publisherName.value 
-                    }).then((data) => {
-                        console.log(data);
-                        if(data.status==200){
-
-                            addPubSuccMsg.classList.remove('hidden')
-                            setTimeout(() => {
-                                publisherName.value = ''
-                                addPubSuccMsg.classList.add('hidden')
-                                document.getElementById('publishermodal').classList.add('hidden')   
-                            },2000);
-                            
-                        }else{
-                            errmsgPub.innerText = 'Something went wrong, please try again.'
-                            errmsgPub.classList.remove('hidden')
-                            setTimeout(() => {
-                                errmsgPub.classList.add('hidden')   
-                            },2000);
-                        }
-                    }).catch(err=>{
-                        errmsgPub.innerText = 'Something went wrong, please try again.'
-                        errmsgPub.classList.remove('hidden')
-                        setTimeout(() => {
-                            errmsgPub.classList.add('hidden')   
-                        },2000);
-                        console.log('====>',err)
-                    });
-            }else{
-                errmsgPub.innerText='Publisher name can\'t be empty !'
-                errmsgPub.classList.remove('hidden')
-                setTimeout(() => {
-                    errmsgPub.classList.add('hidden')   
-                },2000);
-            }
-            
-        }
-
-        function addNewBook(){
-
-            let authors = []
-            $("#authors").val().forEach(el =>{
-                el = Number(el)
-                authors.push(el)
-            })
-
-            let body= { 
-                isbn : $('#isbn').val(),
-                title: $('#title').val(),
-                description : $('#description').val(),
-                language : $('#language').val(),
-                pageCount : $('#pageCount').val(),
-                publishedDate : $('#publishedDate').val(),
-                kind : document.getElementById("kind").value,
-                pdfAvailble: $('#pdfAvailable').is(':checked'),
-                epubAvailble: $('#epubAvailable').is(':checked'),
-                isReference: $('#isReference').is(':checked'),
-                publisher: $('#publisher').val(),
-                branchId: $('#branch').val(),
-                authors: authors,
-                // 
-                availableItems: 0
-            
-            }
-
-            if($('#subtitle').val()){
-                body.subtitle = $('#subtitle').val()
-            }
-            
-            postData("/books",body).then(data => {
-                book = data.json()
-                if (data.status==200){
-                    sendData("/image",{
-                        "file":$('#cover')[0].files[0],
-                        "isbn" : $('#isbn').val()
-                    }).then(res =>{
-                        console.log(res)
-                        if(res.status==200){
-                            succmsg.classList.remove('hidden')     
-                            setTimeout(() => {
-                                succmsg.classList.add('hidden')
-                                clearAddBookForm()                                
-                                document.getElementById('modal').classList.add('hidden')     
-                            }, 2000);
-                        }else{
-                            errmsg.innerText = 'Couldn\'t upload the book cover, please try again.'
-                            errmsg.classList.remove('hidden')
-                            setTimeout(() => {
-                                errmsg.classList.add('hidden')   
-                            },2000);
-                        }
-
-                    })
-                }else{
-                    errmsg.innerText = 'Some thing went wrong, please try again.'
-                    errmsg.classList.remove('hidden')
-                    setTimeout(() => {
-                        errmsg.classList.add('hidden')   
-                    },2000);  
-                }
-            }).catch( err =>{
-            console.log(err)
-            });
-
-            // newBookModal()
-        }
-
-        async function sendData(url, data) {
-        const formData  = new FormData();
-
-        for(const name in data) {
-            formData.append(name, data[name]);
-        }
-
-        const response = await fetch(url, {
-            method: 'POST',
-            body: formData
-        });
-
-        return response
-
-        }
-
-        // Add-book image preview
-
-        function updatePreview(input, target) {
-            let file = input.files[0];
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function () {
-            let img = document.getElementById(target);
-                // can also use "this.result"
-                img.src = reader.result;
-                img.classList.remove('hidden')
-            }
-        }
-
-        //Add book Form reinitialization
-
-        function clearAddBookForm(){
-
-            //clear all add-book fields
-            isbn.value=''
-            bookTitle.value=''
-            bookSubTitle.value=''
-            bookPublishedDate.value=''
-            bookPublisher.value=''
-            bookDescription.value=''
-            bookPages.value=0
-            // reinitialize add-book image preview
-            bookImgPrev = document.getElementById('book-image-preview')
-            if(!bookImgPrev.classList.contains('hidden')){
-                bookImgPrev.classList.add('hidden')
-            }
-
-            //Form parts reinitialization
-            for(let i=1;i<6;i++){
-                if(!document.getElementById('newbookInfo'+i).classList.contains('hidden')){
-                    document.getElementById('newbookInfo'+i).classList.add('hidden')
-                }
-            }
-            currentDivNum = 1
-        }
-
-    </script>
-   
+    <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>   
 </body>
 </html>
