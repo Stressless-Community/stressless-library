@@ -37,7 +37,7 @@ public class BranchServiceImpl implements BranchService {
 	@Override
 	public List<Branch> search(String keyword) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'search'");
+		return branchRepository.search(keyword);
 	}
 
 }

@@ -53,4 +53,10 @@ public class PublisherServiceImpl implements PublisherService {
 		return publisherRepository.existsPublisherByName(name);
 	}
 
+	@Override
+	public List<Publisher> search(String keyword) {
+		// TODO Auto-generated method stub
+		return publisherRepository.search(keyword);
+	}
+
 }
