@@ -475,20 +475,20 @@
     </section>
 
     <section id="bookinfo" class="section m-10 px-14 flex flex-col space-y-3 hidden">
-        <div class="flex flex-row justify-between  w-full shadow-lg">
+        <div class="flex flex-row w-full gap-4">
             <div class="drop-shadow-xl w-1/5">
-                <img id="infoImage" class="cover h-80 w-60" th:src="@{assets/img/book.jpg}">
+                <img id="infoImage" class="cover h-full w-full" th:src="@{assets/img/book.jpg}">
             </div>
 
-            <div class="flex flex-col text-slate-700  w-4/5 space-y-2">
-                <div class="mx-12">
-                    <p id="infoTitle" class="py-3 w-full text-4xl font-semibold"></p>
-                    <p id="infoSubtitle"class="py-3  w-full text-xl font-light "></p>
-                    <p id="infoAuthors"class="py-3  w-full text-lg font-bold"></p>
-                    <p id="infoShortDescription"class="truncate text-md font-light py-3"></p>
+            <div class="flex flex-col text-slate-700 w-4/5 gap-10">
+                <div class="flex flex-col mx-12 space-y-2">
+                    <p id="infoTitle" class="w-full text-4xl font-semibold"></p>
+                    <p id="infoSubtitle"class="w-full text-xl font-light "></p>
+                    <p id="infoAuthors"class="w-full text-lg font-bold"></p>
+                    <p id="infoShortDescription"class="truncate text-md font-light"></p>
                 </div>
 
-                <div class="flex flex-row bg-gray-100 h-full px-8 justify-between">
+                <div class="flex flex-row bg-gray-100 h-full px-8 justify-between shadow-lg">
                     <div class="flex flex-row space-x-3 items-center">
 
                         <div class="bg-yellow-500 p-2 rounded-full">
