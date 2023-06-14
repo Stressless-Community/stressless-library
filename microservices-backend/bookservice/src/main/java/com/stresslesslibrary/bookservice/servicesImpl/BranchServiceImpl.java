@@ -36,7 +36,8 @@ public class BranchServiceImpl implements BranchService {
 
 	@Override
 	public List<Branch> search(String keyword) {
-		return branchRepository.searchById(keyword);
+		// TODO Auto-generated method stub
+		return branchRepository.search(keyword);
 	}
 
 }

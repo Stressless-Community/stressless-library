@@ -105,7 +105,6 @@ public class BookServiceImpl implements BookService {
 		b.setPublisher(publisherService.getOne(book.getPublisher()));
 		b.setBranch(branchService.getOne(book.getBranchId()));
 		LocalDate localDate = LocalDate.now();
-		System.out.print(localDate);
 		b.setRecordedDate(new Date(localDate.getYear(),localDate.getMonthValue(), localDate.getDayOfMonth()));
 		List<Author> authors = new ArrayList<Author>();
 		for (int author : book.getAuthors()) {

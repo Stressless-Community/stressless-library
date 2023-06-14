@@ -12,5 +12,5 @@ import com.stresslesslibrary.bookservice.entities.Branch;
 public interface BranchRepository extends JpaRepository<Branch, String> {
 
     @Query(value="SELECT b  FROM Branch b WHERE b.id LIKE %:search%")
-	List<Branch> searchById(@Param("search") String search);
+	List<Branch> search(@Param("search") String search);
 }

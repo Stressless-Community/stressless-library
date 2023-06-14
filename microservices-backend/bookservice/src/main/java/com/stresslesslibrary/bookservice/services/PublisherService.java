@@ -10,7 +10,7 @@ public interface PublisherService {
 	List<Publisher> findAll();
 
 	List<Publisher> search(String keyword);
-	
+		
 	Publisher getOne(int id);
 	
 	Publisher findByName(String name);

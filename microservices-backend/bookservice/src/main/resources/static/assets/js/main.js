@@ -1,5 +1,5 @@
 
-function dealWithSwipes(){
+
     var Swipes = new Swiper('.swiper-container', {
         loop: true,
         centeredSlides: true,
@@ -16,10 +16,6 @@ function dealWithSwipes(){
             disableOnInteraction: false,
         }
     });
-}
-
-dealWithSwipes()
-
 
 // dealing with the copyright date
 document.getElementById("date").innerHTML = new Date().getFullYear()
@@ -521,227 +517,15 @@ const response = await fetch(url, {
     "Content-Type": "application/json",
     // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
-});
-return response;
-}
-
-
-
-function addNewAuthor(){
-
-    authorName = document.getElementById('newAuthorName')
-    authorDes = document.getElementById('newAuthorDescription')
-    addAuSuccMsg = document.getElementById('succmsgAu')
-    errmsgAu = document.getElementById('errmsgAu')
-
-    if(authorName.val!=''){
-            postData("/authors", { 
-            name : authorName.value, 
-            description : authorDes.value 
-        }).then((data) => {               
-            console.log(data);
-            if(data.status==200){
-                addAuSuccMsg.classList.remove('hidden')
-                setTimeout(() => {
-                    authorName.value = ''
-                    authorDes.value = ''
-                    addAuSuccMsg.classList.add('hidden') 
-                    document.getElementById('authormodal').classList.add('hidden')  
-                },2000);
-
-            }else{
-                errmsgAu.innerText = 'Something went wrong, please try again.'
-                errmsgAu.classList.remove('hidden')
-                setTimeout(() => {
-                    errmsgAu.classList.add('hidden')  
-                },2000);
-            }
-        });
-    }else{
-        errmsgAu.innerText = 'The author\'s name can\'t be empty !'
-        errmsgAu.classList.remove('hidden')
-        setTimeout(() => {
-            errmsgAu.classList.add('hidden')   
-        },2000);
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    autoplay:{
+        delay:3000,
+        disableOnInteraction: false,
     }
-    
-}
-
-function addNewPublisher(){
-    publisherName = document.getElementById('newPublisherName')
-    addPubSuccMsg = document.getElementById('succmsgPub')
-    errmsgPub = document.getElementById('errmsgPub')
-
-    if(publisherName.value!=''){
-            postData("/publishers", {
-            name : publisherName.value 
-            }).then((data) => {
-                console.log(data);
-                if(data.status==200){
-
-                    addPubSuccMsg.classList.remove('hidden')
-                    setTimeout(() => {
-                        publisherName.value = ''
-                        addPubSuccMsg.classList.add('hidden')
-                        document.getElementById('publishermodal').classList.add('hidden')   
-                    },2000);
-                    
-                }else{
-                    errmsgPub.innerText = 'Something went wrong, please try again.'
-                    errmsgPub.classList.remove('hidden')
-                    setTimeout(() => {
-                        errmsgPub.classList.add('hidden')   
-                    },2000);
-                }
-            }).catch(err=>{
-                errmsgPub.innerText = 'Something went wrong, please try again.'
-                errmsgPub.classList.remove('hidden')
-                setTimeout(() => {
-                    errmsgPub.classList.add('hidden')   
-                },2000);
-                console.log('====>',err)
-            });
-    }else{
-        errmsgPub.innerText='Publisher name can\'t be empty !'
-        errmsgPub.classList.remove('hidden')
-        setTimeout(() => {
-            errmsgPub.classList.add('hidden')   
-        },2000);
-    }
-    
-}
-
-function addNewBook(){
-
-    let authors = []
-    $("#authors").val().forEach(el =>{
-        el = Number(el)
-        authors.push(el)
-    })
-
-    let body= { 
-        isbn : $('#isbn').val(),
-        title: $('#title').val(),
-        description : $('#description').val(),
-        language : $('#language').val(),
-        pageCount : $('#pageCount').val(),
-        publishedDate : $('#publishedDate').val(),
-        kind : document.getElementById("kind").value,
-        pdfAvailble: $('#pdfAvailable').is(':checked'),
-        epubAvailble: $('#epubAvailable').is(':checked'),
-        isReference: $('#isReference').is(':checked'),
-        publisher: $('#publisher').val(),
-        branchId: $('#branch').val(),
-        authors: authors,
-        // 
-        availableItems: 0
-    
-    }
-
-    if($('#subtitle').val()){
-        body.subtitle = $('#subtitle').val()
-    }
-    
-    postData("/books",body).then(data => {
-        book = data.json()
-        if (data.status==200){
-            sendData("/image",{
-                "file":$('#cover')[0].files[0],
-                "isbn" : $('#isbn').val()
-            }).then(res =>{
-                console.log(res)
-                if(res.status==200){
-                    succmsg.classList.remove('hidden')     
-                    setTimeout(() => {
-                        succmsg.classList.add('hidden')
-                        clearAddBookForm()                                
-                        document.getElementById('modal').classList.add('hidden')
-                        location.reload()      
-                    }, 2000);
-                }else{
-                    errmsg.innerText = 'Couldn\'t upload the book cover, please try again.'
-                    errmsg.classList.remove('hidden')
-                    setTimeout(() => {
-                        errmsg.classList.add('hidden')   
-                    },2000);
-                }
-
-            })
-        }else{
-            errmsg.innerText = 'Some thing went wrong, please try again.'
-            errmsg.classList.remove('hidden')
-            setTimeout(() => {
-                errmsg.classList.add('hidden')   
-            },2000);  
-        }
-    }).catch( err =>{
-    console.log(err)
-    });
-
-    // newBookModal()
-}
-
-async function sendData(url, data) {
-const formData  = new FormData();
-
-for(const name in data) {
-    formData.append(name, data[name]);
-}
-
-const response = await fetch(url, {
-    method: 'POST',
-    body: formData
 });
 
-return response
-
 }
-
-// Add-book image preview
-
-function updatePreview(input, target) {
-    let file = input.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-    let img = document.getElementById(target);
-        // can also use "this.result"
-        img.src = reader.result;
-        img.classList.remove('hidden')
-    }
-}
-
-//Add book Form reinitialization
-
-function clearAddBookForm(){
-
-    //clear all add-book fields
-    isbn.value=''
-    bookTitle.value=''
-    bookSubTitle.value=''
-    bookPublishedDate.value=''
-    bookPublisher.value=''
-    bookDescription.value=''
-    bookPages.value=0
-    // reinitialize add-book image preview
-    bookImgPrev = document.getElementById('book-image-preview')
-    if(!bookImgPrev.classList.contains('hidden')){
-        bookImgPrev.classList.add('hidden')
-    }
-
-    //Form parts reinitialization
-    for(let i=1;i<6;i++){
-        if(!document.getElementById('newbookInfo'+i).classList.contains('hidden')){
-            document.getElementById('newbookInfo'+i).classList.add('hidden')
-        }
-    }
-    currentDivNum = 1
-
-}
-
-
-
 
