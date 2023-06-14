@@ -106,8 +106,14 @@ const bookBranch = document.getElementById ("branch")
 // display book info functions
 function displayInfo(data={}){
 
-    document.getElementById("infoImage").src=data.largeCoverUrl
-    document.getElementById("infoTitle").innerText=data.title 
+    if(data.largeCoverUrl){
+        document.getElementById("infoImage").src=data.largeCoverUrl
+    }
+
+    if(data.title){
+        document.getElementById("infoTitle").innerText=data.title 
+    }
+
     if(data.subtitle){
         document.getElementById('infoSubtitle').innerText=data.subtitle
     }
@@ -229,7 +235,15 @@ function fieldsEmpty(currentSecion){
             break;
 
             case 4:
-                if(bookPages.value=='' || bookPrintKind.value=='' || bookBranch.value==''){
+                if(bookPages.value<10 || bookPrintKind.value=='' || bookBranch.value==''){
+                    if(bookPages.value<10){
+                        errmsg.innerText = 'The number of pages can\'t be less than 10.'
+                        errmsg.classList.remove('hidden')
+                        setTimeout(() => {
+                            errmsg.classList.add('hidden')   
+                        },2000); 
+                    }
+
                     errmsg.innerText = 'All the fields must be completed'
                     errmsg.classList.remove('hidden')
                     setTimeout(() => {
@@ -255,10 +269,10 @@ isbn.addEventListener('input',function(){
             setTimeout(() => {
                         errmsg.classList.add('hidden')   
             },2000);
-        }else{
-            verifyBook(isbn.value)
-            isbnErr = false
-        }
+    }else{
+        verifyBook(isbn.value)
+        isbnErr = false
+    }
 })
 
 //Previous - Next add book modal functions
@@ -319,24 +333,58 @@ fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:"+isbn.value)
     .then(json => {
         console.log(json.items[0].volumeInfo)
 
-        document.getElementById("title").value=json.items[0].volumeInfo.title
-        if(json.items[0].volumeInfo.subtitle){
-            document.getElementById("subtitle").value=json.items[0].volumeInfo.subtitle
+        if(json.items[0].volumeInfo){
+
+            if(json.items[0].volumeInfo.title){
+                document.getElementById("title").value=json.items[0].volumeInfo.title
+            }
+
+            if(json.items[0].volumeInfo.subtitle){
+                document.getElementById("subtitle").value=json.items[0].volumeInfo.subtitle
+            }
+
+            if(json.items[0].volumeInfo.description){
+                document.getElementById("description").value=json.items[0].volumeInfo.description
+            }
+
+            if(json.items[0].volumeInfo.pageCount){
+                document.getElementById("pageCount").value=json.items[0].volumeInfo.pageCount
+            }
+
+            if(json.items[0].volumeInfo.publishedDate){
+                document.getElementById("publishedDate").value=json.items[0].volumeInfo.publishedDate
+            }
+
+            if(json.items[0].volumeInfo.printType){
+                document.getElementById("kind").value=json.items[0].volumeInfo.printType
+            }
+
+            if(json.items[0].volumeInfo.language){
+                if(json.items[0].volumeInfo.language=="fr"){
+                    document.getElementById("language").value="FRANÇAIS"
+                }
+                if(json.items[0].volumeInfo.language=="en"){
+                    document.getElementById("language").value="ENGLISH"
+                }
+            } 
+            
+        }else{
+            errmsg.innerText = 'The book with this ISBN couldn\'t be found on google apis.'
+            errmsg.classList.remove('hidden')
+            setTimeout(() => {
+                        errmsg.classList.add('hidden')   
+            },2000);
         }
-        document.getElementById("description").value=json.items[0].volumeInfo.description
-        document.getElementById("pageCount").value=json.items[0].volumeInfo.pageCount
-        document.getElementById("publishedDate").value=json.items[0].volumeInfo.publishedDate
-        document.getElementById("kind").value=json.items[0].volumeInfo.printType
+
         
-        if(json.items[0].volumeInfo.language="fr"){
-            document.getElementById("language").value="FRANÇAIS"
-        }
-        if(json.items[0].volumeInfo.language="en"){
-            document.getElementById("language").value="ENGLISH"
-        }
         
 }).catch((err)=>{
     isbnExistsErr = false
+    errmsg.innerText = 'Couldn\'t fetch from google apis, please verify your internet connexion.'
+    errmsg.classList.remove('hidden')
+    setTimeout(() => {
+                errmsg.classList.add('hidden')   
+    },2000);
     console.log(err)
 });
 
