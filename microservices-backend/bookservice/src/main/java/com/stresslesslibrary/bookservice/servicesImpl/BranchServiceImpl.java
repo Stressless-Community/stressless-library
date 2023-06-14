@@ -34,4 +34,10 @@ public class BranchServiceImpl implements BranchService {
 		return branchRepository.save(branch);
 	}
 
+	@Override
+	public List<Branch> search(String keyword) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'search'");
+	}
+
 }

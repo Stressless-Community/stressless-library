@@ -8,6 +8,8 @@ import com.stresslesslibrary.bookservice.entities.Branch;
 public interface BranchService {
 
 	List<Branch> findAll();
+
+	List<Branch> search(String keyword);
 	
 	Branch getOne(String id);
 	
