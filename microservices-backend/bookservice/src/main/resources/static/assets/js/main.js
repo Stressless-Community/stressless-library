@@ -372,10 +372,10 @@ function verifyBook(isbn){
 $(document).ready(function() {
     $('#authors').select2({
         ajax: {
-        url: '/authors',
+        url: '/authors/search',
         data: function (params) {
         var query = {
-            search: params.term
+            keyword: params.term
         }
 
         // Query parameters will be ?search=[term]
@@ -399,17 +399,25 @@ $(document).ready(function() {
 
     $('#branch').select2({
         ajax: {
-        url: '/branches',
+        url: '/branches/search',
+        data: function (params) {
+            var query = {
+                keyword: params.term
+            }
+    
+            // Query parameters will be ?keyword=[term]
+            return query;
+        },
         processResults: function (data) {
-            let autoauthors = []
+            let branchesList = []
             data.forEach(element => {
-                autoauthors.push({
+                branchesList.push({
                     id:element.id,
                     text:element.id
                 })
             });
         return {
-            results: autoauthors
+            results: branchesList
         };
 
         }
@@ -421,17 +429,25 @@ $(document).ready(function() {
 
     $('#publisher').select2({
         ajax: {
-        url: '/publishers',
+        url: '/publishers/search',
+        data: function (params) {
+            var query = {
+                keyword: params.term
+            }
+    
+            // Query parameters will be ?keyword=[term]
+            return query;
+        },
         processResults: function (data) {
-            let autoauthors = []
+            let publishersList = []
             data.forEach(element => {
-                autoauthors.push({
+                publishersList.push({
                     id:element.id,
                     text:element.name
                 })
             });
         return {
-            results: autoauthors
+            results: publishersList
         };
 
         }
