@@ -8,6 +8,8 @@ import com.stresslesslibrary.bookservice.entities.Publisher;
 public interface PublisherService {
 	
 	List<Publisher> findAll();
+
+	List<Publisher> search(String keyword);
 	
 	Publisher getOne(int id);
 	
@@ -16,4 +18,6 @@ public interface PublisherService {
 	Publisher save(Publisher publisher);
 
 	boolean existsByName(String name);
+
+
 }
