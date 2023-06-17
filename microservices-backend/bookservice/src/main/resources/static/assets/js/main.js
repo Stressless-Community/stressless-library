@@ -1,24 +1,21 @@
 
-function dealWithSwipes(){
-    var Swipes = new Swiper('.swiper-container', {
-        loop: true,
-        centeredSlides: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        autoplay:{
-            delay:3000,
-            disableOnInteraction: false,
-        }
-    });
-}
+var Swipes = new Swiper('.swiper-container', {
+    loop: true,
+    centeredSlides: true,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    autoplay:{
+        delay:3000,
+        disableOnInteraction: false,
+    }
+});
 
-dealWithSwipes()
 
 
 // dealing with the copyright date
@@ -34,9 +31,25 @@ function sectionNavigation(sectionName){
     });
     if(sectionName=='dashbord'){
         document.getElementById('bookCasesBar').classList.add('hidden')
+        if(!document.getElementById('dropdownDots').classList.contains('hidden')){
+            document.getElementById('dropdownDots').classList.add('hidden')
+        }
+        
+        if(!document.getElementById('searchBar').classList.contains('hidden')){
+            document.getElementById('searchBar').classList.add('hidden')
+        }
+        if(document.getElementById('dashbordHeader').classList.contains('hidden')){
+            document.getElementById('dashbordHeader').classList.remove('hidden')
+        }
     }else{
         if(document.getElementById('bookCasesBar').classList.contains('hidden')){
             document.getElementById('bookCasesBar').classList.remove('hidden')
+        }
+        if(document.getElementById('searchBar').classList.contains('hidden')){
+            document.getElementById('searchBar').classList.remove('hidden')
+        }
+        if(!document.getElementById('dashbordHeader').classList.contains('hidden')){
+            document.getElementById('dashbordHeader').classList.add('hidden')
         }
     }
     document.getElementById(sectionName).classList.remove('hidden')
@@ -44,15 +57,9 @@ function sectionNavigation(sectionName){
 
 //dealing with the menu
 document.getElementById('menu').addEventListener('click',()=>{
-    console.log('hello heloo')
-    if(document.getElementById('dropdownDots').classList.contains('hidden')){
-        document.getElementById('dropdownDots').classList.remove('hidden')
-    } 
+    document.getElementById('dropdownDots').classList.toggle('hidden')
 })
 
-document.getElementById('dropdownDots').addEventListener('mouseout',()=>{
-    document.getElementById('dropdownDots').classList.add('hidden')
-})
 
 //dealing with the bookcases truncate style and other styles
 function manageTruncate(el,elover){
@@ -77,8 +84,8 @@ for(let i=1;i<=10;i++){
 
 // dealing with the search input
 document.getElementById('search').addEventListener("input",function(){
-
     if(document.getElementById('search').value){
+        console.log(document.getElementById('search').value)
         sectionNavigation('findbook')
     }else{
         sectionNavigation('home')
