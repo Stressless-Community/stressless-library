@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import com.stresslesslibrary.bookservice.entities.Language;
 import com.stresslesslibrary.bookservice.entities.PrintKind;
-import com.stresslesslibrary.bookservice.entities.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 
@@ -53,7 +52,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book getOne(String isbn) {
 		// TODO Exception handler
-		return bookRepository.findById(isbn).orElseThrow();
+		return bookRepository.findById(isbn).orElse(null);
 	}
 
 	@Override
