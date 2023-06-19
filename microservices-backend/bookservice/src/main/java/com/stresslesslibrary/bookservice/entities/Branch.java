@@ -2,6 +2,8 @@ package com.stresslesslibrary.bookservice.entities;
 
 
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -16,6 +18,9 @@ public class Branch {
 	private String id;
 	private String name;
 	
+	@OneToMany(mappedBy = "branch")
+	private List<Book> books;
+
 	@ManyToOne
 	private BookCategory category;
 	
@@ -27,6 +32,9 @@ public class Branch {
 		return id;
 	}
 
+	public List<Book> getBooks() {
+		return books;
+	}
 	public void setId(String id) {
 		this.id = id;
 	}
