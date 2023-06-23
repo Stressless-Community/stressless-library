@@ -6,10 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.stresslesslibrary.bookservice.entities.BookImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,13 +51,11 @@ public class BookController {
 	
 	@GetMapping("/{isbn}")
 	public ResponseEntity<Book> findById(@PathVariable(value = "isbn") String isbn){
-		
-		try {
-			return ResponseEntity.ok().body(bookService.getOne(isbn));
-		} catch (Exception e) {
-			e.printStackTrace();
+		Book book = bookService.getOne(isbn);
+		if (book==null){
 			return ResponseEntity.notFound().build();
-			
+		}else{
+			return ResponseEntity.ok().body(bookService.getOne(isbn));
 		}
 	}
 	

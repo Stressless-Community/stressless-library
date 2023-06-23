@@ -40,6 +40,9 @@ public class BookCase {
 		return categories;
 	}
 
+	public List<Book> getBooks(){
+		return null;
+	}
 	public void setCategories(List<BookCategory> categories) {
 		this.categories = categories;
 	}
