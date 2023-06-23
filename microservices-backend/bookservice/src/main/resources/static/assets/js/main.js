@@ -21,6 +21,7 @@ var Swipes = new Swiper('.swiper-container', {
 // dealing with the copyright date
 document.getElementById("date").innerHTML = new Date().getFullYear()
 
+//sectionNavigation('dashbord')
 // Hide or show sections
 
 function sectionNavigation(sectionName){
@@ -85,7 +86,6 @@ for(let i=1;i<=10;i++){
 // dealing with the search input
 document.getElementById('search').addEventListener("input",function(){
     if(document.getElementById('search').value){
-        console.log(document.getElementById('search').value)
         sectionNavigation('findbook')
     }else{
         sectionNavigation('home')
