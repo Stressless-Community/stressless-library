@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stresslesslibrary.bookservice.dtos.BookReport;
 import com.stresslesslibrary.bookservice.entities.BookCase;
 import com.stresslesslibrary.bookservice.services.BookCaseService;
 
@@ -36,5 +37,11 @@ public class BookCaseController {
 			return ResponseEntity.notFound().build();
 			
 		}
+	}
+
+	@GetMapping("/report")
+	public ResponseEntity<BookReport> report() {
+		
+		return ResponseEntity.ok().body(new BookReport());
 	}
 }
