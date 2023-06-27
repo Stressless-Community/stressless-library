@@ -144,7 +144,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<Book> popularBooks() {
+	public List<Book> recentBooks() {
 		return bookRepository.findTop10ByOrderByRecordedDateDesc();
 	}
 

@@ -69,9 +69,9 @@ public class BookController {
 		}
 	}
 	
-	@GetMapping("/popular")
-	public ResponseEntity<List<Book>> popular(){
-		return ResponseEntity.ok().body(bookService.popularBooks());
+	@GetMapping("/recent")
+	public ResponseEntity<List<Book>> recent(){
+		return ResponseEntity.ok().body(bookService.recentBooks());
 	}
 
 	@PostMapping
