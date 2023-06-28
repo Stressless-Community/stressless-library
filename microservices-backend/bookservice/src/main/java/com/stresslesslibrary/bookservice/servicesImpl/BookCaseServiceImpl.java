@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stresslesslibrary.bookservice.dtos.BookReport;
+import com.stresslesslibrary.bookservice.entities.Book;
 import com.stresslesslibrary.bookservice.entities.BookCase;
 import com.stresslesslibrary.bookservice.repositories.BookCaseRepository;
 import com.stresslesslibrary.bookservice.services.BookCaseService;
@@ -33,6 +35,21 @@ public class BookCaseServiceImpl implements BookCaseService {
 	@Override
 	public BookCase save(BookCase bookCase) {
 		return bookCaseRepository.save(bookCase);
+	}
+
+	@Override
+	public List<Book> getBooks(String id) {
+			try {
+				return findOne(id).getBooks();
+			} catch (Exception e) {
+				return null;
+			} 
+	}
+
+	@Override
+	public BookReport getReport() {
+		BookReport report = new BookReport();
+		return report;
 	}
 	
 }

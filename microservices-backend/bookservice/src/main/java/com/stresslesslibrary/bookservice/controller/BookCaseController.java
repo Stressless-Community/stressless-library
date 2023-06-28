@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stresslesslibrary.bookservice.dtos.BookReport;
+import com.stresslesslibrary.bookservice.entities.Book;
 import com.stresslesslibrary.bookservice.entities.BookCase;
 import com.stresslesslibrary.bookservice.services.BookCaseService;
 
@@ -39,9 +40,21 @@ public class BookCaseController {
 		}
 	}
 
+	@GetMapping("/{id}/books")
+	public ResponseEntity<List<Book>> getBooksByBookCase(@PathVariable(value = "id") String id){
+		
+		try {
+			return ResponseEntity.ok().body(bookCaseService.getBooks(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
+			
+		}
+	}
+
 	@GetMapping("/report")
 	public ResponseEntity<BookReport> report() {
 		
-		return ResponseEntity.ok().body(new BookReport());
+		return ResponseEntity.ok().body(null);
 	}
 }

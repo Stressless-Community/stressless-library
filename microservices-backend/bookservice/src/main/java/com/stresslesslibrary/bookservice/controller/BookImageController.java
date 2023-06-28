@@ -1,8 +1,6 @@
 package com.stresslesslibrary.bookservice.controller;
 
 import java.io.IOException;
-import java.net.http.HttpHeaders;
-import java.util.Optional;
 
 import com.stresslesslibrary.bookservice.entities.Book;
 import com.stresslesslibrary.bookservice.services.BookService;

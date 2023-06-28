@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stresslesslibrary.bookservice.entities.Book;
 import com.stresslesslibrary.bookservice.entities.Branch;
 import com.stresslesslibrary.bookservice.repositories.BranchRepository;
 import com.stresslesslibrary.bookservice.services.BranchService;
@@ -38,6 +39,12 @@ public class BranchServiceImpl implements BranchService {
 	public List<Branch> search(String keyword) {
 		// TODO Auto-generated method stub
 		return branchRepository.search(keyword);
+	}
+
+	@Override
+	public List<Book> getBooks(String id) {
+		// TODO Auto-generated method stub
+		return getOne(id).getBooks();
 	}
 
 }

@@ -8,7 +8,4 @@ import lombok.Data;
 public class BookReport {
 
     private List<BookCaseCount> bookcases;
-
-    private List<BookCategoryCount> bookcategories;
-    private List<BranchesCount> branches;
 }
