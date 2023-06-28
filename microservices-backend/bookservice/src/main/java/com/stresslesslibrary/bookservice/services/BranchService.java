@@ -18,4 +18,6 @@ public interface BranchService {
 
 	List<Book> getBooks(String id);
 	
+	int getBookCount(String id);
+	
 }

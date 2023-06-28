@@ -1,6 +1,9 @@
 package com.stresslesslibrary.bookservice.controller;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.stresslesslibrary.bookservice.entities.Book;
 import com.stresslesslibrary.bookservice.services.BookService;
@@ -23,6 +26,7 @@ import com.stresslesslibrary.bookservice.repositories.BookImageRepository;
 @CrossOrigin("*")
 @RequestMapping("/image")
 public class BookImageController {
+	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/Images/covers";
 	
 	@Autowired
 	private BookImageRepository bookImage;
@@ -32,6 +36,8 @@ public class BookImageController {
 	
 	@PostMapping
 	public ResponseEntity<String> uploadAttachment(@RequestParam("file") MultipartFile file,String isbn){
+
+		
 		
 		try {
 			Book book=bookService.getOne(isbn);
@@ -67,4 +73,13 @@ public class BookImageController {
 
 
 	    }
+
+		@PostMapping("/upload") public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, String isbn) throws IOException {
+        StringBuilder fileNames = new StringBuilder();
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+		System.out.println(file.getContentType());
+        fileNames.append(file.getOriginalFilename());
+        Files.write(fileNameAndPath, file.getBytes());
+        return ResponseEntity.ok().body("Upload Success");
+    }
 }

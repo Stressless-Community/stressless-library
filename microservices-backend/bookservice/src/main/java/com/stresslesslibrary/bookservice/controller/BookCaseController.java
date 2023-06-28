@@ -54,7 +54,6 @@ public class BookCaseController {
 
 	@GetMapping("/report")
 	public ResponseEntity<BookReport> report() {
-		
-		return ResponseEntity.ok().body(null);
+		return ResponseEntity.ok().body(bookCaseService.getReport());
 	}
 }

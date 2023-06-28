@@ -47,4 +47,9 @@ public class BranchServiceImpl implements BranchService {
 		return getOne(id).getBooks();
 	}
 
+	@Override
+	public int getBookCount(String id) {
+		return getBooks(id).size();
+	}
+
 }

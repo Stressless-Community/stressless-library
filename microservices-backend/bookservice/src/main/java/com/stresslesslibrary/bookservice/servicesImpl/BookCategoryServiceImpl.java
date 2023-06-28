@@ -43,4 +43,9 @@ public class BookCategoryServiceImpl implements BookCategoryService {
 		}
 	}
 
+	@Override
+	public int getBookCount(String id) {
+		return getBooks(id).size();
+	}
+
 }

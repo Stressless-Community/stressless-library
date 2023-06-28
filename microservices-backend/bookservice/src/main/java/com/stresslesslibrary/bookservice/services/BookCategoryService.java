@@ -16,4 +16,6 @@ public interface BookCategoryService {
 	BookCategory save(BookCategory bookCategory);
 
 	List<Book> getBooks(String id);
+
+	int getBookCount(String id);
 }

@@ -17,6 +17,9 @@ public interface BookCaseService {
 	BookCase save(BookCase bookCase);
 
 	List<Book> getBooks(String id);
+	
 	BookReport getReport();
+
+	int getBookCount(String id);
 	
 }
