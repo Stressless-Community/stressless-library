@@ -21,6 +21,7 @@ var Swipes = new Swiper('.swiper-container', {
 // dealing with the copyright date
 document.getElementById("date").innerHTML = new Date().getFullYear()
 
+sectionNavigation('dashbord')
 // Hide or show sections
 
 function sectionNavigation(sectionName){
