@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.stresslesslibrary.bookservice.entities.Book;
 import com.stresslesslibrary.bookservice.entities.BookCategory;
 import com.stresslesslibrary.bookservice.services.BookCategoryService;
 
@@ -28,6 +29,18 @@ public class CategoryController {
 		
 		try {
 			return ResponseEntity.ok().body(bookCategory.getOne(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
+			
+		}
+	}
+
+	@GetMapping("/{id}/books")
+	public ResponseEntity<List<Book>> getBooks(@PathVariable(value = "id") String id){
+		
+		try {
+			return ResponseEntity.ok().body(bookCategory.getBooks(id));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.notFound().build();

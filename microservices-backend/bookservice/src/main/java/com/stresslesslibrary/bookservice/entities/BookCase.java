@@ -1,5 +1,6 @@
 package com.stresslesslibrary.bookservice.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import jakarta.persistence.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "bookcases")
@@ -40,8 +42,17 @@ public class BookCase {
 		return categories;
 	}
 
+	@JsonIgnore
 	public List<Book> getBooks(){
-		return null;
+		List<Book> books = new ArrayList<Book>();
+		for (BookCategory bookCategory : categories) {
+			for (Book book : bookCategory.getBooks()) {
+				books.add(book);
+			}
+			bookCategory.getBooks();
+			
+		}
+		return books;
 	}
 	public void setCategories(List<BookCategory> categories) {
 		this.categories = categories;
