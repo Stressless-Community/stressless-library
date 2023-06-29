@@ -3,7 +3,6 @@ package com.stresslesslibrary.bookservice.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -36,7 +35,6 @@ public class BookCategory {
 		return name;
 	}
 
-	@JsonIgnore
 	public List<Book> getBooks(){
 		List<Book> books = new ArrayList<Book>();
 		for (Branch b : this.branches){

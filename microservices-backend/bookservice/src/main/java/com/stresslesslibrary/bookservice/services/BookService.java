@@ -22,5 +22,5 @@ public interface BookService {
 
 	Book update (Book book);
 
-	List<Book> recentBooks();
+	List<Book> popularBooks();
 }

@@ -61,17 +61,12 @@ public class BookController {
 	
 	@GetMapping("/search")
 	public ResponseEntity<List<Book>> search(@RequestParam("keyword") String keyword){
-		List<Book> books = bookService.searchPatern(keyword);
-		if(books.isEmpty()){
-			return ResponseEntity.notFound().build();
-		}else{
-			return ResponseEntity.ok().body(books);
-		}
+		return ResponseEntity.ok().body(bookService.searchPatern(keyword));
 	}
 	
-	@GetMapping("/recent")
-	public ResponseEntity<List<Book>> recent(){
-		return ResponseEntity.ok().body(bookService.recentBooks());
+	@GetMapping("/popular")
+	public ResponseEntity<List<Book>> popular(){
+		return ResponseEntity.ok().body(bookService.popularBooks());
 	}
 
 	@PostMapping
