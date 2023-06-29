@@ -55,6 +55,9 @@
                 </button>
 
                 <div class="flex flex-row">
+                    <svg id="back" xmlns="http://www.w3.org/2000/svg" fill="rgba(217, 119, 6)" class="hidden w-8 h-8 mr-4 cursor-pointer hover:scale-110 transition-all" viewBox="0 0 448 512">
+                        <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                    </svg>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-yellow-600">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg> 
@@ -65,7 +68,7 @@
                     <div id="dropdownDots" class="z-10 absolute hidden bg-white right-2 top-16 divide-y divide-gray-100 rounded-lg shadow-lg w-44">
                         <ul class="py-2 text-md text-yellow-600" aria-labelledby="dropdownMenuIconButton">
                           <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 " onclick="sectionNavigation('dashbord')">Dashboard</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 " onclick="sectionNavigation('dashboard')">Dashboard</a>
                           </li>
                           <li>
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100 " id="settings">Settings</a>
@@ -157,7 +160,7 @@
         </div>
 
         <!-- Dashboard header -->
-        <div id="dashbordHeader" class="hidden flex flex-row justify-center bg-gray-900 px-5 font-ligth  gap-2 py-4">
+        <div id="dashboardHeader" class="hidden flex flex-row justify-center bg-gray-900 px-5 font-ligth  gap-2 py-4">
             <button class="drop-shadow-md flex flex-row justify-center items-center gap-2 py-2 w-40 px-6 bg-teal-500 text-white rounded hover:bg-teal-700 mr-4" onclick="newBookModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -290,7 +293,7 @@
     <section id="findbook" class="section hidden flex flex-row justify-center p-5 mb-12">
         <div id="books" class="books grid grid-cols-4 justify-center">
            
-        
+    
         </div>
     </section>
 
@@ -671,8 +674,8 @@
           
     </section>
 
-    <section id="dashbord" class="flex flex-row bg-gray-100 hidden p-8 gap-8">
-        <!-- General info cards-->
+    <section id="dashboard" class="flex flex-row bg-gray-100 hidden p-8 gap-8">
+               <!-- General info cards-->
         <div class="w-3/5 flex flex-col gap-8">
 
             <!-- Book warnings statistics -->
@@ -694,7 +697,7 @@
 
                     <div class="flex flex-col ">
                     <p class="text-xl font-bold">Total books</p>                           
-                     <span id="" class="text-lg font-light">780</span>
+                    <span id="" class="text-lg font-light">780</span>
                     </div>
                 </div>
 
@@ -708,7 +711,7 @@
                     
                     <div class="flex flex-col ">
                     <p class="text-xl font-bold">Loan</p>                           
-                     <span id="" class="text-lg font-light">10</span>
+                    <span id="" class="text-lg font-light">10</span>
                     </div>
                 </div>
 
@@ -717,12 +720,12 @@
                         <svg xmlns="http://www.w3.org/2000/svg"  fill="none" class="h-6 w-6" stroke="white" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M6.364 2.5a.5.5 0 0 1 .5-.5H13.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 13.5V6.864a.5.5 0 1 1 1 0V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5H6.864a.5.5 0 0 1-.5-.5z"/>
                             <path fill-rule="evenodd" d="M11 10.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L1.146 1.854a.5.5 0 1 1 .708-.708L10 9.293V5.5a.5.5 0 0 1 1 0v5z"/>
-                          </svg>
+                        </svg>
                     </div>
                     
                     <div class="flex flex-col ">
                     <p class="text-xl font-bold">To refund</p>                           
-                     <span id="" class="text-lg font-light">7</span>
+                    <span id="" class="text-lg font-light">7</span>
                     </div>
                 </div>
             </div>
@@ -930,7 +933,7 @@
                     </div>
                 </div>
 
-      
+    
 
             </div>
         </div>
@@ -942,14 +945,14 @@
 
                 <p class="py-3 text-center w-full sticky top-0 bg-white shadow-md font-light text-lg text-gray-700">Recently added books</p>
 
-                <div class="flex flex-row items-center h-24 py-auto" th:each="book : ${popular}">
-                    <img class="bookimage w-16 h-20 m-4" th:src="@{${book.largeCoverUrl}}">
-                    <div class="flex flex-col">
+                <div class="flex flex-row  py-auto" th:each="book : ${popular}">
+                    <img class="bookimage w-32 h-36 m-4" th:src="@{${book.largeCoverUrl}}">
+                    <div class="flex flex-col py-4">
                         <strong class="text-md font-semibold pr-4" th:text="${book.title}"></strong>
                         <p class="font-light pr-4">By <strong ></strong></p>
                     </div> 
                 </div>
-    
+
             </div>
 
             <!-- Recent activities -->
@@ -987,13 +990,12 @@
                 </table>
 
             </div>
-    
-        </div>
 
+        </div>
     </section>
 
     <!-- Footer -->
-    <footer class="px-5 h-32 bg-gray-900 text-yellow-600 text-center bottom-0 flex flex-col justify-center">
+    <footer class="w-full h-32 bg-gray-900 text-yellow-600 text-center bottom-0 flex flex-col justify-center">
         <div class="text-xl">
             <p>Copyright © <span id="date">2023</span> CI-UCBC. All Rights Reserved.</p>
 

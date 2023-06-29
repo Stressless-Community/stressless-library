@@ -1,3 +1,9 @@
+let currentPage = 'home'
+let previousPage = ''
+
+document.getElementById('back').addEventListener('click',()=>{
+    sectionNavigation(previousPage)
+})
 
 var Swipes = new Swiper('.swiper-container', {
     loop: true,
@@ -17,20 +23,35 @@ var Swipes = new Swiper('.swiper-container', {
 });
 
 
-
 // dealing with the copyright date
 document.getElementById("date").innerHTML = new Date().getFullYear()
 
-sectionNavigation('dashbord')
-// Hide or show sections
+sectionNavigation(currentPage)
 
 function sectionNavigation(sectionName){
-    Array.prototype.forEach.call(document.getElementsByClassName("section"), function(element) {
-        if(!element.classList.contains('hidden')){
-            element.classList.add('hidden')
+    
+    if(!document.getElementById(currentPage).classList.contains('hidden')){
+        document.getElementById(currentPage).classList.add('hidden')
+    }
+
+    if(currentPage!=sectionName){
+        previousPage = currentPage
+        currentPage = sectionName
+    }
+    
+    if(sectionName=='home'){
+        if(!document.getElementById('back').classList.contains('hidden')){
+            document.getElementById('back').classList.add('hidden')
         }
-    });
-    if(sectionName=='dashbord'){
+    }
+    else{
+        if(document.getElementById('back').classList.contains('hidden')){
+            document.getElementById('back').classList.remove('hidden')
+        } 
+    }
+
+    if(sectionName=='dashboard'){
+
         document.getElementById('bookCasesBar').classList.add('hidden')
         if(!document.getElementById('dropdownDots').classList.contains('hidden')){
             document.getElementById('dropdownDots').classList.add('hidden')
@@ -39,9 +60,10 @@ function sectionNavigation(sectionName){
         if(!document.getElementById('searchBar').classList.contains('hidden')){
             document.getElementById('searchBar').classList.add('hidden')
         }
-        if(document.getElementById('dashbordHeader').classList.contains('hidden')){
-            document.getElementById('dashbordHeader').classList.remove('hidden')
+        if(document.getElementById('dashboardHeader').classList.contains('hidden')){
+            document.getElementById('dashboardHeader').classList.remove('hidden')
         }
+
     }else{
         if(document.getElementById('bookCasesBar').classList.contains('hidden')){
             document.getElementById('bookCasesBar').classList.remove('hidden')
@@ -49,8 +71,8 @@ function sectionNavigation(sectionName){
         if(document.getElementById('searchBar').classList.contains('hidden')){
             document.getElementById('searchBar').classList.remove('hidden')
         }
-        if(!document.getElementById('dashbordHeader').classList.contains('hidden')){
-            document.getElementById('dashbordHeader').classList.add('hidden')
+        if(!document.getElementById('dashboardHeader').classList.contains('hidden')){
+            document.getElementById('dashboardHeader').classList.add('hidden')
         }
     }
     document.getElementById(sectionName).classList.remove('hidden')
@@ -104,7 +126,7 @@ document.getElementById('search').addEventListener("input",function(){
         sectionNavigation('findbook')
     }else{
         sectionNavigation('home')
-        location.reload()
+        //location.reload()
     }
     
 })
@@ -764,3 +786,5 @@ function clearAddBookForm(){
 
 }
 
+
+ 
