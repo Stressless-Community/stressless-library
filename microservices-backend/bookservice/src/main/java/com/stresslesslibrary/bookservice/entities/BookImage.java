@@ -9,9 +9,10 @@ import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
+@Data @AllArgsConstructor @NoArgsConstructor @ToString
 public class BookImage {
 	@Id
 	@Column(name = "id")
@@ -23,17 +24,13 @@ public class BookImage {
 
 	@Column(name = "type")
 	private String type;
-
-	@Column(name = "image", unique = false, nullable = false, length = 100000)
-	private byte[] image;
 	
 	@OneToOne
 	private Book book; 
 	
-	public BookImage(String name, String contentType, byte[] bytes) {
+	public BookImage(String name, String contentType) {
 		this.name=name;
 		this.type=contentType;
-		this.image=bytes;
 	}
 
 }
