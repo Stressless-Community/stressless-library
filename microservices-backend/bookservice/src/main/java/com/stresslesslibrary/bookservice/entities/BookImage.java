@@ -36,4 +36,9 @@ public class BookImage {
 		this.image=bytes;
 	}
 
+	public BookImage(String name, String contentType){
+		this.name = name;
+		this.type = contentType;
+	}
+
 }
