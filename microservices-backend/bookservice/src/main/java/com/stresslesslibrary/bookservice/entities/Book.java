@@ -50,7 +50,7 @@ public class Book implements Serializable {
 	private Boolean epubAvailble;
 	private Boolean isReference;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	private Date recordedDate;
 
