@@ -67,6 +67,12 @@ public class Branch {
 		this.id = id;
 		this.name = name;
 	}
+
+    public Branch(String id, String name, BookCategory bookCategory) {
+		this.id = id;
+		this.name = name;
+		this.category = bookCategory;
+    }
 	
 	
 	

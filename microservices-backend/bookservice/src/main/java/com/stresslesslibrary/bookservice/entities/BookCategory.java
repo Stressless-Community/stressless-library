@@ -80,6 +80,12 @@ public class BookCategory {
 		this.id = id;
 		this.name = name;
 	}
+
+	public BookCategory(String id, String name, BookCase bookCase) {
+		this.id  = id;
+		this.name  = name;
+		this.bookCase  = bookCase;
+	}
 	
 	
 	

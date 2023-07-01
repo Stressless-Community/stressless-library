@@ -39,8 +39,10 @@ public class BookImageController {
 	
 	@PostMapping
 	public ResponseEntity<String> uploadAttachment(@RequestParam("file") MultipartFile file,String isbn){
-
-		
+		StringBuilder fileNames = new StringBuilder();
+		System.out.println(file.getContentType());
+		Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+		fileNames.append(file.getOriginalFilename());
 		
 		try {
 			Book book=bookService.getOne(isbn);
@@ -51,10 +53,11 @@ public class BookImageController {
 				image.setBook(book);
 				BookImage response = bookImage.save(image);
 				if(response==null){
-					System.out.println("Image response null");
+					System.out.println("Image response is null");
 					bookService.deleteBook(isbn);
 					return ResponseEntity.badRequest().build();
 				}else{
+					Files.write(fileNameAndPath, file.getBytes());
 					return ResponseEntity.ok().body("Success upload");
 				}
 				

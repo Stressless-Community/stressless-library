@@ -24,8 +24,8 @@ public class BookCategoryServiceImpl implements BookCategoryService {
 
 	@Override
 	public BookCategory getOne(String id) {
-		return bookCategoryRepository.findById(id).orElseThrow(
-				//TODO Exeption handler
+		return bookCategoryRepository.findById(id).orElse(
+				null
 				);
 	}
 
@@ -36,11 +36,12 @@ public class BookCategoryServiceImpl implements BookCategoryService {
 
 	@Override
 	public List<Book> getBooks(String id) {
-		try{
+		if(getOne(id)!=null){
 			return getOne(id).getBooks();
-		}catch(Exception e){
-			return null;
 		}
+		return null;
+		
+			
 	}
 
 	@Override

@@ -32,13 +32,8 @@ public class BookCaseController {
 	@GetMapping("/{id}")
 	public ResponseEntity<BookCase> findById(@PathVariable(value = "id") String id){
 		
-		try {
-			return ResponseEntity.ok().body(bookCaseService.findOne(id));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.notFound().build();
-			
-		}
+		return ResponseEntity.ok().body(bookCaseService.findOne(id));
+		
 	}
 
 	@GetMapping("/{id}/books")

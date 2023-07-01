@@ -25,8 +25,8 @@ public class BranchServiceImpl implements BranchService {
 
 	@Override
 	public Branch getOne(String id) {
-		return branchRepository.findById(id).orElseThrow(
-				//TODO exception handler
+		return branchRepository.findById(id).orElse(
+				null
 				);
 	}
 

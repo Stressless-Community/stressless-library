@@ -42,26 +42,16 @@ public class BranchController {
 
 	@GetMapping("/{id}/books")
 	public ResponseEntity<List<Book>> getBooks(@PathVariable(value = "id") String id){
-		// TODO if else
-		try {
-			return ResponseEntity.ok().body(branchService.getOne(id).getBooks());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.notFound().build();
-			
-		}
+		
+		return ResponseEntity.ok().body(branchService.getOne(id).getBooks());
+		
 	}
 
 	@GetMapping("/{id}/books/count")
 	public ResponseEntity<Integer> getBooksCount(@PathVariable(value = "id") String id){
-		// TODO if elese 
-		try {
-			return ResponseEntity.ok().body(branchService.getOne(id).getBooks().size());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.notFound().build();
-			
-		}
+		
+		return ResponseEntity.ok().body(branchService.getOne(id).getBooks().size());
+		
 	}
 
 	
