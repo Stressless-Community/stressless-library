@@ -1,48 +1,44 @@
-let currentPage = 'home'
-let previousPage = ''
+if(!sessionStorage.getItem('nav')){
+    sessionStorage.setItem('nav',['home'].toString())
+}
+
+//on create : navigate to the current page
+sectionNavigation(sessionStorage.getItem('nav').split(',').slice(-1)[0])
+
 
 document.getElementById('back').addEventListener('click',()=>{
-    sectionNavigation(previousPage)
-})
-
-var Swipes = new Swiper('.swiper-container', {
-    loop: true,
-    centeredSlides: true,
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    autoplay:{
-        delay:3000,
-        disableOnInteraction: false,
+    if(sessionStorage.getItem('nav').split(',').length!=1){
+        nav = sessionStorage.getItem('nav').split(',')
+        if(!document.getElementById(sessionStorage.getItem('nav').split(',').slice(-1)[0]).classList.contains('hidden')){
+            document.getElementById(sessionStorage.getItem('nav').split(',').slice(-1)[0]).classList.add('hidden')
+        }
+        nav.pop()
+        sessionStorage.setItem('nav',nav)
+        sectionNavigation(nav.slice(-1)[0])
     }
-});
+    
+})
 
 
 // dealing with the copyright date
 document.getElementById("date").innerHTML = new Date().getFullYear()
 
-sectionNavigation(currentPage)
 
 function sectionNavigation(sectionName){
-    
-    if(!document.getElementById(currentPage).classList.contains('hidden')){
-        document.getElementById(currentPage).classList.add('hidden')
+
+    if(!document.getElementById(sessionStorage.getItem('nav').split(',').slice(-1)[0]).classList.contains('hidden')){
+        document.getElementById(sessionStorage.getItem('nav').split(',').slice(-1)[0]).classList.add('hidden')
     }
 
-    if(currentPage!=sectionName){
-        previousPage = currentPage
-        currentPage = sectionName
-    }
-    
     if(sectionName=='home'){
+        //deal with the swiper carousel
+        setSwiper()
+
+        //remove the back arrow
         if(!document.getElementById('back').classList.contains('hidden')){
             document.getElementById('back').classList.add('hidden')
         }
+
     }
     else{
         if(document.getElementById('back').classList.contains('hidden')){
@@ -50,32 +46,55 @@ function sectionNavigation(sectionName){
         } 
     }
 
+    if(sectionName=='home' || sectionName=='findbook'){
+
+        if(document.getElementById('bookCasesBar').classList.contains('hidden')){
+            document.getElementById('bookCasesBar').classList.remove('hidden')
+        }
+
+        if(document.getElementById('searchBar').classList.contains('hidden')){
+            document.getElementById('searchBar').classList.remove('hidden')
+        }
+    }else{
+
+        if(!document.getElementById('bookCasesBar').classList.contains('hidden')){
+            document.getElementById('bookCasesBar').classList.add('hidden')
+        }
+
+        if(!document.getElementById('searchBar').classList.contains('hidden')){
+            document.getElementById('searchBar').classList.add('hidden')
+        }
+    }
+
+    if(sectionName != 'findbook'){
+        document.getElementById('search').value=''
+    }
+    
     if(sectionName=='dashboard'){
 
-        document.getElementById('bookCasesBar').classList.add('hidden')
         if(!document.getElementById('dropdownDots').classList.contains('hidden')){
             document.getElementById('dropdownDots').classList.add('hidden')
         }
         
-        if(!document.getElementById('searchBar').classList.contains('hidden')){
-            document.getElementById('searchBar').classList.add('hidden')
-        }
         if(document.getElementById('dashboardHeader').classList.contains('hidden')){
             document.getElementById('dashboardHeader').classList.remove('hidden')
         }
 
     }else{
-        if(document.getElementById('bookCasesBar').classList.contains('hidden')){
-            document.getElementById('bookCasesBar').classList.remove('hidden')
-        }
-        if(document.getElementById('searchBar').classList.contains('hidden')){
-            document.getElementById('searchBar').classList.remove('hidden')
-        }
+        
         if(!document.getElementById('dashboardHeader').classList.contains('hidden')){
             document.getElementById('dashboardHeader').classList.add('hidden')
         }
     }
+
+    if(sectionName != sessionStorage.getItem('nav').split(',').slice(-1)[0]){
+        nav = sessionStorage.getItem('nav').split(',')
+        nav.push(sectionName)
+        sessionStorage.setItem('nav',nav)
+    }
+    
     document.getElementById(sectionName).classList.remove('hidden')
+    
 }
 
 //dealing with the menu
@@ -367,6 +386,7 @@ function next(){
 
     }
 }
+
 // End Previous-Next add-book functions
 
 // verify book from google apis     
@@ -729,18 +749,18 @@ function addNewBook(){
 }
 
 async function sendData(url, data) {
-const formData  = new FormData();
+    const formData  = new FormData();
 
-for(const name in data) {
-    formData.append(name, data[name]);
-}
+    for(const name in data) {
+        formData.append(name, data[name]);
+    }
 
-const response = await fetch(url, {
-    method: 'POST',
-    body: formData
-});
+    const response = await fetch(url, {
+        method: 'POST',
+        body: formData
+    });
 
-return response
+    return response
 
 }
 
@@ -786,5 +806,28 @@ function clearAddBookForm(){
 
 }
 
+
+// deal with swiper carousel block
+
+function setSwiper(){
+
+var Swipes = new Swiper('.swiper-container', {
+    loop: true,
+    centeredSlides: true,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    autoplay:{
+        delay:3000,
+        disableOnInteraction: false,
+    }
+});
+
+}
 
  
