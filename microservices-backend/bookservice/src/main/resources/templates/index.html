@@ -188,58 +188,55 @@
     <!-- End header -->
 
     <!-- Main section -->
-    <section section id="home" class="section bg-white pb-8">
+    <section section id="home" class="hidden section bg-white pb-8">    
         
            <!-- Swiper -->
-        <div class=" overflow-x-hidden w-full h-64 flex justify-center items-center">
+        <div class="overflow-x-hidden w-full h-64 flex justify-center items-center">
             <div class="swiper-container w-full h-full relative z-0">
-
                 <!-- swiper slides -->
-            <div class="swiper-wrapper h-max relative">
-                <div class="swiper-slide bg-gray-200 p-5 text-center baner" id="baner1">
-                    <div>
-                        <img class="cover" th:src="@{assets/img/booktree.png}">
-                    </div>
-                    <div>
-                          <h1>
-                            “Everyone is a reader... Some just haven't found their favourite book yet.”<br>
-                            <span>― Anonymous</span>
-                        </h1>
-                    </div>
-               
-                            
+                <div class="swiper-wrapper h-max relative">
+                        <div class="swiper-slide bg-gray-200 p-5 text-center baner" id="baner1">
+                            <div>
+                                <img class="cover" th:src="@{assets/img/booktree.png}">
+                            </div>
+                            <div>
+                                <h1>
+                                    “Everyone is a reader... Some just haven't found their favourite book yet.”<br>
+                                    <span>― Anonymous</span>
+                                </h1>
+                            </div>          
+                        </div>
+        
+                        <div class="swiper-slide bg-gray-100 p-5 text-center">
+                            <h2>SIMPLE SWIPER 2</h2>
+                        </div>
+        
+                        <div class="swiper-slide bg-gray-300 p-5 text-center">
+                            <h2>SIMPLE SWIPER 3</h2>
+                        </div>
+        
+                        <div class="swiper-slide bg-100 p-5 text-center">
+                            <h2>SIMPLE SWIPER 4</h2>
+                        </div>
+        
+                        <div class="swiper-slide bg-300 text-center p-5">
+                            <h2>SIMPLE SWIPER 5</h2>
+                        </div>  
                 </div>
-                
-                <div class="swiper-slide bg-gray-100 p-5 text-center"> 
-                    <h2>SIMPLE SWIPER 2</h2>
-                </div>
-                
-                <div class="swiper-slide bg-gray-300 p-5 text-center">
-                    <h2>SIMPLE SWIPER 3</h2>
-                </div>
-                
-                <div class="swiper-slide bg-100 p-5 text-center">
-                    <h2>SIMPLE SWIPER 4</h2>
-                </div>
-                
-                <div class="swiper-slide bg-300 text-center p-5">
-                    <h2>SIMPLE SWIPER 5</h2>
-                </div>
+                    <!-- End swiper slides -->
+        
+                    <!-- pagination dots -->
+                    <div class="swiper-pagination" style="z-index: 20; color: rgba(134, 89, 6, 0.603);"></div>
+                    <!-- End pagination dots -->
+        
+                    <div class="absolute inset-0 flex justify-center items-center z-10">
+                        <div class="flex flex-row justify-between w-full">
+                            <div class="swiper-button-prev relative" style="color:rgba(130, 130, 4, 0.919)"></div>
+                            <div class="swiper-button-next relative" style="color: rgba(130, 130, 4, 0.919);"></div>
+                        </div>
+                    </div>  
             </div>
-            <!-- End swiper slides -->
-
-            <!-- pagination dots -->
-            <div class="swiper-pagination" style="z-index: 20; color: rgba(134, 89, 6, 0.603);"></div>
-            <!-- End pagination dots -->
-
-              <div class="absolute inset-0 flex justify-center items-center z-10">
-                <div class="flex flex-row justify-between w-full">
-                    <div class="swiper-button-prev relative" style="color:rgba(130, 130, 4, 0.919)"></div>
-                    <div class="swiper-button-next relative" style="color: rgba(130, 130, 4, 0.919);"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
 
           <!-- End Swiper -->
 
@@ -1007,6 +1004,7 @@
     <script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
     <script type="text/javascript" th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/assets/vendor/select2/select2.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>   
+    <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
 </body>
 </html>
+
