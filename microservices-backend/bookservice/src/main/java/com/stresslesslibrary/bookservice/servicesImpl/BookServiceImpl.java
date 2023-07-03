@@ -63,27 +63,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<Book> searchPatern(String keyword) {
-		List<String> indexes= new ArrayList<>();
-		List<Book> matches= new ArrayList<>();
-			try (Scanner scanner = new Scanner(keyword)) {
-				while (scanner.hasNext()) {
-					indexes.add(scanner.next());
-				}
-			}
-			if(indexes.isEmpty()||keyword.isBlank()||keyword.isEmpty()) {
-					matches.addAll(bookRepository.findAll());
-				}else {
-					matches.addAll(bookRepository.search(indexes.get(0).toLowerCase()));
-					if(matches.isEmpty()) {
-						authorRepository.search(keyword.toLowerCase()).forEach(au->{
-							matches.addAll(au.getBooks());
-						
-						});;
-						if(matches.isEmpty()) {
-							bookIndexRepository.search(keyword.toLowerCase());
-						}
-					}
-				}
+		List<Book> matches= bookRepository.search(keyword);
 				
 		
 			return matches;
