@@ -161,6 +161,7 @@
 
         <!-- Dashboard header -->
         <div id="dashboardHeader" class="hidden flex flex-row justify-center bg-gray-900 px-5 font-ligth  gap-2 py-4">
+            <button class="drop-shadow-md flex flex-row justify-center items-center gap-2 py-2 w-40 px-6 bg-gray-500 text-white rounded hover:bg-gray-600 mr-4" onclick="adminHome()">Home</button>
             <button class="drop-shadow-md flex flex-row justify-center items-center gap-2 py-2 w-40 px-6 bg-teal-500 text-white rounded hover:bg-teal-700 mr-4" onclick="newBookModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -672,8 +673,33 @@
     </section>
 
     <section id="dashboard" class="flex flex-row bg-gray-100 hidden p-8 gap-8">
+
+        <div class="h-screen  w-2/5 flex flex-col gap-8 rounded-md drop-shadow-lg">
+            <!-- Recently added books -->
+            <div class="rounded-md flex flex-col divide-y overflow-y-auto bg-white">
+                <div class="py-3 text-center w-full sticky top-0 bg-white shadow-md flex flex-col">
+                    <div id="" class="flex flex-row justify-center p-4 h-full w-full">
+                        <div class="relative flex items-center h-10 w-96 rounded-3xl focus-within:shadow-md bg-white overflow-hidden border border-gray-300">
+                            <div class="grid place-items-center h-full w-12 text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                    
+                            <input
+                            class="peer h-full w-full outline-none text-md text-gray-700 pr-2" type="search" id="adminSearch" placeholder="Search..." /> 
+                        </div>
+                    </div>
+                </div>
+
+                <div id="adminBooks" class="divide-y"></div>
+                
+            </div>
+
+        </div>
+
                <!-- General info cards-->
-        <div class="w-3/5 flex flex-col gap-8">
+        <div id="adminDash" class="w-3/5 flex flex-col gap-8">
 
             <!-- Book warnings statistics -->
             <div class="flex flex-row justify-between gap-10 bg-teal-50 py-5 px-14 rounded-md drop-shadow-lg">
@@ -935,59 +961,92 @@
             </div>
         </div>
 
-        <!-- Recent activities -->
-        <div class="w-2/5 flex flex-col gap-8 rounded-md drop-shadow-lg">
-            <!-- Recently added books -->
-            <div class="h-screen rounded-md flex flex-col divide-y overflow-y-auto bg-white">
+        <div id="adminbookinfo" class="hidden w-3/5 flex flex-col gap-8 bg-white p-8 shadow-lg rounded-md">
+            <div class="flex flex-row w-full gap-4">
+                <div class="drop-shadow-xl w-1/4">
+                    <img id="admininfoImage" class="cover w-full" th:src="@{assets/img/book.jpg}">
+                </div>
+    
+                <div class="flex flex-col text-slate-700 w-3/4 gap-10">
+                    <div class="flex flex-col mx-5 space-y-2">
+                        <p id="admininfoTitle" class="w-full text-4xl font-semibold"></p>
+                        <p id="admininfoSubtitle"class="w-full text-xl font-light "></p>
+                        <p id="admininfoAuthors"class="w-full text-lg font-bold"></p>
+                        <p id="admininfoShortDescription"class="truncate text-md font-light"></p>
+                    </div>
+                </div>
+            </div>
 
-                <p class="py-3 text-center w-full sticky top-0 bg-white shadow-md font-light text-lg text-gray-700">Recently added books</p>
+            <div class="flex flex-row bg-gray-100 h-full px-8 py-4 justify-between shadow-lg">
+                <div class="flex flex-row space-x-3 items-center">
 
-                <div class="flex flex-row  py-auto" th:each="book : ${popular}">
-                    <img class="bookimage w-32 h-36 m-4" th:src="@{${book.largeCoverUrl}}">
-                    <div class="flex flex-col py-4">
-                        <strong class="text-md font-semibold pr-4" th:text="${book.title}"></strong>
-                        <p class="font-light pr-4">By <strong ></strong></p>
-                    </div> 
+                    <div class="bg-yellow-500 p-2 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-9 h-9 text-white">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
+                        </svg>
+                    </div>
+                    
+
+                   <div class="flex flex-col ">
+                    <p  class="text-xl font-bold">Print kind</p>                         
+                    <span id="admininfoPrintKind" class="text-lg font-light"></span>
+                   </div>
                 </div>
 
+                <div class="flex flex-row space-x-3 items-center">
+                    
+                    <div class="bg-yellow-500 p-2 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-9 h-9 text-white">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                        </svg>
+                    </div>
+
+                    <div class="flex flex-col ">
+                    <p class="text-xl font-bold">Pages</p>
+
+                     <span id="admininfoPages" class="text-lg font-light"></span>
+                    </div>
+                 </div>
+
+                 <div class="flex flex-row space-x-3 items-center">
+                    <div class="bg-yellow-500 p-2 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-9 h-9 text-white">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                        </svg>
+                    </div>
+                    
+                    <div class="flex flex-col ">
+                    <p class="text-xl font-bold">Publish date</p>                           
+                     <span id="admininfoPublishedDate" class="text-lg font-light"></span>
+                    </div>
+                 </div>
+
+                 <div class="flex flex-row space-x-3 items-center">
+
+                    <div class="bg-yellow-500 p-2 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-9 h-9 text-white">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                        </svg>
+                    </div>
+                    
+                    <div class="flex flex-col">
+                    <p class="text-xl font-bold">Publisher</p>                            
+                     <span id="admininfoPublisher" class="text-lg font-light"></span>
+                    </div>
+                 </div>
             </div>
-
-            <!-- Recent activities -->
-            <div class="hidden recent-activity bg-white h-1/2 rounded-md">
-                <h1>Recent Activities</h1>
-                <table>
-                    <tr>
-                        <td>32 min</td>
-                        <td>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16" style="color: green;">
-                                <circle cx="8" cy="8" r="8"/>
-                            </svg>
-                        </td>
-                        <td>You added a new book with isbn 9786765452536</td>
-
-                    </tr>
-                    <tr>
-                        <td>32 min</td>
-                        <td>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16" style="color: red;">
-                                <circle cx="8" cy="8" r="8"/>
-                            </svg>
-                        </td>
-                        <td>You deleted the book with isbn 9786765452536</td>
-                    </tr>
-                    <tr>
-                        <td>32 min</td>
-                        <td>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16" style="color: orange;">
-                                <circle cx="8" cy="8" r="8"/>
-                            </svg>
-                        </td>
-                        <td>You updated the book with isbn 9786765452536</td>
-                    </tr>
-                </table>
-
+    
+            <!-- BOOK FULL DESCRIPTION -->
+            <div class="flex flex-col space-y-10 pt-8">
+                <div class="flex flex-col space-y-4">
+                    <p  class="text-2xl font-bold">Description</p>
+                    <hr>
+                    <p id="admininfoDescription" class="text-slate-700 text-lg font-light  tracking-wide [word-spacing:3px]"></p>
+                </div>
+                <div id="admininfoAuthorsDetails"></div>
             </div>
-
+            
+    
         </div>
     </section>
 
