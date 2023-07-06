@@ -1,7 +1,4 @@
 package com.stresslesslibrary.bookservice.dtos;
-
-import com.stresslesslibrary.bookservice.entities.Language;
-import com.stresslesslibrary.bookservice.entities.PrintKind;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

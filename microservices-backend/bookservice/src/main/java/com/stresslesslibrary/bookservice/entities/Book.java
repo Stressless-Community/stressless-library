@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.stresslesslibrary.bookservice.dtos.BookRecommendation;
 
 @Entity
 @Data
@@ -50,7 +51,7 @@ public class Book implements Serializable {
 	private Boolean epubAvailble;
 	private Boolean isReference;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	private Date recordedDate;
 
@@ -262,6 +263,15 @@ public class Book implements Serializable {
 	
 	public void addAuthor(Author author) {
 		authors.add(author);
+	}
+
+	public List<BookRecommendation> getRecommendations(){
+		List<BookRecommendation> recommendations = new ArrayList<BookRecommendation>();
+		for(Book b : branch.getBooks()){
+			BookRecommendation recommendation = new BookRecommendation(b.isbn,b.getLargeCoverUrl());
+			recommendations.add(recommendation);
+		}
+		return recommendations;
 	}
 	
 	

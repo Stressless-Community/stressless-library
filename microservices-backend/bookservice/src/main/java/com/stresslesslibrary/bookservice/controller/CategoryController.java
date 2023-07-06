@@ -26,13 +26,9 @@ public class CategoryController {
 	@GetMapping("/{id}")
 	public ResponseEntity<BookCategory> findById(@PathVariable(value = "id") String id){
 		
-		try {
-			return ResponseEntity.ok().body(bookCategory.getOne(id));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.notFound().build();
-			
-		}
+		
+		return ResponseEntity.ok().body(bookCategory.getOne(id));
+		
 	}
 	
 }

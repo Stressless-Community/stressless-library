@@ -10,14 +10,17 @@ import com.stresslesslibrary.bookservice.entities.Language;
 import com.stresslesslibrary.bookservice.entities.PrintKind;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
+import org.webjars.NotFoundException;
 
 import com.stresslesslibrary.bookservice.dtos.BookDTO;
 import com.stresslesslibrary.bookservice.entities.Author;
 import com.stresslesslibrary.bookservice.entities.Book;
+import com.stresslesslibrary.bookservice.entities.BookImage;
 import com.stresslesslibrary.bookservice.repositories.AuthorRepository;
 import com.stresslesslibrary.bookservice.repositories.BookIndexRepository;
 import com.stresslesslibrary.bookservice.repositories.BookRepository;
 import com.stresslesslibrary.bookservice.services.AuthorService;
+import com.stresslesslibrary.bookservice.services.BookImageService;
 import com.stresslesslibrary.bookservice.services.BookService;
 import com.stresslesslibrary.bookservice.services.BranchService;
 import com.stresslesslibrary.bookservice.services.PublisherService;
@@ -43,6 +46,9 @@ public class BookServiceImpl implements BookService {
 	
 	@Autowired
 	private AuthorService authorService;
+
+	@Autowired
+	private BookImageService bookImageService;
 	
 	@Override
 	public List<Book> findAll() {
@@ -57,27 +63,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<Book> searchPatern(String keyword) {
-		List<String> indexes= new ArrayList<>();
-		List<Book> matches= new ArrayList<>();
-			try (Scanner scanner = new Scanner(keyword)) {
-				while (scanner.hasNext()) {
-					indexes.add(scanner.next());
-				}
-			}
-			if(indexes.isEmpty()||keyword.isBlank()||keyword.isEmpty()) {
-					matches.addAll(bookRepository.findAll());
-				}else {
-					matches.addAll(bookRepository.search(indexes.get(0).toLowerCase()));
-					if(matches.isEmpty()) {
-						authorRepository.search(keyword.toLowerCase()).forEach(au->{
-							matches.addAll(au.getBooks());
-						
-						});;
-						if(matches.isEmpty()) {
-							bookIndexRepository.search(keyword.toLowerCase());
-						}
-					}
-				}
+		List<Book> matches= bookRepository.search(keyword);
 				
 		
 			return matches;
@@ -103,8 +89,7 @@ public class BookServiceImpl implements BookService {
 		b.setIsReference(book.getIsReference());
 		b.setPublisher(publisherService.getOne(book.getPublisher()));
 		b.setBranch(branchService.getOne(book.getBranchId()));
-		LocalDate localDate = LocalDate.now();
-		b.setRecordedDate(new Date(localDate.getYear(),localDate.getMonthValue(), localDate.getDayOfMonth()));
+		b.setRecordedDate(new Date());
 		List<Author> authors = new ArrayList<Author>();
 		for (int author : book.getAuthors()) {
 		 authors.add(authorService.getOne(author));	
@@ -138,7 +123,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book updateBook(BookDTO book) {
 		try {
-			Book b=getOne(book.getIsbn());
+			Book b = getOne(book.getIsbn());
 			b.setIsbn(book.getIsbn());
 			b.setTitle(book.getTitle());
 			b.setSubtitle(book.getSubtitle());
@@ -165,8 +150,24 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<Book> popularBooks() {
+	public List<Book> recentBooks() {
 		return bookRepository.findTop10ByOrderByRecordedDateDesc();
+	}
+
+	@Override
+	public void deleteBook(String id) {
+		Book b = getOne(id);
+		BookImage cover = bookImageService.findBookImageByName(id);
+		if(b!=null && cover==null){
+			bookRepository.delete(b);
+		}else if(cover!=null && b!= null){
+			bookImageService.delete(id);
+			bookRepository.delete(b);
+		}else if(b == null){
+			throw new NotFoundException("Book not found");
+		}
+
+		
 	}
 
 
