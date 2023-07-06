@@ -9,4 +9,8 @@ public interface BookIndexService {
     List<BookIndex> findAll();
 
     BookIndex getOne(int id);
+
+    List<BookIndex> search(String keyword);
+
+    BookIndex save(BookIndex bookIndex);
 }
