@@ -80,6 +80,11 @@ function sectionNavigation(sectionName){
             document.getElementById('dashboardHeader').classList.remove('hidden')
         }
 
+        fetch("/books").then(res => res.json())
+        .then(json =>
+            populateAdminBooks(json)
+        ) 
+
     }else{
         
         if(!document.getElementById('dashboardHeader').classList.contains('hidden')){
@@ -95,6 +100,16 @@ function sectionNavigation(sectionName){
     
     document.getElementById(sectionName).classList.remove('hidden')
     
+}
+
+function adminHome(){
+    if(document.getElementById('adminDash').classList.contains('hidden')){
+        document.getElementById('adminDash').classList.remove('hidden')
+    }
+
+    if(!document.getElementById('adminbookinfo').classList.contains('hidden')){
+        document.getElementById('adminbookinfo').classList.add('hidden')
+    }
 }
 
 //dealing with the menu
@@ -133,6 +148,32 @@ function populateFindBook(data= []){
     document.getElementById('books').innerHTML=books
 }
 
+function populateAdminBooks(data = []){
+    books=''
+    data.forEach(book => {
+
+    let authors =''
+    book.authors.forEach(element => {
+        authors += element.name+ ", "   
+    });
+
+    authors = authors.substr(0, authors.length - 1)
+    authors = authors.substr(0, authors.length - 1)
+
+        book=
+                '<div data-isbn="'+book.isbn+'" onclick="showAdminBookInfo(this.dataset.isbn,this)"  class="bookcard flex flex-row hover:bg-gray-100 hover:cursor-pointer py-auto">'+
+                    '<img class="bookimage w-28 h-32 m-4" src="'+book.largeCoverUrl+'" alt="'+book.isbn+'" >'+
+                    '<div class="flex flex-col justify-center gap-3 py-4">'+
+                        '<strong class="text-md font-semibold pr-4">'+book.title+'</strong>'+
+                        '<p class="font-light pr-4">By <strong >'+authors+'</strong></p>'+
+                    '</div>'+
+                '</div>'
+
+        books+=book;
+    })
+    document.getElementById('adminBooks').innerHTML=books
+}
+
 // dealing with the search input
 document.getElementById('search').addEventListener("input",function(){
     if(document.getElementById('search').value){
@@ -145,9 +186,19 @@ document.getElementById('search').addEventListener("input",function(){
         sectionNavigation('findbook')
     }else{
         sectionNavigation('home')
-        //location.reload()
     }
     
+})
+
+// dealing with the admin search 
+document.getElementById('adminSearch').addEventListener("input",function(){
+    if(document.getElementById('adminSearch').value){
+        keyword=document.getElementById('adminSearch').value
+        fetch("/books/search?keyword="+keyword).then(res => res.json())
+        .then(json =>
+            populateAdminBooks(json)
+        )
+    }    
 })
 
 //Add book input fields
@@ -208,6 +259,50 @@ function displayInfo(data={}){
     sectionNavigation('bookinfo')
 }
 
+function displayAdminBookInfo(book={}){
+
+    if(book.largeCoverUrl){
+        document.getElementById("admininfoImage").src=book.largeCoverUrl
+    }
+
+    if(book.title){
+        document.getElementById("admininfoTitle").innerText=book.title 
+    }
+
+    if(book.subtitle){
+        document.getElementById('admininfoSubtitle').innerText=book.subtitle
+    }
+    
+    let authors =''
+    book.authors.forEach(element => {
+        authors += element.name+ ", "
+        
+    });
+
+    authors = authors.substr(0, authors.length - 1)
+    authors = authors.substr(0, authors.length - 1)
+    document.getElementById ('admininfoAuthors').innerText=authors
+    
+    document.getElementById ('admininfoShortDescription').innerText=book.description
+    document.getElementById ('admininfoPrintKind').innerText=book.kind
+    document.getElementById ('admininfoPublishedDate').innerText=book.publishedDate
+    document.getElementById ('admininfoPublisher').innerText=book.publisher
+    document.getElementById ("admininfoDescription").innerText=book.description
+    document.getElementById ("admininfoPages").innerText=book.pageCount
+
+    authorsData = ''
+    book.authors.forEach(author=>{
+        authorsData += '<div class="flex flex-col space-y-4"><p class="text-2xl font-bold">'+author.name+'</p><hr><p class="text-slate-700 text-lg font-extralight tracking-wide [word-spacing:3px]">'+author.description+'</p></div>'
+    })
+    
+    document.getElementById('admininfoAuthorsDetails').innerHTML = authorsData
+
+    //hide branch cards
+    document.getElementById('adminDash').classList.add('hidden')
+
+    document.getElementById('adminbookinfo').classList.remove('hidden')
+}
+
 // show book info
 
 function showBookInfo(isbn){
@@ -216,9 +311,24 @@ function showBookInfo(isbn){
     .then (json =>{
         console.log(json)
         displayInfo(json)
-    
     })
     
+}
+
+function showAdminBookInfo(isbn=0,selectedCard){
+
+    for(elt of document.getElementsByClassName('bookcard')){
+        if(elt.classList.contains('bg-slate-100')){
+            elt.classList.remove('bg-slate-100')
+        }
+    }
+
+    selectedCard.classList.add('bg-slate-100')
+    
+    fetch('/books/'+isbn).then(data => data.json())
+    .then (json =>{
+        displayAdminBookInfo(json)
+    })
 }
 
 // New book modal
