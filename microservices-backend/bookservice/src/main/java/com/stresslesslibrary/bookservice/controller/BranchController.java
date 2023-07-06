@@ -57,13 +57,9 @@ public class BranchController {
 	
 	@GetMapping("/search")
 	public ResponseEntity<?> search(@RequestParam(defaultValue = "") String keyword){
-			if (keyword=="" || branchService.search(keyword).size()==0 ){
-				return ResponseEntity.ok().body(branchService.findAll());
-			}
-			else{
-					List <Branch> result= branchService.search(keyword);
-					return ResponseEntity.ok().body(result);
-			}	
+			
+					return ResponseEntity.ok().body(branchService.search(keyword));
+			
 		
 	}
 

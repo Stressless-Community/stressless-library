@@ -40,13 +40,8 @@ public class PublisherController {
 	}
 	@GetMapping("/search")
 	public ResponseEntity<?> search(@RequestParam(defaultValue = "") String keyword){
-			if (keyword=="" || publisherService.search(keyword).size()==0 ){
-				return ResponseEntity.ok().body(publisherService.findAll());
-			}
-			else{
-					List <Publisher> result= publisherService.search(keyword);
-					return ResponseEntity.ok().body(result);
-			}	
+					return ResponseEntity.ok().body(publisherService.search(keyword));
+				
 		
 	}
 	

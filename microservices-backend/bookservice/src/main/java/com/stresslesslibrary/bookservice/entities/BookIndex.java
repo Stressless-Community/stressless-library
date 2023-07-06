@@ -15,6 +15,7 @@ import jakarta.persistence.*;
 public class BookIndex {
 	@Id
 	private int id;
+	@Column( unique = true)
 	private String name;
 	
 	@ManyToMany(mappedBy = "indexes")
