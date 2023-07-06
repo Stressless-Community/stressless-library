@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,9 +65,9 @@ public class BookController {
 		return ResponseEntity.ok().body(bookService.searchPatern(keyword));
 	}
 	
-	@GetMapping("/popular")
+	@GetMapping("/recent")
 	public ResponseEntity<List<Book>> popular(){
-		return ResponseEntity.ok().body(bookService.popularBooks());
+		return ResponseEntity.ok().body(bookService.recentBooks());
 	}
 
 	@PostMapping
@@ -83,15 +84,6 @@ public class BookController {
 			return ResponseEntity.badRequest().body(book);
 		}
 		
-	}
-	
-	@PostMapping("/add-author")
-	public ResponseEntity<String> setAuthor(@RequestParam int authorId, String isbn){
-		
-		if(bookService.setAuthor(authorId, isbn)) {
-		return ResponseEntity.ok().body("Add succefully");
-		}
-		return ResponseEntity.badRequest().body("Cannot deal this those id");
 	}
 	
 	@PutMapping()
@@ -121,6 +113,17 @@ public class BookController {
 	        List <Book> books = bookService.findAll();
 	        ExcelService generator = new ExcelService(books,branchservice.findAll());
 	        generator.generateExcelFile(response);
+	 }
+
+	 @DeleteMapping("{isbn}")
+	 public ResponseEntity<String> deleteBook(@PathVariable(value = "isbn") String isbn){
+		try {
+			bookService.deleteBook(isbn);
+			return ResponseEntity.ok()
+			.body("Book deleted");
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("No book with isbn : "+isbn);
+		}
 	 }
 	 
 	 

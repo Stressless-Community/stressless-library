@@ -11,7 +11,6 @@ public class BookReport {
     
     private int totalBooks;
     private List<BookCaseCount> bookcasesCounts;
-
     public BookReport(){
         this.bookcasesCounts = new ArrayList<BookCaseCount>();
     }

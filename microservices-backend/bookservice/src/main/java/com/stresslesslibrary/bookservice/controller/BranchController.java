@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stresslesslibrary.bookservice.entities.Book;
 import com.stresslesslibrary.bookservice.entities.Branch;
 import com.stresslesslibrary.bookservice.services.BranchService;
 
@@ -39,6 +40,20 @@ public class BranchController {
 		}
 	}
 
+	@GetMapping("/{id}/books")
+	public ResponseEntity<List<Book>> getBooks(@PathVariable(value = "id") String id){
+		
+		return ResponseEntity.ok().body(branchService.getOne(id).getBooks());
+		
+	}
+
+	@GetMapping("/{id}/books/count")
+	public ResponseEntity<Integer> getBooksCount(@PathVariable(value = "id") String id){
+		
+		return ResponseEntity.ok().body(branchService.getOne(id).getBooks().size());
+		
+	}
+
 	
 	@GetMapping("/search")
 	public ResponseEntity<?> search(@RequestParam(defaultValue = "") String keyword){
@@ -51,4 +66,6 @@ public class BranchController {
 			}	
 		
 	}
+
+
 }
