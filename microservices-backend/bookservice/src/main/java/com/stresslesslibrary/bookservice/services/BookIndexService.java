@@ -8,5 +8,5 @@ public interface BookIndexService {
     
     List<BookIndex> findAll();
 
-    BookIndex getOne();
+    BookIndex getOne(int id);
 }
