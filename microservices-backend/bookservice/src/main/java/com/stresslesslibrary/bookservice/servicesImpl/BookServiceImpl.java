@@ -16,11 +16,13 @@ import com.stresslesslibrary.bookservice.dtos.BookDTO;
 import com.stresslesslibrary.bookservice.entities.Author;
 import com.stresslesslibrary.bookservice.entities.Book;
 import com.stresslesslibrary.bookservice.entities.BookImage;
+import com.stresslesslibrary.bookservice.entities.BookIndex;
 import com.stresslesslibrary.bookservice.repositories.AuthorRepository;
 import com.stresslesslibrary.bookservice.repositories.BookIndexRepository;
 import com.stresslesslibrary.bookservice.repositories.BookRepository;
 import com.stresslesslibrary.bookservice.services.AuthorService;
 import com.stresslesslibrary.bookservice.services.BookImageService;
+import com.stresslesslibrary.bookservice.services.BookIndexService;
 import com.stresslesslibrary.bookservice.services.BookService;
 import com.stresslesslibrary.bookservice.services.BranchService;
 import com.stresslesslibrary.bookservice.services.PublisherService;
@@ -33,7 +35,7 @@ public class BookServiceImpl implements BookService {
 	private BookRepository bookRepository;
 	
 	@Autowired
-	private BookIndexRepository bookIndexRepository;
+	private BookIndexService indexService ;
 	
 	@Autowired
 	private AuthorRepository authorRepository;
@@ -91,9 +93,17 @@ public class BookServiceImpl implements BookService {
 		b.setBranch(branchService.getOne(book.getBranchId()));
 		b.setRecordedDate(new Date());
 		List<Author> authors = new ArrayList<Author>();
+		List<BookIndex> indexes = new ArrayList<BookIndex>();
 		for (int author : book.getAuthors()) {
 		 authors.add(authorService.getOne(author));	
 		}
+
+		for(int index : book.getIndexes()){
+			if(indexService.getOne(index)!= null){
+				indexes.add(indexService.getOne(index));
+			}
+		}
+		b.setIndexes(indexes);
 		b.setAuthors(authors);
 		return bookRepository.save(b);
 	} catch (Exception e) {
@@ -141,6 +151,9 @@ public class BookServiceImpl implements BookService {
 			List<Author> authors = new ArrayList<Author>();
 			for (int author : book.getAuthors()) {
 			authors.add(authorService.getOne(author));	
+			}
+			for(int indexe : book.getIndexes()){
+				
 			}
 			b.setAuthors(authors);
 			return bookRepository.save(b);

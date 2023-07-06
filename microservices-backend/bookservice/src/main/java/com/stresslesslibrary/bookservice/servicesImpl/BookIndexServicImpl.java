@@ -3,11 +3,13 @@ package com.stresslesslibrary.bookservice.servicesImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.stresslesslibrary.bookservice.entities.BookIndex;
 import com.stresslesslibrary.bookservice.repositories.BookIndexRepository;
 import com.stresslesslibrary.bookservice.services.BookIndexService;
 
+@Service
 public class BookIndexServicImpl implements BookIndexService {
 
     @Autowired
