@@ -44,13 +44,8 @@ public class AuthorController {
 	
 	@GetMapping("/search")
 	public ResponseEntity<?> search(@RequestParam(defaultValue = "") String keyword){
-			if (keyword=="" || authorService.search(keyword).size()==0 ){
-				return ResponseEntity.ok().body(authorService.findAll());
-			}
-			else{
-					List <Author> result= authorService.search(keyword);
-					return ResponseEntity.ok().body(result);
-			}	
+			
+					return ResponseEntity.ok().body(authorService.search(keyword));
 		
 	}
 	

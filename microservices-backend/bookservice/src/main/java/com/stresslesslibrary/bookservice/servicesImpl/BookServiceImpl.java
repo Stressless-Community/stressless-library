@@ -123,20 +123,26 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book updateBook(BookDTO book) {
 		try {
-			Book b = getOne(book.getIsbn());
+			Book b = new Book();
 			b.setIsbn(book.getIsbn());
 			b.setTitle(book.getTitle());
 			b.setSubtitle(book.getSubtitle());
 			b.setDescription(book.getDescription());
-//			b.setLanguage(book.getLanguage());
+			b.setLanguage(Language.valueOf(book.getLanguage()));
 			b.setPageCount(book.getPageCount());
 			b.setPublishedDate(book.getPublishedDate());
-//			b.setKinds(book.getKinds());
+			b.setKind(PrintKind.valueOf(book.getKind()));
 			b.setPdfAvailble(book.getPdfAvailble());
 			b.setEpubAvailble(book.getEpubAvailble());
 			b.setIsReference(book.getIsReference());
 			b.setPublisher(publisherService.getOne(book.getPublisher()));
 			b.setBranch(branchService.getOne(book.getBranchId()));
+			b.setRecordedDate(new Date());
+			List<Author> authors = new ArrayList<Author>();
+			for (int author : book.getAuthors()) {
+			authors.add(authorService.getOne(author));	
+			}
+			b.setAuthors(authors);
 			return bookRepository.save(b);
 		} catch (Exception e) {
 			return null;

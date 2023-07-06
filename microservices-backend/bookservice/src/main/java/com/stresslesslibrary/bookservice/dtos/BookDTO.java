@@ -19,7 +19,7 @@ public class BookDTO {
 	private String title;
 	private String subtitle;
 	@NotNull @NotNull
-	private MultipartFile cover;
+	private int[] indexes;
 	private String description;
 	private String language;
 	private int pageCount;
