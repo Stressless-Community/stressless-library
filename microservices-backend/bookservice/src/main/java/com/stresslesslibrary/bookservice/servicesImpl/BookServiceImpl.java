@@ -97,13 +97,14 @@ public class BookServiceImpl implements BookService {
 		for (int author : book.getAuthors()) {
 		 authors.add(authorService.getOne(author));	
 		}
-
-		for(int index : book.getIndexes()){
-			if(indexService.getOne(index)!= null){
-				indexes.add(indexService.getOne(index));
+		if(book.getIndexes()!=null){
+			for(int index : book.getIndexes()){
+				if(indexService.getOne(index)!= null){
+					indexes.add(indexService.getOne(index));
+				}
 			}
+			b.setIndexes(indexes);
 		}
-		b.setIndexes(indexes);
 		b.setAuthors(authors);
 		return bookRepository.save(b);
 	} catch (Exception e) {
