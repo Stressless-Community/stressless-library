@@ -449,7 +449,7 @@
                         <!-- PART TWO -->
                         <div id="newbookInfo2" class="hidden px-4 pt-5 space-y-2 sm:p-6 sm:pb-2">
                             <label for="description" class="text-gray-600 text-lg">Full description</label>
-                            <textarea name="" id="description" type="text" th:field="*{description}" placeholder="Write here the full description of the book" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea>                   
+                            <textarea name="" id="description" type="text" placeholder="Write here the full description of the book" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea>                   
                             <div class="flex flex-col justify-start">
                                 <label for="language" class="text-gray-600 text-lg">Select language</label>
                                 <select id="language"  class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
@@ -481,7 +481,7 @@
                             <div class="w-full flex flex-row space-x-3 justify-between items-center">
                                 <div class="w-3/5">
                                     <label for="publisher">Publisher</label>
-                                    <select id="publisher" th:field="*{publisher}"  required style="width: 100%;">
+                                    <select id="publisher"  required style="width: 100%;">
                             
                                     </select>
                                 </div>
@@ -493,7 +493,7 @@
                                 </div>
                             </div>
 
-                            <input id="publishedDate" type="text" th:field="*{publishedDate}" placeholder="publishedDate" required  class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
+                            <input id="publishedDate" type="text" placeholder="publishedDate" required  class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
 
                         </div>
                         <!-- END PART THREE -->
@@ -502,7 +502,7 @@
                         <div id="newbookInfo4" class="hidden px-4 pt-5  sm:p-6 sm:pb-2 flex flex-col">
                             <div class="flex flex-row space-x-3 p-2 mt-2">
                                 <label for="pageCount" class="text-gray-600 text-lg p-2">Page count</label>
-                                <input id="pageCount" type="number" min="10" value="10" th:field="*{pageCount}" placeholder="Page count"  required class="p-2 text-left border-b border-yellow-200 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
+                                <input id="pageCount" type="number" min="10" value="10" placeholder="Page count"  required class="p-2 text-left border-b border-yellow-200 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
                             </div>
 
                             <select id="kind"  class="w-full text-left border-b border-yellow-200 p-2 mt-2 bg-white placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" required >
@@ -547,7 +547,7 @@
                              
                              <div class="bg-white px-4 pt-5 flex flex-row justify-center sm:p-6 sm:pb-2">
                                 <label for="cover">Cover</label>
-                                <input id="cover" class="p-2" type="file" accept="image/*" th:field="*{cover}" onchange="updatePreview(this, 'book-image-preview')" required>
+                                <input id="cover" class="p-2" type="file" accept="image/*" onchange="updatePreview(this, 'book-image-preview')" required>
                             </div>
                         </div>
                         <!-- END PART FIVE -->
@@ -613,8 +613,8 @@
                         <p class="bg-gray-200 text-gray-600 text-2xl font-bold text-center py-3 px-4">New author</p>
                         <!-- PART ONE -->
                         <div id="" class="px-4 pt-5  sm:p-6 sm:pb-2">
-                            <input id="newAuthorName" type="text" th:field="*{isbn}" placeholder="Name of the author"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
-                            <textarea name="" id="newAuthorDescription" type="text" th:field="*{description}" placeholder="About the author" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea> 
+                            <input id="newAuthorName" type="text" placeholder="Name of the author"  required class="w-full border-b border-yellow-200 p-2 mt-2 mb-3 placeholder-gray-600 text-gray-600 text-lg outline-none focus:outline-none hover:scale-95 transition-all" />
+                            <textarea name="" id="newAuthorDescription" type="text"  placeholder="About the author" rows="6" required class="w-full bg-gray-100 p-4 mt-2 text-lg text-gray-600 mb-3 focus:outline-none border-b border-yellow-200 hover:scale-95 transition-all"></textarea> 
                         </div>
                         <!-- END PART ONE -->
                         

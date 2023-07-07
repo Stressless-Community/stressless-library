@@ -37,7 +37,6 @@ public class ThymeleafController {
     @GetMapping("/")
     public String viewHomePage(Model model) {
         model.addAttribute("catalogs", bookService.findAll());
-        model.addAttribute("bookDto", new BookDTO());
         model.addAttribute("popular", bookService.recentBooks());
         return "index";
     }
